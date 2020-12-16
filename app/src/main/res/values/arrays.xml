@@ -74,4 +74,125 @@
         <item>들뜬</item>
         <item>희망에 찬</item>
     </string-array>
+
+    <string-array name="emotion_bad">
+        <item>걱정되는</item>
+        <item>까마득한</item>
+        <item>암담한</item>
+        <item>염려되는</item>
+        <item>근심하는</item>
+        <item>신경 쓰이는</item>
+        <item>뒤숭숭한</item>
+        <item>무서운</item>
+        <item>섬뜩한</item>
+        <item>오싹한</item>
+        <item>주눅든</item>
+        <item>겁나는</item>
+        <item>두려운</item>
+        <item>간담이 서늘해지는</item>
+        <item>진땀 나는</item>
+        <item>불안한</item>
+        <item>조바심 나는</item>
+        <item>긴장한</item>
+        <item>떨리는</item>
+        <item>안절부절못한</item>
+        <item>조마조마한</item>
+        <item>초조한</item>
+        <item>불편한</item>
+        <item>거북한</item>
+        <item>겸연쩍은</item>
+        <item>곤혹스러운</item>
+        <item>떨떠름한</item>
+        <item>언짢은</item>
+        <item>괴로운</item>
+        <item>난처한</item>
+        <item>멋쩍은</item>
+        <item>쑥스러운</item>
+        <item>답답한</item>
+        <item>갑갑한</item>
+        <item>서먹한</item>
+        <item>숨막히는</item>
+        <item>어색한</item>
+        <item>찝찝한</item>
+        <item>슬픈</item>
+        <item>가슴이 찢어지는</item>
+        <item>구슬픈</item>
+        <item>그리운</item>
+        <item>눈물겨운</item>
+        <item>목이 메는</item>
+        <item>서글픈</item>
+        <item>서러운</item>
+        <item>쓰라린</item>
+        <item>애끓는</item>
+        <item>울적한</item>
+        <item>참담한</item>
+        <item>처참한</item>
+        <item>안타까운</item>
+        <item>한스러운</item>
+        <item>마음이 아픈</item>
+        <item>비참한</item>
+        <item>처연한</item>
+        <item>서운한</item>
+        <item>김빠진</item>
+        <item>애석한</item>
+        <item>냉담한</item>
+        <item>섭섭한</item>
+        <item>야속한</item>
+        <item>낙담한</item>
+        <item>외로운</item>
+        <item>고독한</item>
+        <item>공허한</item>
+        <item>적적한</item>
+        <item>허전한</item>
+        <item>허탈한</item>
+        <item>막막한</item>
+        <item>쓸쓸한</item>
+        <item>허한</item>
+        <item>우울한</item>
+        <item>무력한</item>
+        <item>무기력한</item>
+        <item>침울한</item>
+        <item>꿀꿀한</item>
+        <item>피곤한</item>
+        <item>고단한</item>
+        <item>노곤한</item>
+        <item>따분한</item>
+        <item>맥 빠진</item>
+        <item>맥 풀린</item>
+        <item>지긋지긋한</item>
+        <item>귀찮은</item>
+        <item>무감각한</item>
+        <item>지겨운</item>
+        <item>지루한</item>
+        <item>지친</item>
+        <item>절망스러운</item>
+        <item>좌절한</item>
+        <item>힘든</item>
+        <item>무료한</item>
+        <item>성가신</item>
+        <item>심심한</item>
+        <item>혐오스런</item>
+        <item>밥맛 떨어지는</item>
+        <item>질린</item>
+        <item>정떨어지는</item>
+        <item>혼란스러운</item>
+        <item>멍한</item>
+        <item>창피한</item>
+        <item>놀란</item>
+        <item>민망한</item>
+        <item>당혹스런</item>
+        <item>무안한</item>
+        <item>부끄러운</item>
+        <item>화가 나는</item>
+        <item>끓어오르는</item>
+        <item>속상한</item>
+        <item>약 오르는</item>
+        <item>분한</item>
+        <item>울화가 치미는</item>
+        <item>핏대서는</item>
+        <item>격노한</item>
+        <item>분개한</item>
+        <item>억울한</item>
+        <item>치밀어 오르는</item>
+    </string-array>
 </resources>

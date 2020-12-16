@@ -1,6 +1,7 @@
 package com.zettafantasy.giraffe.feature.emotion
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,12 @@ class FindEmotionFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
         viewModel = ViewModelProvider(this).get(FindEmotionViewModel::class.java)
         initUI()
         setData()
@@ -36,14 +38,31 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun setData() {
-        val emotions: Array<String> = resources.getStringArray(R.array.emotion_good)
+        Log.d(TAG, arguments.toString())
+
+        val emotionType = arguments?.get(EmotionType::class.simpleName)
+        val resourceId = getResourceId(emotionType)
+        val emotions: Array<String> = resources.getStringArray(resourceId)
         val group = AdapterDataBindingItemGroup(emotions.map { Emotion(it) }.toList())
         vAdapter.setItems(group, viewModel)
+    }
+
+    private fun getResourceId(emotionType: Any?): Int {
+        var resourceId = R.array.emotion_bad
+        if (emotionType is EmotionType) {
+            resourceId = when (emotionType) {
+                EmotionType.GOOD -> R.array.emotion_good
+                EmotionType.BAD -> R.array.emotion_bad
+                else -> R.array.emotion_bad
+            }
+        }
+        return resourceId
     }
 
     private fun initUI() {
         vAdapter = EmotionAdapterControl()
         binding.emotionRv.adapter = vAdapter.adapter
-        binding.emotionRv.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.emotionRv.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
     }
 }
