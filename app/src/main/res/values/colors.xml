@@ -11,4 +11,6 @@
     <color name="orange50_900">#E65100</color>
     <color name="lime50_200">#EEFF41</color>
     <color name="lime50_700">#AEEA00</color>
+
+    <color name="gray50_200">#EEEEEE</color>
 </resources>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="emotion_good">
+        <item>감동받은</item>
+        <item>뭉클한</item>
+        <item>감격스런</item>
+        <item>벅찬</item>
+        <item>환희에 찬</item>
+        <item>황홀한</item>
+        <item>충만한</item>
+        <item>고마운</item>
+        <item>감사한</item>
+        <item>즐거운</item>
+        <item>유쾌한</item>
+        <item>통쾌한</item>
+        <item>흔쾌한</item>
+        <item>기쁜</item>
+        <item>행복한</item>
+        <item>반가운</item>
+        <item>따뜻한</item>
+        <item>감미로운</item>
+        <item>포근한</item>
+        <item>푸근한</item>
+        <item>사랑하는</item>
+        <item>정을 느끼는</item>
+        <item>친근한</item>
+        <item>훈훈한</item>
+        <item>정겨운</item>
+        <item>뿌듯한</item>
+        <item>산뜻한</item>
+        <item>만족스런</item>
+        <item>상쾌한</item>
+        <item>흡족한</item>
+        <item>개운한</item>
+        <item>후련한</item>
+        <item>든든한</item>
+        <item>흐뭇한</item>
+        <item>홀가분한</item>
+        <item>편안한</item>
+        <item>느긋한</item>
+        <item>담담한</item>
+        <item>친밀한</item>
+        <item>친근한</item>
+        <item>긴장이 풀리는</item>
+        <item>안심이 되는</item>
+        <item>차분한</item>
+        <item>가벼운</item>
+        <item>평화로운</item>
+        <item>누그러지는</item>
+        <item>고요한</item>
+        <item>여유로운</item>
+        <item>진정되는</item>
+        <item>잠잠해진</item>
+        <item>평온한</item>
+        <item>흥미로운</item>
+        <item>매혹된</item>
+        <item>재미있는</item>
+        <item>끌리는</item>
+        <item>활기찬</item>
+        <item>짜릿한</item>
+        <item>신나는</item>
+        <item>용기 나는</item>
+        <item>기력이 넘치는</item>
+        <item>기운이 나는</item>
+        <item>당당한</item>
+        <item>살아있는</item>
+        <item>생기가 도는</item>
+        <item>원기가 왕성한</item>
+        <item>자신감 있는</item>
+        <item>힘이 솟는</item>
+        <item>흥분된</item>
+        <item>두근거리는</item>
+        <item>기대에 부푼</item>
+        <item>들뜬</item>
+        <item>희망에 찬</item>
+    </string-array>
+</resources>
