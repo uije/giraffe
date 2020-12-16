@@ -18,7 +18,7 @@
     android:shape="rectangle">
     <stroke
         android:width="4dp"
-        android:color="@color/design_default_color_secondary" />
+        android:color="?colorSecondary" />
     <corners android:radius="30dp" />
     <solid android:color="#FFF" />
 </shape>
