@@ -6,11 +6,15 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel" />
+
+        <variable
             name="item"
-            type="com.zettafantasy.giraffe.model.Emotion" />
+            type="com.zettafantasy.giraffe.feature.emotion.EmotionItemViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@color/gray50_200">
@@ -20,21 +24,30 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="16dp"
-            android:background="@color/white"
+            android:layout_margin="@dimen/cardview_default_elevation"
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="@{() -> viewModel.onCheck(item)}"
+            app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp">
 
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{item.name}"
+                android:text="@{item.emotion.name}"
                 android:textColor="@color/black"
                 android:textSize="40dp"
                 tools:text="기쁨" />
 
+            <ImageView
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_check_circle_outline_36dp"
+                android:tint="@{item.checked ? @color/accent : @color/gray50_200}" />
         </androidx.cardview.widget.CardView>
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -13,4 +13,6 @@
     <color name="lime50_700">#AEEA00</color>
 
     <color name="gray50_200">#EEEEEE</color>
+
+    <color name="accent">@color/lime50_700</color>
 </resources>

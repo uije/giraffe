@@ -7,16 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
 
 
 class FindEmotionFragment : Fragment() {
-    private lateinit var vAdapter: EmotionAdapterControl
+    private lateinit var adapter: EmotionAdapter
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
 
@@ -31,6 +34,7 @@ class FindEmotionFragment : Fragment() {
     ): View? {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         viewModel = ViewModelProvider(this).get(FindEmotionViewModel::class.java)
         initUI()
         setData()
@@ -43,8 +47,19 @@ class FindEmotionFragment : Fragment() {
         val emotionType = arguments?.get(EmotionType::class.simpleName)
         val resourceId = getResourceId(emotionType)
         val emotions: Array<String> = resources.getStringArray(resourceId)
-        val group = AdapterDataBindingItemGroup(emotions.map { Emotion(it) }.toList())
-        vAdapter.setItems(group, viewModel)
+
+        val list = emotions.map {
+            ViewModelProvider(
+                this,
+                EmotionItemViewModelFactory<EmotionItemViewModel>(Emotion(it))
+            ).get(EmotionItemViewModel::class.java)
+        }.toList()
+
+        adapter.submitList(list)
+
+        list[0].checked.observe(viewLifecycleOwner, Observer { checked ->
+            Log.d("UIJE", checked.toString())
+        })
     }
 
     private fun getResourceId(emotionType: Any?): Int {
@@ -60,9 +75,22 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initUI() {
-        vAdapter = EmotionAdapterControl()
-        binding.emotionRv.adapter = vAdapter.adapter
+        adapter = EmotionAdapter(AppExecutors, viewModel)
+        binding.emotionRv.adapter = adapter
+        val spanCount = 2
         binding.emotionRv.layoutManager =
-            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+            GridLayoutManager(context, spanCount, RecyclerView.HORIZONTAL, false)
+
+        binding.emotionRv.addItemDecoration(
+            LayoutMarginDecoration(
+                spanCount,
+                resources.getDimensionPixelSize(R.dimen.emotion_margin)
+            )
+        )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        adapter.setLifecycleDestroyed()
     }
 }

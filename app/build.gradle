@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -48,8 +49,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
-    implementation 'tech.thdev.recyclerview:simple-adapter:1.1.0'
-    implementation 'tech.thdev.recyclerview:simple-adapter-databinding:1.1.0'
+    implementation('com.github.thekhaeng:recycler-margin:1.2.1') {
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
