@@ -24,6 +24,7 @@ class FindEmotionFragment : Fragment() {
     private lateinit var selectedAdapter: SelectedEmotionAdapter
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
+    private lateinit var emotions: List<Emotion>
 
     companion object {
         const val TAG = "FindEmotionFragment"
@@ -51,11 +52,11 @@ class FindEmotionFragment : Fragment() {
         val resourceId = getResourceId(emotionType)
         val emotions: Array<String> = resources.getStringArray(resourceId)
 
-        val list = emotions.map {
+        this.emotions = emotions.map {
             Emotion(it)
         }.toList()
 
-        emotionAdapter.submitList(list)
+        emotionAdapter.submitList(this.emotions)
     }
 
     private fun getResourceId(emotionType: Any?): Int {
@@ -97,7 +98,12 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initSelectedRv() {
-        selectedAdapter = SelectedEmotionAdapter(AppExecutors, viewModel)
+        selectedAdapter = SelectedEmotionAdapter(AppExecutors, viewModel) { emotion ->
+            val pos = emotions.indexOf(emotion)
+            if (pos >= 0) {
+                binding.emotionRv.smoothScrollToPosition(pos)
+            }
+        }
         binding.selectedRv.adapter = selectedAdapter
         binding.selectedRv.layoutManager =
             LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)

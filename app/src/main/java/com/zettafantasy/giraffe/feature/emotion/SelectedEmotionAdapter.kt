@@ -13,7 +13,8 @@ import com.zettafantasy.giraffe.model.Emotion
 
 class SelectedEmotionAdapter(
     appExecutors: AppExecutors,
-    private val viewModel: FindEmotionViewModel
+    private val viewModel: FindEmotionViewModel,
+    private val emotionClickCallback: ((Emotion) -> Unit)?
 ) : DataBoundListAdapter<Emotion>(
     appExecutors = appExecutors,
     diffCallback = object : DiffUtil.ItemCallback<Emotion>() {
@@ -42,6 +43,13 @@ class SelectedEmotionAdapter(
                 false
             )
         binding.viewModel = viewModel
+
+        binding.root.setOnClickListener {
+            binding.item?.let {
+                emotionClickCallback?.invoke(it)
+            }
+        }
+
         return binding
     }
 
