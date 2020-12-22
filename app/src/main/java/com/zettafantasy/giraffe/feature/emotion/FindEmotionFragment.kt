@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
@@ -19,12 +20,13 @@ import com.zettafantasy.giraffe.model.Emotion
 
 
 class FindEmotionFragment : Fragment() {
-    private lateinit var adapter: EmotionAdapter
+    private lateinit var emotionAdapter: EmotionAdapter
+    private lateinit var selectedAdapter: SelectedEmotionAdapter
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
 
     companion object {
-        const val TAG = "EmotionFragment"
+        const val TAG = "FindEmotionFragment"
     }
 
     override fun onCreateView(
@@ -36,6 +38,7 @@ class FindEmotionFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel = ViewModelProvider(this).get(FindEmotionViewModel::class.java)
+        binding.viewModel = viewModel
         initUI()
         setData()
         return binding.root
@@ -52,7 +55,7 @@ class FindEmotionFragment : Fragment() {
             Emotion(it)
         }.toList()
 
-        adapter.submitList(list)
+        emotionAdapter.submitList(list)
     }
 
     private fun getResourceId(emotionType: Any?): Int {
@@ -68,8 +71,13 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initUI() {
-        adapter = EmotionAdapter(AppExecutors, viewModel)
-        binding.emotionRv.adapter = adapter
+        initEmotionRv()
+        initSelectedRv()
+    }
+
+    private fun initEmotionRv() {
+        emotionAdapter = EmotionAdapter(AppExecutors, viewModel)
+        binding.emotionRv.adapter = emotionAdapter
         val spanCount = 2
         binding.emotionRv.layoutManager =
             GridLayoutManager(context, spanCount, RecyclerView.HORIZONTAL, false)
@@ -82,8 +90,25 @@ class FindEmotionFragment : Fragment() {
         )
     }
 
+    private fun initSelectedRv() {
+        selectedAdapter = SelectedEmotionAdapter(AppExecutors, viewModel)
+        binding.selectedRv.adapter = selectedAdapter
+        binding.selectedRv.layoutManager =
+            LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.selectedRv.addItemDecoration(
+            LayoutMarginDecoration(
+                1, resources.getDimensionPixelSize(R.dimen.selected_emotion_margin)
+            )
+        )
+
+        viewModel.selectedItems.observe(viewLifecycleOwner, Observer {
+            it?.toList().let(selectedAdapter::submitList)
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        adapter.setLifecycleDestroyed()
+        emotionAdapter.setLifecycleDestroyed()
+        selectedAdapter.setLifecycleDestroyed()
     }
 }

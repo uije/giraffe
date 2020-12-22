@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.DiffUtil
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.DataBoundListAdapter
-import com.zettafantasy.giraffe.databinding.EmotionViewBinding
+import com.zettafantasy.giraffe.databinding.SelectedEmotionViewBinding
 import com.zettafantasy.giraffe.model.Emotion
 
-class EmotionAdapter(
+class SelectedEmotionAdapter(
     appExecutors: AppExecutors,
     private val viewModel: FindEmotionViewModel
 ) : DataBoundListAdapter<Emotion>(
@@ -33,11 +33,11 @@ class EmotionAdapter(
     }
 ) {
 
-    override fun createBinding(parent: ViewGroup): EmotionViewBinding {
+    override fun createBinding(parent: ViewGroup): SelectedEmotionViewBinding {
         val binding = DataBindingUtil
-            .inflate<EmotionViewBinding>(
+            .inflate<SelectedEmotionViewBinding>(
                 LayoutInflater.from(parent.context),
-                R.layout.emotion_view,
+                R.layout.selected_emotion_view,
                 parent,
                 false
             )
@@ -47,7 +47,7 @@ class EmotionAdapter(
 
     override fun bind(binding: ViewDataBinding, item: Emotion) {
         when (binding) {
-            is EmotionViewBinding -> {
+            is SelectedEmotionViewBinding -> {
                 binding.item = item
             }
         }

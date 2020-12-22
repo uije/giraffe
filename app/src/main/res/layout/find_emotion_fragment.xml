@@ -3,11 +3,41 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         tools:context="com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment">
 
+        <!-- 선택된 감정 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/selected_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/emotion_margin"
+            android:layout_marginTop="@dimen/emotion_margin"
+            android:layout_marginEnd="@dimen/emotion_margin"
+            android:background="@color/white"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/emotion_rv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleGone="@{viewModel.selectedItems.size() > 0}"
+            tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/selected_emotion_view"
+            tools:orientation="horizontal" />
+
+        <!-- 감정목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/emotion_rv"
             android:layout_width="0dp"
@@ -20,9 +50,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selected_rv"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_emotion"
+            tools:listitem="@layout/emotion_view"
             tools:orientation="horizontal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

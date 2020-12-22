@@ -4,6 +4,7 @@ import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
+import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
@@ -12,7 +13,7 @@ import androidx.databinding.adapters.Converters
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 
 
-object TintBindingAdapter {
+object BindingAdapter {
 
     @BindingAdapter("android:tint")
     @JvmStatic
@@ -44,4 +45,9 @@ object TintBindingAdapter {
         return drawable
     }
 
+    @JvmStatic
+    @BindingAdapter("visibleGone")
+    fun showHide(view: View, show: Boolean) {
+        view.visibility = if (show) View.VISIBLE else View.GONE
+    }
 }
