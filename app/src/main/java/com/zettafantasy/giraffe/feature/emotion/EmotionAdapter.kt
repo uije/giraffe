@@ -9,25 +9,26 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.DataBoundListAdapter
 import com.zettafantasy.giraffe.databinding.ItemEmotionBinding
+import com.zettafantasy.giraffe.model.Emotion
 
 class EmotionAdapter(
     appExecutors: AppExecutors,
     private val viewModel: FindEmotionViewModel
-) : DataBoundListAdapter<EmotionItemViewModel>(
+) : DataBoundListAdapter<Emotion>(
     appExecutors = appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<EmotionItemViewModel>() {
+    diffCallback = object : DiffUtil.ItemCallback<Emotion>() {
         override fun areItemsTheSame(
-            oldItem: EmotionItemViewModel,
-            newItem: EmotionItemViewModel
+            oldItem: Emotion,
+            newItem: Emotion
         ): Boolean {
-            return oldItem.emotion.value === newItem.emotion.value
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: EmotionItemViewModel,
-            newItem: EmotionItemViewModel
+            oldItem: Emotion,
+            newItem: Emotion
         ): Boolean {
-            return oldItem.emotion.value == newItem.emotion.value
+            return oldItem == newItem
         }
     }
 ) {
@@ -44,7 +45,7 @@ class EmotionAdapter(
         return binding
     }
 
-    override fun bind(binding: ViewDataBinding, item: EmotionItemViewModel) {
+    override fun bind(binding: ViewDataBinding, item: Emotion) {
         when (binding) {
             is ItemEmotionBinding -> {
                 binding.item = item

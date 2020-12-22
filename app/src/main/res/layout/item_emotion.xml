@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.zettafantasy.giraffe.feature.emotion.EmotionItemViewModel" />
+            type="com.zettafantasy.giraffe.model.Emotion" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{item.emotion.name}"
+                android:text="@{item.name}"
                 android:textColor="@color/black"
                 android:textSize="40dp"
                 tools:text="기쁨" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_check_circle_outline_36dp"
-                android:tint="@{item.checked ? @color/accent : @color/gray50_200}" />
+                android:tint="@{viewModel.selectedItems.contains(item) ? @color/accent : @color/gray50_200}" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

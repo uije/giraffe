@@ -49,17 +49,10 @@ class FindEmotionFragment : Fragment() {
         val emotions: Array<String> = resources.getStringArray(resourceId)
 
         val list = emotions.map {
-            ViewModelProvider(
-                this,
-                EmotionItemViewModelFactory<EmotionItemViewModel>(Emotion(it))
-            ).get(EmotionItemViewModel::class.java)
+            Emotion(it)
         }.toList()
 
         adapter.submitList(list)
-
-        list[0].checked.observe(viewLifecycleOwner, Observer { checked ->
-            Log.d("UIJE", checked.toString())
-        })
     }
 
     private fun getResourceId(emotionType: Any?): Int {
