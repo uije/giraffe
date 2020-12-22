@@ -25,9 +25,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_margin="@dimen/cardview_default_elevation"
-            android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{() -> viewModel.onCheck(item)}"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="4dp">
 

@@ -76,7 +76,13 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initEmotionRv() {
-        emotionAdapter = EmotionAdapter(AppExecutors, viewModel)
+        emotionAdapter = EmotionAdapter(AppExecutors, viewModel) { emotion ->
+            val pos = viewModel.toggle(emotion)
+            if (pos >= 0) {
+                binding.selectedRv.smoothScrollToPosition(pos)
+            }
+        }
+
         binding.emotionRv.adapter = emotionAdapter
         val spanCount = 2
         binding.emotionRv.layoutManager =
@@ -102,7 +108,9 @@ class FindEmotionFragment : Fragment() {
         )
 
         viewModel.selectedItems.observe(viewLifecycleOwner, Observer {
-            it?.toList().let(selectedAdapter::submitList)
+            if (it.isNotEmpty()) {
+                it.toList().let(selectedAdapter::submitList)
+            }
         })
     }
 

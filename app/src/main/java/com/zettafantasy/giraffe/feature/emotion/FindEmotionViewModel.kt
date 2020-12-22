@@ -16,7 +16,7 @@ class FindEmotionViewModel : ViewModel() {
     val selectedItems: LiveData<List<Emotion>>
         get() = _selectedItems
 
-    fun onCheck(item: Emotion) {
+    fun toggle(item: Emotion): Int {
         Log.d(TAG, String.format("onClick %s", item))
 
         if (list.contains(item)) {
@@ -26,5 +26,6 @@ class FindEmotionViewModel : ViewModel() {
         }
 
         _selectedItems.value = list
+        return list.indexOf(item)
     }
 }
