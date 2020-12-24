@@ -58,7 +58,11 @@ class FindEmotionFragment : Fragment() {
             R.id.menu_done -> {
 
                 val args = Bundle()
-                args.putSerializable(EmotionType::class.simpleName, EmotionType.GOOD)
+                args.putSerializable(EmotionType::class.simpleName, getEmotionType())
+                args.putParcelableArrayList(
+                    Emotion::class.simpleName,
+                    viewModel.selectedItems.value?.let { ArrayList(it.toMutableList()) }
+                )
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_find_emotion_to_find_desire, args)
 
@@ -71,7 +75,7 @@ class FindEmotionFragment : Fragment() {
     private fun setData() {
         Log.d(TAG, arguments.toString())
 
-        val emotionType = arguments?.get(EmotionType::class.simpleName)
+        val emotionType = getEmotionType()
         val resourceId = getResourceId(emotionType)
         val emotions: Array<String> = resources.getStringArray(resourceId)
 
@@ -81,6 +85,9 @@ class FindEmotionFragment : Fragment() {
 
         emotionAdapter.submitList(this.emotions)
     }
+
+    private fun getEmotionType(): EmotionType =
+        arguments?.get(EmotionType::class.simpleName) as EmotionType
 
     private fun getResourceId(emotionType: Any?): Int {
         var resourceId = R.array.emotion_bad

@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/emotion_description"
         android:name="com.zettafantasy.giraffe.feature.emotion.DescriptionFragment"
-        android:label="설명"
+        android:label="감정찾기"
         tools:layout="@layout/emotion_description_fragment">
         <action
             android:id="@+id/action_description_to_find_emotion"
@@ -40,12 +40,18 @@
         tools:layout="@layout/find_emotion_fragment">
         <action
             android:id="@+id/action_find_emotion_to_find_desire"
-            app:destination="@id/find_desire"
+            app:destination="@id/desire_description"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <fragment
+        android:id="@+id/desire_description"
+        android:name="com.zettafantasy.giraffe.feature.desire.DescriptionFragment"
+        android:label="욕구찾기"
+        tools:layout="@layout/desire_description_fragment" />
 
     <fragment
         android:id="@+id/find_desire"
