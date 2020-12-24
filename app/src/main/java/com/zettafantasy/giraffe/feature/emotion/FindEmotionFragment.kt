@@ -2,13 +2,12 @@ package com.zettafantasy.giraffe.feature.emotion
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,6 +24,7 @@ class FindEmotionFragment : Fragment() {
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
     private lateinit var emotions: List<Emotion>
+    private var doneMenu: MenuItem? = null
 
     companion object {
         const val TAG = "FindEmotionFragment"
@@ -35,6 +35,7 @@ class FindEmotionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
@@ -43,6 +44,28 @@ class FindEmotionFragment : Fragment() {
         initUI()
         setData()
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.find_emotion, menu)
+        doneMenu = menu.findItem(R.id.menu_done)
+        doneMenu?.isVisible = viewModel.hasItem()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_done -> {
+
+                val args = Bundle()
+                args.putSerializable(EmotionType::class.simpleName, EmotionType.GOOD)
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_find_emotion_to_find_desire, args)
+
+                super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun setData() {
@@ -117,6 +140,7 @@ class FindEmotionFragment : Fragment() {
             if (it.isNotEmpty()) {
                 it.toList().let(selectedAdapter::submitList)
             }
+            doneMenu?.isVisible = it.isNotEmpty()
         })
     }
 

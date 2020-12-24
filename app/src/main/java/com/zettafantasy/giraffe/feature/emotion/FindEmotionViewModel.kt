@@ -28,4 +28,8 @@ class FindEmotionViewModel : ViewModel() {
         _selectedItems.value = list
         return list.indexOf(item)
     }
+
+    fun hasItem(): Boolean {
+        return list.isNotEmpty()
+    }
 }
