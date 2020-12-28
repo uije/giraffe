@@ -2,10 +2,15 @@ package com.zettafantasy.giraffe.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.zettafantasy.giraffe.common.Item
 
 data class Emotion(
-    val name: String
-) : Parcelable {
+    private val name: String
+) : Item, Parcelable {
+
+    override fun getName(): String {
+        return name
+    }
 
     constructor(parcel: Parcel) : this(parcel.readString()!!) {
     }

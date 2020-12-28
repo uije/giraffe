@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
+import com.zettafantasy.giraffe.common.ItemAdapter
+import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
 
 
 class FindEmotionFragment : Fragment() {
-    private lateinit var emotionAdapter: EmotionAdapter
-    private lateinit var selectedAdapter: SelectedEmotionAdapter
+    private lateinit var emotionAdapter: ItemAdapter
+    private lateinit var selectedAdapter: SelectedItemAdapter
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
     private lateinit var emotions: List<Emotion>
@@ -107,8 +109,8 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initEmotionRv() {
-        emotionAdapter = EmotionAdapter(AppExecutors, viewModel) { emotion ->
-            val pos = viewModel.toggle(emotion)
+        emotionAdapter = ItemAdapter(AppExecutors, viewModel) { emotion ->
+            val pos = viewModel.toggle(emotion as Emotion)
             if (pos >= 0) {
                 binding.selectedRv.smoothScrollToPosition(pos)
             }
@@ -128,7 +130,7 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initSelectedRv() {
-        selectedAdapter = SelectedEmotionAdapter(AppExecutors, viewModel) { emotion ->
+        selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { emotion ->
             val pos = emotions.indexOf(emotion)
             if (pos >= 0) {
                 binding.emotionRv.smoothScrollToPosition(pos)

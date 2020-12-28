@@ -1,35 +1,34 @@
-package com.zettafantasy.giraffe.feature.emotion
+package com.zettafantasy.giraffe.common
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
+import com.zettafantasy.giraffe.BR
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.AppExecutors
-import com.zettafantasy.giraffe.common.DataBoundListAdapter
 import com.zettafantasy.giraffe.databinding.EmotionViewBinding
-import com.zettafantasy.giraffe.model.Emotion
+import com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel
 
-class EmotionAdapter(
+class ItemAdapter(
     appExecutors: AppExecutors,
     private val viewModel: FindEmotionViewModel,
-    private val emotionClickCallback: ((Emotion) -> Unit)?
-) : DataBoundListAdapter<Emotion>(
+    private val itemClickCallback: ((Item) -> Unit)?
+) : DataBoundListAdapter<Item>(
     appExecutors = appExecutors,
-    diffCallback = object : DiffUtil.ItemCallback<Emotion>() {
+    diffCallback = object : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(
-            oldItem: Emotion,
-            newItem: Emotion
+            oldItem: Item,
+            newItem: Item
         ): Boolean {
             return oldItem === newItem
         }
 
         override fun areContentsTheSame(
-            oldItem: Emotion,
-            newItem: Emotion
+            oldItem: Item,
+            newItem: Item
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.getName() == newItem.getName()
         }
     }
 ) {
@@ -46,17 +45,13 @@ class EmotionAdapter(
 
         binding.root.setOnClickListener {
             binding.item?.let {
-                emotionClickCallback?.invoke(it)
+                itemClickCallback?.invoke(it)
             }
         }
         return binding
     }
 
-    override fun bind(binding: ViewDataBinding, item: Emotion) {
-        when (binding) {
-            is EmotionViewBinding -> {
-                binding.item = item
-            }
-        }
+    override fun bind(binding: ViewDataBinding, item: Item) {
+        binding.setVariable(BR.item, item)
     }
 }
