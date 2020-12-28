@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">기린</string>
     <string name="fab_content_desc">추가버튼</string>
+    <string name="emotion_state_desc"><![CDATA[현재 <font color="#%1$s">%2$s</font> 상태이시군요.]]></string>
 </resources>

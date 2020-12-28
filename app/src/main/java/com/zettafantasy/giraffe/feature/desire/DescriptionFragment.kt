@@ -30,8 +30,8 @@ class DescriptionFragment : Fragment() {
 
         emotions?.let {
             view.findViewById<TextView>(R.id.state).text = HtmlCompat.fromHtml(
-                String.format(
-                    "현재 <font color=\"#%s\">%s</font> 상태이시군요.",
+                getString(
+                    R.string.emotion_state_desc,
                     Integer.toHexString(
                         ContextCompat.getColor(requireContext(), R.color.accent)
                     ).substring(2),
