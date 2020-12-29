@@ -11,7 +11,7 @@
 
         <variable
             name="item"
-            type="com.zettafantasy.giraffe.model.Emotion" />
+            type="com.zettafantasy.giraffe.common.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

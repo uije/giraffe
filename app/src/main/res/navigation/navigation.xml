@@ -49,13 +49,13 @@
 
     <fragment
         android:id="@+id/desire_description"
-        android:name="com.zettafantasy.giraffe.feature.desire.DescriptionFragment"
+        android:name="com.zettafantasy.giraffe.feature.need.DescriptionFragment"
         android:label="욕구찾기"
         tools:layout="@layout/desire_description_fragment" />
 
     <fragment
         android:id="@+id/find_desire"
-        android:name="com.zettafantasy.giraffe.feature.desire.FindDesireFragment"
+        android:name="com.zettafantasy.giraffe.feature.need.FindNeedFragment"
         android:label="욕구찾기"
         tools:layout="@layout/find_desire_fragment" />
 </navigation>

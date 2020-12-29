@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.desire
+package com.zettafantasy.giraffe.feature.need
 
 import android.os.Bundle
 import android.text.TextUtils

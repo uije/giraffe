@@ -5,7 +5,7 @@
     android:id="@+id/title_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zettafantasy.giraffe.feature.desire.DescriptionFragment"
+    tools:context="com.zettafantasy.giraffe.feature.need.DescriptionFragment"
     tools:layout_editor_absoluteY="81dp">
 
     <TextView

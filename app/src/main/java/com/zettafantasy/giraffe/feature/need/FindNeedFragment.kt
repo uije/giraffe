@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.desire
+package com.zettafantasy.giraffe.feature.need
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.zettafantasy.giraffe.R
 
-class FindDesireFragment : Fragment() {
+class FindNeedFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
