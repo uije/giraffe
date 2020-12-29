@@ -38,9 +38,10 @@ class NeedDaoTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetWord() = runBlocking {
-        val desire = Need(null, "aaa")
-        needDao.insert(desire)
+        val need = Need(null, "aaa", Need.NeedType.AUTONOMY)
+        needDao.insert(need)
         val allNeeds = needDao.getNeeds().first()
-        assertEquals(allNeeds[0].getName(), desire.getName())
+        assertEquals(allNeeds[0].getName(), need.getName())
+        assertEquals(allNeeds[0].type, need.type)
     }
 }
