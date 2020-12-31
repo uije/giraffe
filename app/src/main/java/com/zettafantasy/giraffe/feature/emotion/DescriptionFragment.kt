@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.model.EmotionType
 
 class DescriptionFragment : Fragment() {
 

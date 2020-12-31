@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.zettafantasy.giraffe.model.Need
 import kotlinx.coroutines.flow.Flow
 
-@Dao
+//@Dao
 interface NeedDao {
     @Query("SELECT * FROM need")
     fun getNeeds(): Flow<List<Need>>

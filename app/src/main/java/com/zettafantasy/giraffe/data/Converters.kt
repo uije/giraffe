@@ -1,12 +1,12 @@
 package com.zettafantasy.giraffe.data
 
 import androidx.room.TypeConverter
-import com.zettafantasy.giraffe.model.Need
+import com.zettafantasy.giraffe.model.NeedType
 
 class Converters {
     @TypeConverter
-    fun toNeedType(value: Int) = enumValues<Need.NeedType>()[value]
+    fun toNeedType(value: Int) = enumValues<NeedType>()[value]
 
     @TypeConverter
-    fun fromNeedType(value: Need.NeedType) = value.ordinal
+    fun fromNeedType(value: NeedType) = value.ordinal
 }

@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.feature.emotion.EmotionType
+import com.zettafantasy.giraffe.model.EmotionType
 import com.zettafantasy.giraffe.model.Emotion
 
 class DescriptionFragment : Fragment() {
@@ -37,6 +39,11 @@ class DescriptionFragment : Fragment() {
                 ),
                 HtmlCompat.FROM_HTML_MODE_LEGACY
             )
+        }
+
+        view.findViewById<AppCompatButton>(R.id.start_btn).setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_description_to_find_need)
         }
         return view
     }

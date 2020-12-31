@@ -18,10 +18,11 @@ import com.zettafantasy.giraffe.common.ItemAdapter
 import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
+import com.zettafantasy.giraffe.model.EmotionType
 
 
 class FindEmotionFragment : Fragment() {
-    private lateinit var emotionAdapter: ItemAdapter
+    private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
     private lateinit var viewModel: FindEmotionViewModel
     private lateinit var binding: FindEmotionFragmentBinding
@@ -85,7 +86,7 @@ class FindEmotionFragment : Fragment() {
             Emotion(it)
         }.toList()
 
-        emotionAdapter.submitList(this.emotions)
+        itemAdapter.submitList(this.emotions)
     }
 
     private fun getEmotionType(): EmotionType =
@@ -104,19 +105,19 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initUI() {
-        initEmotionRv()
+        initItemRv()
         initSelectedRv()
     }
 
-    private fun initEmotionRv() {
-        emotionAdapter = ItemAdapter(AppExecutors, viewModel) { emotion ->
+    private fun initItemRv() {
+        itemAdapter = ItemAdapter(AppExecutors, viewModel, R.layout.emotion_view) { emotion ->
             val pos = viewModel.toggle(emotion as Emotion)
             if (pos >= 0) {
                 binding.selectedRv.smoothScrollToPosition(pos)
             }
         }
 
-        binding.emotionRv.adapter = emotionAdapter
+        binding.emotionRv.adapter = itemAdapter
         val spanCount = 2
         binding.emotionRv.layoutManager =
             GridLayoutManager(context, spanCount, RecyclerView.HORIZONTAL, false)
@@ -155,7 +156,7 @@ class FindEmotionFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        emotionAdapter.setLifecycleDestroyed()
+        itemAdapter.setLifecycleDestroyed()
         selectedAdapter.setLifecycleDestroyed()
     }
 }

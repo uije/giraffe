@@ -51,11 +51,20 @@
         android:id="@+id/desire_description"
         android:name="com.zettafantasy.giraffe.feature.need.DescriptionFragment"
         android:label="욕구찾기"
-        tools:layout="@layout/desire_description_fragment" />
+        tools:layout="@layout/desire_description_fragment">
+
+        <action
+            android:id="@+id/action_description_to_find_need"
+            app:destination="@id/find_need"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
 
     <fragment
-        android:id="@+id/find_desire"
+        android:id="@+id/find_need"
         android:name="com.zettafantasy.giraffe.feature.need.FindNeedFragment"
         android:label="욕구찾기"
-        tools:layout="@layout/find_desire_fragment" />
+        tools:layout="@layout/find_need_fragment" />
 </navigation>

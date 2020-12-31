@@ -8,7 +8,7 @@ import com.zettafantasy.giraffe.model.Need
 
 class FindNeedViewModel : ViewModel() {
     companion object {
-        const val TAG = "FindDesireViewModel"
+        const val TAG = "FindNeedViewModel"
     }
 
     private val list = mutableListOf<Need>()

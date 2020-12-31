@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.zettafantasy.giraffe.data.NeedDao
 import com.zettafantasy.giraffe.data.GiraffeRoomDatabase
 import com.zettafantasy.giraffe.model.Need
+import com.zettafantasy.giraffe.model.NeedType
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -27,7 +28,7 @@ class NeedDaoTest {
         db = Room.inMemoryDatabaseBuilder(context, GiraffeRoomDatabase::class.java)
             .allowMainThreadQueries()
             .build()
-        needDao = db.desireDao()
+        needDao = db.needDao()
     }
 
     @After
@@ -38,7 +39,7 @@ class NeedDaoTest {
     @Test
     @Throws(Exception::class)
     fun insertAndGetWord() = runBlocking {
-        val need = Need(null, "aaa", Need.NeedType.AUTONOMY)
+        val need = Need(null, "aaa", NeedType.AUTONOMY)
         needDao.insert(need)
         val allNeeds = needDao.getNeeds().first()
         assertEquals(allNeeds[0].getName(), need.getName())

@@ -28,7 +28,7 @@
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"
             android:scrollbars="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/desire_rv"
+            app:layout_constraintBottom_toTopOf="@id/need_rv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +39,7 @@
 
         <!-- 욕구목록 -->
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/desire_rv"
+            android:id="@+id/need_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"

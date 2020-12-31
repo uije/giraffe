@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.emotion
+package com.zettafantasy.giraffe.model
 
 import androidx.annotation.Keep
 import java.io.Serializable

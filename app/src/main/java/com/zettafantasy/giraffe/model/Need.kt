@@ -2,18 +2,16 @@ package com.zettafantasy.giraffe.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.*
 import com.zettafantasy.giraffe.common.Item
 
-@Entity
 data class Need(
-    @PrimaryKey(autoGenerate = true) val id: Long?,
-    @ColumnInfo private val name: String,
-    @ColumnInfo var type: NeedType,
+    val id: Int?,
+    private val name: String,
+    val type: NeedType,
 ) : Item, Parcelable {
 
     constructor(parcel: Parcel) : this(
-        parcel.readValue(Long::class.java.classLoader) as? Long,
+        parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString()!!,
         NeedType.values()[parcel.readInt()]
     )
@@ -42,13 +40,4 @@ data class Need(
         }
     }
 
-    enum class NeedType {
-        CONNECTION,
-        PHYSICAL_WELLBEING,
-        HONESTY,
-        PLAY,
-        PEACE,
-        AUTONOMY,
-        MEANING
-    }
 }
