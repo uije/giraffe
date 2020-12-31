@@ -5,5 +5,5 @@ import java.io.Serializable
 
 @Keep
 enum class EmotionType : Serializable {
-    GOOD, BAD
+    SATISFIED, UNSATISFIED
 }

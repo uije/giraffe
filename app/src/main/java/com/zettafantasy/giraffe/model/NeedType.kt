@@ -1,6 +1,10 @@
 package com.zettafantasy.giraffe.model
 
-enum class NeedType {
+import androidx.annotation.Keep
+import java.io.Serializable
+
+@Keep
+enum class NeedType : Serializable {
     CONNECTION,
     PHYSICAL_WB,
     TRUTH,

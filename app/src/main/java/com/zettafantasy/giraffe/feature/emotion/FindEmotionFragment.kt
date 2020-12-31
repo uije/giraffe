@@ -67,7 +67,7 @@ class FindEmotionFragment : Fragment() {
                     viewModel.selectedItems.value?.let { ArrayList(it.toMutableList()) }
                 )
                 Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_find_emotion_to_find_desire, args)
+                    .navigate(R.id.action_find_emotion_to_find_need, args)
 
                 super.onOptionsItemSelected(item)
             }
@@ -96,8 +96,8 @@ class FindEmotionFragment : Fragment() {
         var resourceId = R.array.emotion_bad
         if (emotionType is EmotionType) {
             resourceId = when (emotionType) {
-                EmotionType.GOOD -> R.array.emotion_good
-                EmotionType.BAD -> R.array.emotion_bad
+                EmotionType.SATISFIED -> R.array.emotion_good
+                EmotionType.UNSATISFIED -> R.array.emotion_bad
                 else -> R.array.emotion_bad
             }
         }

@@ -22,7 +22,7 @@ class DescriptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.desire_description_fragment, container, false)
+        val view = inflater.inflate(R.layout.need_description_fragment, container, false)
 
         val emotionType = getEmotionType()
         val emotions =

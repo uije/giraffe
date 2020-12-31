@@ -20,14 +20,14 @@ class DescriptionFragment : Fragment() {
         val view = inflater.inflate(R.layout.emotion_description_fragment, container, false)
         view.findViewById<AppCompatButton>(R.id.start_btn_good).setOnClickListener {
             val args = Bundle()
-            args.putSerializable(EmotionType::class.simpleName, EmotionType.GOOD)
+            args.putSerializable(EmotionType::class.simpleName, EmotionType.SATISFIED)
             Navigation.findNavController(view)
                 .navigate(R.id.action_description_to_find_emotion, args)
         }
 
         view.findViewById<AppCompatButton>(R.id.start_btn_bad).setOnClickListener {
             val args = Bundle()
-            args.putSerializable(EmotionType::class.simpleName, EmotionType.BAD)
+            args.putSerializable(EmotionType::class.simpleName, EmotionType.UNSATISFIED)
             Navigation.findNavController(view)
                 .navigate(R.id.action_description_to_find_emotion, args)
         }
