@@ -8,4 +8,6 @@
     <string name="need_type_meaning">삶의 의미의 욕구 - 영성, 인생, 예찬</string>
     <string name="need_type_strong">힘의 욕구 - 성취, 인정, 자존</string>
     <string name="need_type_freedom">자유의 욕구 - 독립, 자율성, 선택</string>
+    <string name="emotion">감정</string>
+    <string name="need">욕구</string>
 </resources>

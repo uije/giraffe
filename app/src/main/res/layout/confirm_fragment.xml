@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/title_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zettafantasy.giraffe.feature.confirm.ConfirmFragment"
+    tools:layout_editor_absoluteY="81dp">
+
+    <!-- 감정 제목 -->
+    <TextView
+        android:id="@+id/title_emotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/emotion"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="?colorOnSecondary"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/emotions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:text="감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="?colorOnSecondary"
+        android:textSize="30dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/title_need"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_emotion" />
+
+    <!-- 욕구 제목 -->
+    <TextView
+        android:id="@+id/title_need"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/need"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="?colorOnSecondary"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_emotion" />
+
+    <TextView
+        android:id="@+id/needs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:ellipsize="end"
+        android:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 "
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="?colorOnSecondary"
+        android:textSize="30dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_need" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?colorSecondary"
+        android:padding="10dp"
+        android:text="저장하기"
+        android:textColor="?colorOnSecondary"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

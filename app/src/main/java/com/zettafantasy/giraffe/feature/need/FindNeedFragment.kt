@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -53,8 +54,8 @@ class FindNeedFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
-//                Navigation.findNavController(binding.root)
-//                    .navigate(R.id.action_find_emotion_to_find_need)
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_find_need_to_confirm)
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)
