@@ -12,6 +12,10 @@ data class Emotion(
         return name
     }
 
+    override fun getType(): Int {
+        TODO("Not yet implemented")
+    }
+
     constructor(parcel: Parcel) : this(parcel.readString()!!) {
     }
 

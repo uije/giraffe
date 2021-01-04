@@ -5,12 +5,8 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel" />
-
-        <variable
             name="item"
-            type="com.zettafantasy.giraffe.model.Emotion" />
+            type="com.zettafantasy.giraffe.common.Item" />
     </data>
 
     <FrameLayout

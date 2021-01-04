@@ -131,8 +131,8 @@ class FindEmotionFragment : Fragment() {
     }
 
     private fun initSelectedRv() {
-        selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { emotion ->
-            val pos = emotions.indexOf(emotion)
+        selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { item ->
+            val pos = emotions.indexOf(item)
             if (pos >= 0) {
                 binding.emotionRv.smoothScrollToPosition(pos)
             }

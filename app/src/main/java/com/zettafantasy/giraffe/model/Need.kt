@@ -20,6 +20,10 @@ data class Need(
         return name
     }
 
+    override fun getType(): Int {
+        return type.nameRes
+    }
+
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
         parcel.writeString(name)

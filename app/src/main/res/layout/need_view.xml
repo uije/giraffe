@@ -14,30 +14,56 @@
             type="com.zettafantasy.giraffe.common.Item" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:background="@color/gray50_200">
+        android:layout_margin="@dimen/cardview_default_elevation"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/cardview_default_elevation"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="4dp">
+            android:layout_height="match_parent">
 
+            <!-- 욕구타입 -->
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="@{item.type}"
+                android:textColor="@color/gray50_500"
+                android:textSize="20dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="@id/name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="자유의 욕구" />
+
+            <!-- 욕구 -->
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:gravity="center"
                 android:text="@{item.name}"
                 android:textColor="@color/black"
-                android:textSize="40dp"
-                tools:text="지지" />
+                android:textSize="35dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/type"
+                tools:text="가치를 이루기 위한 방법을 선택할 자유" />
 
             <ImageView
                 android:id="@+id/check"
@@ -45,7 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_check_circle_outline_36dp"
-                android:tint="@{viewModel.selectedItems.contains(item) ? @color/accent : @color/gray50_200}" />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:tint="@{viewModel.selectedItems.contains(item) ? @color/accent : @color/gray50_200}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

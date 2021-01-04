@@ -23,17 +23,12 @@ class NeedInventory private constructor(resources: Resources) {
     private val list = mutableListOf<Need>()
 
     init {
-        load(resources.getStringArray(R.array.need_0_autonomy), NeedType.AUTONOMY)
-        load(resources.getStringArray(R.array.need_1_physical_wb), NeedType.PHYSICAL_WB)
-        load(resources.getStringArray(R.array.need_2_connection), NeedType.CONNECTION)
-        load(resources.getStringArray(R.array.need_3_play), NeedType.PLAY)
-        load(resources.getStringArray(R.array.need_4_meaning), NeedType.MEANING)
-        load(resources.getStringArray(R.array.need_5_truth), NeedType.TRUTH)
-        load(resources.getStringArray(R.array.need_6_peace), NeedType.PEACE)
-        load(
-            resources.getStringArray(R.array.need_7_self_realization),
-            NeedType.SELF_REALIZATION
-        )
+        load(resources.getStringArray(R.array.need_0_survival), NeedType.SURVIVAL)
+        load(resources.getStringArray(R.array.need_1_social), NeedType.SOCIAL)
+        load(resources.getStringArray(R.array.need_2_strong), NeedType.STRONG)
+        load(resources.getStringArray(R.array.need_3_freedom), NeedType.FREEDOM)
+        load(resources.getStringArray(R.array.need_4_fun), NeedType.FUN)
+        load(resources.getStringArray(R.array.need_5_meaning), NeedType.MEANING)
     }
 
     private fun load(stringArray: Array<String>, type: NeedType) {

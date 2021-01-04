@@ -34,7 +34,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:visibleGone="@{viewModel.selectedItems.size() > 0}"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/selected_emotion_view"
+            tools:listitem="@layout/selected_item_view"
             tools:orientation="horizontal" />
 
         <!-- 감정목록 -->

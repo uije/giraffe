@@ -4,15 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.zettafantasy.giraffe.BR
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.databinding.SelectedEmotionViewBinding
-import com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel
 
 class SelectedItemAdapter(
     appExecutors: AppExecutors,
-    private val viewModel: FindEmotionViewModel,
+    private val viewModel: ViewModel,
     private val itemClickCallback: ((Item) -> Unit)?
 ) : DataBoundListAdapter<Item>(
     appExecutors = appExecutors,
@@ -33,26 +32,24 @@ class SelectedItemAdapter(
     }
 ) {
 
-    override fun createBinding(parent: ViewGroup): SelectedEmotionViewBinding {
+    override fun createBinding(parent: ViewGroup): ViewDataBinding {
         val binding = DataBindingUtil
-            .inflate<SelectedEmotionViewBinding>(
+            .inflate<ViewDataBinding>(
                 LayoutInflater.from(parent.context),
-                R.layout.selected_emotion_view,
+                R.layout.selected_item_view,
                 parent,
                 false
             )
-        binding.viewModel = viewModel
-
-        binding.root.setOnClickListener {
-            binding.item?.let {
-                itemClickCallback?.invoke(it)
-            }
-        }
-
+        binding.setVariable(BR.viewModel, viewModel)
         return binding
     }
 
     override fun bind(binding: ViewDataBinding, item: Item) {
         binding.setVariable(BR.item, item);
+        binding.root.setOnClickListener {
+            item?.let {
+                itemClickCallback?.invoke(it)
+            }
+        }
     }
 }

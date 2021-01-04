@@ -196,37 +196,29 @@
         <item>치밀어 오르는</item>
     </string-array>
 
-    <string-array name="need_0_autonomy">
-        <item>자신의 꿈</item>
-        <item>목표</item>
-        <item>가치를 선택할 수 있는 자유</item>
-        <item>가치를 이루기 위한 방법을 선택할 자유</item>
-    </string-array>
-
-    <string-array name="need_1_physical_wb">
+    <string-array name="need_0_survival">
         <item>공기</item>
         <item>음식</item>
         <item>물</item>
         <item>주거</item>
         <item>휴식</item>
         <item>수면</item>
-        <item>안전</item>
-        <item>따뜻함</item>
-        <item>신체적 접촉(스킨 쉽)</item>
+        <item>신체적 접촉(스킨쉽)</item>
         <item>성적 표현</item>
-        <item>부드러움</item>
+        <item>신체적 안전</item>
+        <item>정서적 안정</item>
+        <item>경제적 안정</item>
         <item>편안함</item>
-        <item>돌봄을 받음</item>
-        <item>보호받음</item>
         <item>애착형성</item>
-        <item>의존(생존과 안전)</item>
-        <item>자유로운 움직임 (이동)</item>
+        <item>자유로운 움직임</item>
         <item>운동</item>
+        <item>건강</item>
+        <item>웰빙</item>
+        <item>돌봄 받음</item>
+        <item>보호 받음</item>
     </string-array>
 
-    <string-array name="need_2_connection">
-        <item>주는 것</item>
-        <item>봉사</item>
+    <string-array name="need_1_social">
         <item>친밀한 관계</item>
         <item>유대</item>
         <item>소통</item>
@@ -241,92 +233,102 @@
         <item>협력</item>
         <item>도움</item>
         <item>감사</item>
-        <item>인정</item>
-        <item>승인</item>
-        <item>사랑</item>
         <item>애정</item>
         <item>관심</item>
-        <item>호감</item>
         <item>우정</item>
         <item>가까움</item>
         <item>나눔</item>
+        <item>연민</item>
         <item>소속감</item>
         <item>공동체</item>
+        <item>상호의존</item>
         <item>안도</item>
+        <item>안심</item>
+        <item>위로</item>
         <item>위안</item>
         <item>신뢰</item>
         <item>확신</item>
-        <item>정서적 안 전</item>
-        <item>자기 보호</item>
+        <item>예측가능성</item>
         <item>일관성</item>
-        <item>안정성</item>
+        <item>참여</item>
+        <item>성실성</item>
+        <item>책무</item>
+        <item>책임</item>
+        <item>평화</item>
+        <item>여유</item>
+        <item>아름다움</item>
+        <item>가르침</item>
+        <item>성취</item>
+        <item>공유</item>
+        <item>유연성</item>
+        <item>상대 돌봄</item>
+        <item>상대 보호</item>
+    </string-array>
+
+    <string-array name="need_2_strong">
+        <item>평등</item>
+        <item>질서</item>
+        <item>조화</item>
+        <item>자신감</item>
+        <item>자기 표현</item>
+        <item>자기 신뢰</item>
+        <item>중요하게 여겨짐</item>
+        <item>유능감</item>
+        <item>능력</item>
+        <item>존재감</item>
+        <item>공정</item>
+        <item>공평</item>
+        <item>진정성</item>
+        <item>투명성</item>
         <item>정직</item>
         <item>진실</item>
-        <item>예측가능성</item>
-    </string-array>
-
-    <string-array name="need_3_play">
-        <item>쾌락</item>
-        <item>흥분</item>
-        <item>즐거움</item>
-        <item>재미</item>
-        <item>유머</item>
-    </string-array>
-
-    <string-array name="need_4_meaning">
-        <item>기여</item>
-        <item>능력</item>
-        <item>도전</item>
-        <item>명료함</item>
-        <item>발견</item>
-        <item>회복</item>
-        <item>깨달음</item>
-        <item>자극</item>
-        <item>효능감</item>
-        <item>인생예찬(축하,애도)</item>
-        <item>기념</item>
-        <item>중요성</item>
-        <item>참여</item>
-        <item>희망</item>
-        <item>주관을 가짐(자신만의 견해나 사상)</item>
-    </string-array>
-
-    <string-array name="need_5_truth">
-        <item>진실</item>
-        <item>성실성</item>
-        <item>존재감</item>
+        <item>인정</item>
         <item>일치</item>
         <item>개성</item>
-        <item>자기존중</item>
-        <item>비전</item>
-        <item>꿈</item>
+        <item>숙달</item>
+        <item>전문성</item>
+        <item>자기 존중</item>
+        <item>정의</item>
+        <item>보람</item>
     </string-array>
 
-    <string-array name="need_6_peace">
-        <item>아름다움</item>
-        <item>평탄함</item>
-        <item>홀가분함</item>
-        <item>여유</item>
-        <item>평등</item>
-        <item>조화</item>
-        <item>질서</item>
-        <item>평화</item>
-        <item>영적 교감</item>
-        <item>영성</item>
-    </string-array>
-
-    <string-array name="need_7_self_realization">
-        <item>성취</item>
-        <item>배움</item>
+    <string-array name="need_3_freedom">
         <item>생산</item>
         <item>성장</item>
         <item>창조성</item>
         <item>치유</item>
-        <item>숙달</item>
-        <item>전문성</item>
-        <item>목표</item>
-        <item>가르침</item>
+        <item>선택</item>
+        <item>승인</item>
+        <item>자유</item>
+        <item>주관을 가짐(자신만의 견해나 사상)</item>
+        <item>자율성</item>
+        <item>독립</item>
+        <item>혼자만의 시간</item>
+    </string-array>
+
+    <string-array name="need_4_fun">
+        <item>재미</item>
+        <item>놀이</item>
         <item>자각</item>
-        <item>자기표현</item>
+        <item>도전</item>
+        <item>꺠달음</item>
+        <item>명료함</item>
+        <item>배움</item>
+        <item>자극</item>
+        <item>발견</item>
+    </string-array>
+
+    <string-array name="need_5_meaning">
+        <item>의미</item>
+        <item>인생예찬(축하,애도)</item>미
+        <item>사랑</item>
+        <item>비전</item>
+        <item>꿈</item>
+        <item>희망</item>
+        <item>영적 교감</item>
+        <item>영성</item>
+        <item>영감</item>
+        <item>존엄성</item>
+        <item>기여</item>
     </string-array>
 </resources>
