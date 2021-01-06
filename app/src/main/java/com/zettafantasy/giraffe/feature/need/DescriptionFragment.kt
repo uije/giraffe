@@ -12,7 +12,6 @@ import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.model.EmotionType
 import com.zettafantasy.giraffe.model.Emotion
 
 class DescriptionFragment : Fragment() {
@@ -24,7 +23,6 @@ class DescriptionFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.need_description_fragment, container, false)
 
-        val emotionType = getEmotionType()
         val emotions =
             arguments?.getParcelableArrayList<Emotion>(Emotion::class.simpleName)
 
@@ -42,12 +40,21 @@ class DescriptionFragment : Fragment() {
         }
 
         view.findViewById<AppCompatButton>(R.id.start_btn).setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_description_to_find_need)
+            navigateFindNeedScreen(emotions, view)
         }
         return view
     }
 
-    private fun getEmotionType(): EmotionType =
-        arguments?.get(EmotionType::class.simpleName) as EmotionType
+    private fun navigateFindNeedScreen(
+        emotions: java.util.ArrayList<Emotion>?,
+        view: View
+    ) {
+        val args = Bundle()
+        args.putParcelableArrayList(
+            Emotion::class.simpleName,
+            emotions?.let { ArrayList(it.toMutableList()) }
+        )
+        Navigation.findNavController(view)
+            .navigate(R.id.action_description_to_find_need, args)
+    }
 }

@@ -54,12 +54,23 @@ class FindNeedFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_find_need_to_confirm)
+                navigateConfirmScreen()
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun navigateConfirmScreen() {
+        val args = Bundle()
+        args.putAll(arguments)
+        args.putParcelableArrayList(
+            Need::class.simpleName,
+            viewModel.selectedItems.value?.let { ArrayList(it.toMutableList()) }
+        )
+
+        Navigation.findNavController(binding.root)
+            .navigate(R.id.action_find_need_to_confirm, args)
     }
 
     private fun setData() {

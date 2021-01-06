@@ -44,4 +44,7 @@ data class Need(
         }
     }
 
+    override fun toString(): String {
+        return name
+    }
 }

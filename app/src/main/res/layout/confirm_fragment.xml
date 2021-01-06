@@ -43,6 +43,7 @@
         app:layout_constraintBottom_toTopOf="@id/title_need"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_emotion" />
 
@@ -70,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ellipsize="end"
-        android:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 "
+        tools:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 "
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="?colorOnSecondary"
@@ -80,6 +81,7 @@
         app:layout_constraintBottom_toTopOf="@id/btn_save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_need" />
 
