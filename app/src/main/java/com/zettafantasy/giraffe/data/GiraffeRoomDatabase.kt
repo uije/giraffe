@@ -7,16 +7,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.zettafantasy.giraffe.model.Need
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//@Database(entities = [Need::class], version = 1)
-//@TypeConverters(Converters::class)
+@Database(entities = [Record::class], version = 1)
+@TypeConverters(Converters::class)
 abstract class GiraffeRoomDatabase : RoomDatabase() {
 
-    abstract fun needDao(): NeedDao
+    abstract fun recordDao(): RecordDao
 
     companion object {
         @Volatile
@@ -53,7 +52,7 @@ abstract class GiraffeRoomDatabase : RoomDatabase() {
                 // comment out the following line.
                 INSTANCE?.let { database ->
                     scope.launch(Dispatchers.IO) {
-                        populateDatabase(database.needDao())
+                        populateDatabase(database.recordDao())
                     }
                 }
             }
@@ -68,7 +67,7 @@ abstract class GiraffeRoomDatabase : RoomDatabase() {
          * Populate the database in a new coroutine.
          * If you want to start with more words, just add them.
          */
-        suspend fun populateDatabase(needDao: NeedDao) {
+        suspend fun populateDatabase(recordDao: RecordDao) {
             // Start the app with a clean database every time.
             // Not needed if you only populate on creation.
             Log.d(this.javaClass.simpleName, "populateDatabase")

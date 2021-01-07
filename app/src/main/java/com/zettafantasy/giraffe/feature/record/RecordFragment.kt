@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.history
+package com.zettafantasy.giraffe.feature.record
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.databinding.HistoryFragmentBinding
 import com.zettafantasy.giraffe.feature.main.MainViewModel
 
-class HistoryFragment : Fragment() {
+class RecordFragment : Fragment() {
     private lateinit var binding: HistoryFragmentBinding
     private lateinit var viewModel: MainViewModel
 

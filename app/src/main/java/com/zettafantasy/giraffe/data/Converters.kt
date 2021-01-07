@@ -1,12 +1,28 @@
 package com.zettafantasy.giraffe.data
 
 import androidx.room.TypeConverter
-import com.zettafantasy.giraffe.model.NeedType
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.util.*
+
 
 class Converters {
-    @TypeConverter
-    fun toNeedType(value: Int) = enumValues<NeedType>()[value]
+
+    private val gson = Gson()
 
     @TypeConverter
-    fun fromNeedType(value: NeedType) = value.ordinal
+    fun toListInt(str: String): List<Int> {
+        return gson.fromJson(str, object : TypeToken<List<Int>>() {}.type)
+    }
+
+    @TypeConverter
+    fun fromListInt(list: List<Int>): String {
+        return gson.toJson(list)
+    }
+
+    @TypeConverter
+    fun toDate(date: Long) = Date(date)
+
+    @TypeConverter
+    fun fromDate(date: Date) = date.time
 }

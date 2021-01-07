@@ -4,17 +4,16 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.zettafantasy.giraffe.model.Need
 import kotlinx.coroutines.flow.Flow
 
-//@Dao
-interface NeedDao {
-    @Query("SELECT * FROM need")
-    fun getNeeds(): Flow<List<Need>>
+@Dao
+interface RecordDao {
+    @Query("SELECT * FROM record ORDER BY date DESC")
+    fun getRecords(): Flow<List<Record>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(need: Need)
+    suspend fun insert(record: Record)
 
-    @Query("DELETE FROM need")
+    @Query("DELETE FROM record")
     suspend fun deleteAll()
 }

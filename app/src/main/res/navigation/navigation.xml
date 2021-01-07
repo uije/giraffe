@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/history"
-        android:name="com.zettafantasy.giraffe.feature.history.HistoryFragment"
+        android:name="com.zettafantasy.giraffe.feature.record.RecordFragment"
         android:label="기록"
         tools:layout="@layout/history_fragment">
         <action
