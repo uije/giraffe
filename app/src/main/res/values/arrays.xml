@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="emotion_good">
+    <string-array name="emotion_satisfied">
         <item>감동받은</item>
         <item>뭉클한</item>
         <item>감격스런</item>
@@ -75,7 +75,7 @@
         <item>희망에 찬</item>
     </string-array>
 
-    <string-array name="emotion_bad">
+    <string-array name="emotion_unsatisfied">
         <item>걱정되는</item>
         <item>까마득한</item>
         <item>암담한</item>

@@ -16,6 +16,7 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.ItemAdapter
 import com.zettafantasy.giraffe.common.SelectedItemAdapter
+import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
 import com.zettafantasy.giraffe.model.EmotionType
@@ -77,32 +78,12 @@ class FindEmotionFragment : Fragment() {
 
     private fun setData() {
         Log.d(TAG, arguments.toString())
-
-        val emotionType = getEmotionType()
-        val resourceId = getResourceId(emotionType)
-        val emotions: Array<String> = resources.getStringArray(resourceId)
-
-        this.emotions = emotions.map {
-            Emotion(it)
-        }.toList()
-
+        this.emotions = EmotionInventory.getInstance(resources).getList(getEmotionType())
         itemAdapter.submitList(this.emotions)
     }
 
     private fun getEmotionType(): EmotionType =
         arguments?.get(EmotionType::class.simpleName) as EmotionType
-
-    private fun getResourceId(emotionType: Any?): Int {
-        var resourceId = R.array.emotion_bad
-        if (emotionType is EmotionType) {
-            resourceId = when (emotionType) {
-                EmotionType.SATISFIED -> R.array.emotion_good
-                EmotionType.UNSATISFIED -> R.array.emotion_bad
-                else -> R.array.emotion_bad
-            }
-        }
-        return resourceId
-    }
 
     private fun initUI() {
         initItemRv()
@@ -146,7 +127,7 @@ class FindEmotionFragment : Fragment() {
             )
         )
 
-        viewModel.selectedItems.observe(viewLifecycleOwner, Observer {
+        viewModel.selectedItems.observe(viewLifecycleOwner, {
             if (it.isNotEmpty()) {
                 it.toList().let(selectedAdapter::submitList)
             }

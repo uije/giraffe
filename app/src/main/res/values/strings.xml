@@ -10,4 +10,6 @@
     <string name="need_type_freedom">자유의 욕구 - 독립, 자율성, 선택</string>
     <string name="emotion">감정</string>
     <string name="need">욕구</string>
+    <string name="emotion_type_satisfied">원하는 것이 이루어질 때</string>
+    <string name="emotion_type_unsatisfied">원하는 것이 이루어지지 않을 때</string>
 </resources>

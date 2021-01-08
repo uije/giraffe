@@ -5,22 +5,29 @@ import android.os.Parcelable
 import com.zettafantasy.giraffe.common.Item
 
 data class Emotion(
-    private val name: String
+    val id: Int?,
+    private val name: String,
+    val type: EmotionType
 ) : Item, Parcelable {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString()!!,
+        EmotionType.values()[parcel.readInt()]
+    )
 
     override fun getName(): String {
         return name
     }
 
     override fun getType(): Int {
-        TODO("Not yet implemented")
-    }
-
-    constructor(parcel: Parcel) : this(parcel.readString()!!) {
+        return type.nameRes
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeValue(id)
         parcel.writeString(name)
+        parcel.writeInt(type.ordinal)
     }
 
     override fun describeContents(): Int {
