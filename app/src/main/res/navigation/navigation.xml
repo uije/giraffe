@@ -9,7 +9,7 @@
         android:id="@+id/record"
         android:name="com.zettafantasy.giraffe.feature.record.RecordFragment"
         android:label="기록"
-        tools:layout="@layout/history_fragment">
+        tools:layout="@layout/record_fragment">
         <action
             android:id="@+id/action_history_to_emotion_description"
             app:destination="@id/emotion_description"
