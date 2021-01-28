@@ -12,8 +12,10 @@ import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.data.GiraffeRepository
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.model.Emotion
 import com.zettafantasy.giraffe.model.Need
+import kotlinx.coroutines.*
 
 class ConfirmFragment : Fragment() {
     private lateinit var emotions: List<Emotion>
@@ -30,23 +32,33 @@ class ConfirmFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.confirm_fragment, container, false)
         view.findViewById<AppCompatButton>(R.id.btn_save).setOnClickListener {
-            //repository.insert()
-            navigateRecordScreen(view)
+            save { navigateRecordScreen(view) }
         }
 
-        emotions = arguments?.getParcelableArrayList<Emotion>(Emotion::class.simpleName)!!
+        emotions = arguments?.getParcelableArrayList(Emotion::class.simpleName)!!
         emotions?.let {
             view.findViewById<TextView>(R.id.emotions).text = TextUtils.join(", ", it)
         }
 
 
-        val needs =
-            arguments?.getParcelableArrayList<Need>(Need::class.simpleName)
+        needs = arguments?.getParcelableArrayList(Need::class.simpleName)!!
         needs?.let {
             view.findViewById<TextView>(R.id.needs).text = TextUtils.join(", ", it)
         }
 
         return view
+    }
+
+    private fun save(onSuccess: () -> Unit) {
+        val record = Record(emotions.map { it.id!! }.toList(), needs.map { it.id!! }.toList())
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                repository.insert(record)
+            }
+            if (this@ConfirmFragment.isVisible) {
+                onSuccess()
+            }
+        }
     }
 
     private fun navigateRecordScreen(view: View) {

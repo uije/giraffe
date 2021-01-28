@@ -7,7 +7,11 @@ import java.util.*
 
 @Entity
 data class Record(
-    @PrimaryKey(autoGenerate = true) val id: Long?,
-    val emotionIds: List<Int>,
-    val needIds: List<Int>, @ColumnInfo(index = true) val date: Date
-)
+    val emotionIds: List<Int>, val needIds: List<Int>
+) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Long? = null
+
+    @ColumnInfo(index = true)
+    var date: Date = Date()
+}
