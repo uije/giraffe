@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -78,7 +77,7 @@ class FindEmotionFragment : Fragment() {
 
     private fun setData() {
         Log.d(TAG, arguments.toString())
-        this.emotions = EmotionInventory.getInstance(resources).getList(getEmotionType())
+        this.emotions = EmotionInventory.getInstance(resources).getListByType(getEmotionType())
         itemAdapter.submitList(this.emotions)
     }
 

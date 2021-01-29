@@ -21,6 +21,7 @@ class NeedInventory private constructor(resources: Resources) {
     }
 
     private val list = mutableListOf<Need>()
+    private val map = mutableMapOf<Int?, Need>()
 
     init {
         load(resources.getStringArray(R.array.need_0_survival), NeedType.SURVIVAL)
@@ -33,9 +34,14 @@ class NeedInventory private constructor(resources: Resources) {
 
     private fun load(stringArray: Array<String>, type: NeedType) {
         for (item in stringArray) {
-            list.add(Need(list.size, item, type))
+            val need = Need(list.size, item, type)
+            list.add(need)
+            map[need.id] = need
         }
     }
 
     fun getList(): List<Need> = list.toList()
+
+    fun getListByIds(ids: List<Int>) = ids.map { map[it] }.toList()
+
 }

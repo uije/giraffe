@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.main
+package com.zettafantasy.giraffe.feature.record
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
