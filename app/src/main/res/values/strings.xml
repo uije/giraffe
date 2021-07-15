@@ -12,4 +12,6 @@
     <string name="need">욕구</string>
     <string name="emotion_type_satisfied">원하는 것이 이루어질 때</string>
     <string name="emotion_type_unsatisfied">원하는 것이 이루어지지 않을 때</string>
+    <string name="format_date">%1$ty.%1$tm.%1$td</string>
+    <string name="format_time">%1$Tk:%1$TM</string>
 </resources>

@@ -16,24 +16,93 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:background="@color/gray50_200">
+        android:layout_height="wrap_content">
 
+        <!-- 가이드라인 20% -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <!-- 날짜 -->
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@{@string/format_date(item.date)}"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@id/time"
+            app:layout_constraintEnd_toStartOf="@id/guideline_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="21.12.28" />
+        <!-- 시간 -->
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@{@string/format_time(item.date)}"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/date"
+            app:layout_constraintStart_toStartOf="@id/date"
+            app:layout_constraintTop_toBottomOf="@id/date"
+            tools:text="12:57" />
+        <!-- 가이드라인 60% -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+        <!-- 감정들 -->
+        <TextView
+            android:id="@+id/emotions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@{item.emotions.toString()}"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_60"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline_20"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="기쁨,슬픔,기쁨,슬픔,기쁨,슬픔" />
+        <!-- 욕구들 -->
+        <TextView
+            android:id="@+id/needs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:gravity="center"
+            android:singleLine="true"
             android:text="@{item.needs.toString()}"
-            android:textColor="@color/black"
-            android:textSize="40dp"
+            android:textColor="@color/accent"
+            android:textSize="20dp"
+            app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline_60"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="기쁨" />
+            tools:text="자유,돈,공기,자유,돈,공기" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
