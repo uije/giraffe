@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="org.apache.commons.lang3.StringUtils" />
+
         <variable
             name="viewModel"
             type="com.zettafantasy.giraffe.feature.record.RecordViewModel" />
@@ -72,9 +74,9 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:ellipsize="end"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:singleLine="true"
-            android:text="@{item.emotions.toString()}"
+            android:text='@{StringUtils.join(item.emotions,",")}'
             android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constrainedWidth="true"
@@ -91,10 +93,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:singleLine="true"
-            android:text="@{item.needs.toString()}"
-            android:textColor="@color/accent"
+            android:text='@{StringUtils.join(item.needs,",")}'
+            android:textColor="@color/black"
             android:textSize="20dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
