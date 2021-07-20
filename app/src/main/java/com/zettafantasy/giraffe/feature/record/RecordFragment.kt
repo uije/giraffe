@@ -35,7 +35,7 @@ class RecordFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
         binding.fab.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_history_to_emotion_description)
+                .navigate(R.id.action_create_record)
         }
 
         initRecordRv()
@@ -60,6 +60,9 @@ class RecordFragment : Fragment() {
 
     private fun initRecordRv() {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
+            //상세화면
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_view_record)
         }
 
         binding.recordRv.adapter = adapter

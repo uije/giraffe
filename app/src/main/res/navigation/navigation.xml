@@ -3,21 +3,36 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/record">
+    app:startDestination="@id/records">
 
     <fragment
-        android:id="@+id/record"
+        android:id="@+id/records"
         android:name="com.zettafantasy.giraffe.feature.record.RecordFragment"
         android:label="기록"
         tools:layout="@layout/record_fragment">
+        <!-- 기록하기 -->
         <action
-            android:id="@+id/action_history_to_emotion_description"
+            android:id="@+id/action_create_record"
             app:destination="@id/emotion_description"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
+        <!-- 기록 상세보기 -->
+        <action
+            android:id="@+id/action_view_record"
+            app:destination="@id/record"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
+
+    <fragment
+        android:id="@+id/record"
+        android:name="com.zettafantasy.giraffe.feature.record.SingleRecordFragment"
+        android:label="기록"
+        tools:layout="@layout/record_fragment"></fragment>
 
     <fragment
         android:id="@+id/emotion_description"
@@ -84,7 +99,7 @@
 
         <action
             android:id="@+id/action_confirm_to_record"
-            app:destination="@id/record"
+            app:destination="@id/records"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
