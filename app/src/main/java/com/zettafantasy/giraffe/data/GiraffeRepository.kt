@@ -9,6 +9,10 @@ class GiraffeRepository(private val recordDao: RecordDao) {
     // Observed Flow will notify the observer when the data has changed.
     val allRecords: Flow<List<Record>> = recordDao.getRecords()
 
+    fun findRecord(id: Long): Flow<Record> {
+        return recordDao.findRecord(id)
+    }
+
     // By default Room runs suspend queries off the main thread, therefore, we don't need to
     // implement anything else to ensure we're not doing long running database work
     // off the main thread.

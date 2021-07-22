@@ -11,6 +11,9 @@ interface RecordDao {
     @Query("SELECT * FROM record ORDER BY date DESC")
     fun getRecords(): Flow<List<Record>>
 
+    @Query("SELECT * FROM record WHERE id == :id")
+    fun findRecord(id: Long): Flow<Record>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(record: Record)
 

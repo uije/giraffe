@@ -62,7 +62,7 @@ class RecordFragment : Fragment() {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_view_record)
+                .navigate(RecordFragmentDirections.actionViewRecord(record.id!!))
         }
 
         binding.recordRv.adapter = adapter

@@ -25,14 +25,22 @@
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_close_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
+            app:popExitAnim="@anim/fragment_close_exit">
+            <argument
+                android:name="recordId"
+                app:argType="long" />
+        </action>
     </fragment>
 
     <fragment
         android:id="@+id/record"
         android:name="com.zettafantasy.giraffe.feature.record.SingleRecordFragment"
         android:label="기록"
-        tools:layout="@layout/record_fragment"></fragment>
+        tools:layout="@layout/record_fragment">
+        <argument
+            android:name="recordId"
+            app:argType="long" />
+    </fragment>
 
     <fragment
         android:id="@+id/emotion_description"
