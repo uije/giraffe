@@ -1,6 +1,7 @@
 package com.zettafantasy.giraffe.feature.record
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,12 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.NeedInventory
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.RecordFragmentBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class RecordFragment : Fragment() {
@@ -28,6 +34,10 @@ class RecordFragment : Fragment() {
     private lateinit var needInventory: NeedInventory
     private val viewModel: RecordViewModel by viewModels {
         RecordViewModelFactory((requireActivity().application as GiraffeApplication).repository)
+    }
+
+    companion object {
+        const val TAG = "RecordFragment"
     }
 
     override fun onCreateView(
@@ -93,13 +103,26 @@ class RecordFragment : Fragment() {
                     AlertDialog.Builder(requireContext())
                         .setMessage("해당 기록을 지우시겠어요?")
                         .setPositiveButton("네") { _, _ ->
-                            val position = viewHolder.adapterPosition
-                            // Then you can remove this item from the adapter
+                            val recordWrapper = adapter.currentList[viewHolder.adapterPosition]
+                            delete(recordWrapper.record) {
+                                Log.d(TAG, String.format("record deleted %s", recordWrapper.record))
+                            }
                         }
                         .setNegativeButton("아니오") { _, _ -> adapter.notifyItemChanged(viewHolder.adapterPosition); }
                         .show()
                 }
             })
         itemTouchHelper.attachToRecyclerView(binding.recordRv)
+    }
+
+    private fun delete(record: Record, onSuccess: () -> Unit) {
+        GlobalScope.launch(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
+                viewModel.repository.deleteRecord(record)
+            }
+            if (this@RecordFragment.isVisible) {
+                onSuccess()
+            }
+        }
     }
 }

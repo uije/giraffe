@@ -7,7 +7,7 @@ import androidx.lifecycle.asLiveData
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.Record
 
-class RecordViewModel(private val repository: GiraffeRepository) : ViewModel() {
+class RecordViewModel(val repository: GiraffeRepository) : ViewModel() {
 
     val allRecords: LiveData<List<Record>> = repository.allRecords.asLiveData()
 

@@ -1,9 +1,6 @@
 package com.zettafantasy.giraffe.data
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,4 +16,7 @@ interface RecordDao {
 
     @Query("DELETE FROM record")
     suspend fun deleteAll()
+
+    @Delete
+    suspend fun delete(record: Record)
 }
