@@ -2,74 +2,79 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/title_constraint"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context="com.zettafantasy.giraffe.feature.confirm.ConfirmFragment"
-        tools:layout_editor_absoluteY="81dp">
+        android:layout_height="match_parent">
 
-        <!-- 날짜 -->
-        <TextView
-            android:id="@+id/date"
+        <LinearLayout
+            android:id="@+id/title_constraint"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="end"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="?colorOnSecondary"
-            android:textSize="23dp"
-            tools:text="21.07.22 12:23" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context="com.zettafantasy.giraffe.feature.confirm.ConfirmFragment"
+            tools:layout_editor_absoluteY="81dp">
 
-        <!-- 감정 제목 -->
-        <TextView
-            android:id="@+id/title_emotion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/emotion"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="?colorOnSecondary"
-            android:textSize="40dp"
-            android:textStyle="bold" />
+            <!-- 날짜 -->
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:gravity="end"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="?colorOnSecondary"
+                android:textSize="23dp"
+                tools:text="21.07.22 12:23" />
 
-        <TextView
-            android:id="@+id/emotions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="?colorOnSecondary"
-            android:textSize="30dp"
-            tools:text="감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는" />
+            <!-- 감정 제목 -->
+            <TextView
+                android:id="@+id/title_emotion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/emotion"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="?colorOnSecondary"
+                android:textSize="40dp"
+                android:textStyle="bold" />
 
-        <!-- 욕구 제목 -->
-        <TextView
-            android:id="@+id/title_need"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/need"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="?colorOnSecondary"
-            android:textSize="40dp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/emotions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="?colorOnSecondary"
+                android:textSize="30dp"
+                tools:text="감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는" />
 
-        <TextView
-            android:id="@+id/needs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ellipsize="end"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:textColor="?colorOnSecondary"
-            android:textSize="30dp"
-            tools:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 " />
-    </LinearLayout>
+            <!-- 욕구 제목 -->
+            <TextView
+                android:id="@+id/title_need"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/need"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="?colorOnSecondary"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/needs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ellipsize="end"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="?colorOnSecondary"
+                android:textSize="30dp"
+                tools:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 " />
+        </LinearLayout>
+    </ScrollView>
 </layout>
