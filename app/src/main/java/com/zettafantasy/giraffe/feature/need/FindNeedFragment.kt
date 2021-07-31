@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
@@ -18,6 +19,7 @@ import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.FindNeedFragmentBinding
 import com.zettafantasy.giraffe.model.Need
+import kotlin.math.roundToInt
 
 class FindNeedFragment : Fragment() {
     private var doneMenu: MenuItem? = null
@@ -92,7 +94,7 @@ class FindNeedFragment : Fragment() {
         }
 
         binding.needRv.adapter = itemAdapter
-        val spanCount = 2
+        val spanCount = getSpanCount()
         binding.needRv.layoutManager =
             GridLayoutManager(context, spanCount, RecyclerView.HORIZONTAL, false)
 
@@ -102,6 +104,13 @@ class FindNeedFragment : Fragment() {
                 resources.getDimensionPixelSize(R.dimen.emotion_margin)
             )
         )
+
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(binding.needRv)
+    }
+
+    private fun getSpanCount(): Int {
+        return (resources.displayMetrics.heightPixels / resources.getDimension(R.dimen.card_height)).roundToInt()
     }
 
     private fun initSelectedRv() {

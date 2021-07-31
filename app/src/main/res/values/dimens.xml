@@ -3,4 +3,6 @@
     <dimen name="emotion_margin">12dp</dimen>
     <dimen name="selected_emotion_margin">6dp</dimen>
     <dimen name="record_margin">6dp</dimen>
+    <dimen name="card_width">350dp</dimen>
+    <dimen name="card_height">350dp</dimen>
 </resources>

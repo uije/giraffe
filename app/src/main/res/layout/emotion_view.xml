@@ -15,9 +15,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/card_width"
         android:layout_height="match_parent"
-        tools:background="@color/gray50_200">
+        tools:layout_height="@dimen/card_height">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/cardview_default_elevation"
             android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/gray50_200"
             app:cardCornerRadius="4dp">
 
             <TextView
@@ -43,11 +43,11 @@
 
             <ImageView
                 android:id="@+id/check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/ic_check_circle_outline_36dp"
-                android:tint="@{viewModel.selectedItems.contains(item) ? @color/accent : @color/gray50_200}" />
+                android:tint="@{viewModel.selectedItems.contains(item) ? @color/accent : @color/white}" />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
