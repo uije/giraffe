@@ -1,6 +1,7 @@
 package com.zettafantasy.giraffe.feature.need
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -18,7 +19,10 @@ import com.zettafantasy.giraffe.common.ItemAdapter
 import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.FindNeedFragmentBinding
+import com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment
+import com.zettafantasy.giraffe.feature.emotion.SnapPagerScrollListener
 import com.zettafantasy.giraffe.model.Need
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 class FindNeedFragment : Fragment() {
@@ -78,6 +82,7 @@ class FindNeedFragment : Fragment() {
     private fun setData() {
         needs = NeedInventory.getInstance(resources).getList()
         itemAdapter.submitList(needs)
+        binding.progressbar.max = max(needs.size - 1, 0)
     }
 
     private fun initUI() {
@@ -107,6 +112,16 @@ class FindNeedFragment : Fragment() {
 
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.needRv)
+        binding.needRv.addOnScrollListener(SnapPagerScrollListener(snapHelper,
+            SnapPagerScrollListener.ON_SETTLED,
+            true,
+            object : SnapPagerScrollListener.OnChangeListener {
+                override fun onSnapped(position: Int) {
+                    Log.d(FindEmotionFragment.TAG, String.format("onSnapped(%s)", position))
+                    binding.progressbar.progress = position + spanCount - 1
+                }
+            }
+        ))
     }
 
     private fun getSpanCount(): Int {
@@ -117,7 +132,8 @@ class FindNeedFragment : Fragment() {
         selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { emotion ->
             val pos = needs.indexOf(emotion)
             if (pos >= 0) {
-                binding.needRv.smoothScrollToPosition(pos)
+                binding.needRv.scrollToPosition(pos)
+                binding.progressbar.progress = pos
             }
         }
         binding.selectedRv.adapter = selectedAdapter
