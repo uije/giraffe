@@ -20,6 +20,7 @@ import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
 import com.zettafantasy.giraffe.model.EmotionType
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 
@@ -81,6 +82,7 @@ class FindEmotionFragment : Fragment() {
         Log.d(TAG, arguments.toString())
         this.emotions = EmotionInventory.getInstance(resources).getListByType(getEmotionType())
         itemAdapter.submitList(this.emotions)
+        binding.progressbar.max = max(emotions.size - 1, 0)
     }
 
     private fun getEmotionType(): EmotionType =
@@ -113,6 +115,16 @@ class FindEmotionFragment : Fragment() {
 
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(binding.emotionRv)
+        binding.emotionRv.addOnScrollListener(SnapPagerScrollListener(snapHelper,
+            SnapPagerScrollListener.ON_SETTLED,
+            true,
+            object : SnapPagerScrollListener.OnChangeListener {
+                override fun onSnapped(position: Int) {
+                    Log.d(TAG, String.format("onSnapped(%s)", position))
+                    binding.progressbar.progress = position + spanCount - 1
+                }
+            }
+        ))
     }
 
     private fun getSpanCount(): Int {
@@ -123,7 +135,8 @@ class FindEmotionFragment : Fragment() {
         selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { item ->
             val pos = emotions.indexOf(item)
             if (pos >= 0) {
-                binding.emotionRv.smoothScrollToPosition(pos)
+                binding.emotionRv.scrollToPosition(pos)
+                binding.progressbar.progress = pos
             }
         }
         binding.selectedRv.adapter = selectedAdapter
