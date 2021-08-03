@@ -13,7 +13,7 @@
         <!-- 기록하기 -->
         <action
             android:id="@+id/action_create_record"
-            app:destination="@id/emotion_description"
+            app:destination="@id/intro_description"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"
             app:launchSingleTop="true"
@@ -42,6 +42,21 @@
         <argument
             android:name="recordId"
             app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/intro_description"
+        android:name="com.zettafantasy.giraffe.feature.IntroFragment"
+        android:label="소개"
+        tools:layout="@layout/intro_fragment">
+        <action
+            android:id="@+id/action_intro_to_emotion_description"
+            app:destination="@id/emotion_description"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

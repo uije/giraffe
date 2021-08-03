@@ -16,4 +16,6 @@
     <string name="format_time">%1$Tk:%1$TM</string>
     <string name="format_datetime">%1$tY.%1$tm.%1$td %1$Tk:%1$TM</string>
     <string name="date">날짜</string>
+    <string name="find_emotion_desc"><![CDATA[현재 기분이 어떠신가요?]]></string>
+    <string name="intro_desc"><![CDATA[지금부터 내 <font color="#%1$s">감정</font>과<br>연결된 <font color="#%1$s">욕구</font>를 찾을꺼에요.]]></string>
 </resources>

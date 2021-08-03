@@ -16,6 +16,7 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.ItemAdapter
 import com.zettafantasy.giraffe.common.SelectedItemAdapter
+import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion

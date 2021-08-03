@@ -20,7 +20,7 @@ import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.FindNeedFragmentBinding
 import com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment
-import com.zettafantasy.giraffe.feature.emotion.SnapPagerScrollListener
+import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.model.Need
 import kotlin.math.max
 import kotlin.math.roundToInt

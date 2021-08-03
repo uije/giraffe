@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <import type="android.text.Html" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/title_constraint"
         android:layout_width="match_parent"
@@ -12,59 +17,67 @@
         tools:layout_editor_absoluteY="81dp">
 
         <TextView
-            android:id="@+id/find_emotion_desc"
+            android:id="@+id/intro_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            android:text="@string/find_emotion_desc"
+            android:text="@{Html.fromHtml(String.format(@string/intro_desc(Integer.toHexString(@color/accent).substring(2))))}"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="?colorOnSecondary"
             android:textSize="40dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/start_btn_good"
+            app:layout_constraintBottom_toTopOf="@id/time_ic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="@string/intro_desc" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start_btn_good"
-            android:layout_width="144dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/rounded_button"
-            android:text="좋다"
-            android:textColor="?colorOnSecondary"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/start_btn_bad"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/time_ic"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_alarm_black_24dp"
+            app:layout_constraintBottom_toTopOf="@id/start_btn"
+            app:layout_constraintEnd_toStartOf="@id/time_tx"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/find_emotion_desc" />
+            app:layout_constraintTop_toBottomOf="@id/intro_desc" />
+
+        <TextView
+            android:id="@+id/time_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="5min"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/time_ic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/time_ic"
+            app:layout_constraintTop_toTopOf="@id/time_ic" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start_btn_bad"
+            android:id="@+id/start_btn"
             android:layout_width="144dp"
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="60dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_button"
-            android:text="나쁘다"
+            android:text="시작하기"
             android:textColor="?colorOnSecondary"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_btn_good" />
+            app:layout_constraintTop_toBottomOf="@id/time_ic" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

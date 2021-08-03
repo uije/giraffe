@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.emotion
+package com.zettafantasy.giraffe.common
 
 import androidx.annotation.IntDef
 import androidx.recyclerview.widget.PagerSnapHelper
