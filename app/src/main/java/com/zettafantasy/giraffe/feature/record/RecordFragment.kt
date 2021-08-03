@@ -1,13 +1,10 @@
 package com.zettafantasy.giraffe.feature.record
 
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -17,6 +14,7 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
+import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.data.Record
@@ -27,8 +25,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class RecordFragment : Fragment() {
-    private lateinit var binding: RecordFragmentBinding
+class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
     private lateinit var adapter: RecordAdapter
     private lateinit var emotionInventory: EmotionInventory
     private lateinit var needInventory: NeedInventory
@@ -40,18 +37,15 @@ class RecordFragment : Fragment() {
         const val TAG = "RecordFragment"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
+    override fun init(inflater: LayoutInflater, container: ViewGroup?): RecordFragmentBinding {
+        var binding: RecordFragmentBinding =
+            DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
         binding.fab.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_create_record)
         }
 
-        initRecordRv()
+        initRecordRv(binding)
 
         emotionInventory = EmotionInventory.getInstance(resources)
         needInventory = NeedInventory.getInstance(resources)
@@ -68,10 +62,10 @@ class RecordFragment : Fragment() {
             }
         }
 
-        return binding.root
+        return binding
     }
 
-    private fun initRecordRv() {
+    private fun initRecordRv(binding: RecordFragmentBinding) {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
