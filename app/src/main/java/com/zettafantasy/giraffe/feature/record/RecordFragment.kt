@@ -52,6 +52,7 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
 
         viewModel.allRecords.observe(viewLifecycleOwner) { records ->
             records.let { it ->
+                Log.d(TAG, String.format("allRecords %s", it.size))
                 adapter.submitList(it.map {
                     RecordWrapper(
                         it,

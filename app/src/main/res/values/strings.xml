@@ -18,4 +18,8 @@
     <string name="date">날짜</string>
     <string name="find_emotion_desc"><![CDATA[현재 기분이 어떠신가요?]]></string>
     <string name="intro_desc"><![CDATA[지금부터 내 <font color="#%1$s">감정</font>과<br>연결된 <font color="#%1$s">욕구</font>를 찾을꺼에요.]]></string>
+    <string name="stimulus_desc1"><![CDATA[내 기분의 원인이 되는<br><font color="#%1$s">사건(자극)</font>을 떠올려보세요.]]></string>
+    <string name="stimulus_desc2"><![CDATA[그때 상황을 충분히 되짚어 봅니다.]]></string>
+    <string name="stimulus_desc3"><![CDATA[그 사건을 단어 혹은 짧은 문장으로 써주세요.]]></string>
+    <string name="done"><![CDATA[완료]]></string>
 </resources>

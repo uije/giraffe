@@ -65,7 +65,22 @@
         android:label="감정찾기"
         tools:layout="@layout/emotion_description_fragment">
         <action
-            android:id="@+id/action_description_to_find_emotion"
+            android:id="@+id/action_description_to_find_stimulus"
+            app:destination="@id/find_stimulus"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/find_stimulus"
+        android:name="com.zettafantasy.giraffe.feature.FindStimulusFragment"
+        android:label="자극찾기"
+        tools:layout="@layout/find_stimulus_fragment">
+        <action
+            android:id="@+id/action_find_stimulus_to_find_emotion"
             app:destination="@id/find_emotion"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

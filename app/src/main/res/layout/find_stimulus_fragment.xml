@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/title_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        tools:context="com.zettafantasy.giraffe.feature.emotion.DescriptionFragment"
+        tools:layout_editor_absoluteY="81dp">
+
+        <TextView
+            android:id="@+id/stimulus_desc1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@{Html.fromHtml(String.format(@string/stimulus_desc1(Integer.toHexString(@color/accent).substring(2))))}"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="?colorOnSecondary"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/stimulus_desc2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="내 기분의 원인이 되는 \n사건(자극)을 떠올려보세요." />
+
+        <TextView
+            android:id="@+id/stimulus_desc2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/stimulus_desc2"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="?colorOnSecondary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/stimulus_desc3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stimulus_desc1" />
+
+        <TextView
+            android:id="@+id/stimulus_desc3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/stimulus_desc3"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="?colorOnSecondary"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/edit_tx"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stimulus_desc2" />
+
+        <EditText
+            android:id="@+id/edit_tx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="ex. 엄마의 잔소리, 직장상사와 면담"
+            android:inputType="text"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stimulus_desc3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

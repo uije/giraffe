@@ -29,14 +29,14 @@ class DescriptionFragment : BaseBindingFragment<EmotionDescriptionFragmentBindin
             val args = Bundle()
             args.putSerializable(EmotionType::class.simpleName, EmotionType.SATISFIED)
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_description_to_find_emotion, args)
+                .navigate(R.id.action_description_to_find_stimulus, args)
         }
 
         binding.startBtnBad.setOnClickListener {
             val args = Bundle()
             args.putSerializable(EmotionType::class.simpleName, EmotionType.UNSATISFIED)
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_description_to_find_emotion, args)
+                .navigate(R.id.action_description_to_find_stimulus, args)
         }
 
         return binding
