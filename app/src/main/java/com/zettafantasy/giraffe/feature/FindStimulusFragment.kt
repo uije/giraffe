@@ -1,9 +1,11 @@
 package com.zettafantasy.giraffe.feature
 
+import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
@@ -13,6 +15,7 @@ import com.zettafantasy.giraffe.databinding.FindStimulusFragmentBinding
 import com.zettafantasy.giraffe.model.EmotionType
 import java.util.*
 
+
 class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() {
 
     private var doneMenu: MenuItem? = null
@@ -21,7 +24,6 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
         inflater: LayoutInflater,
         container: ViewGroup?
     ): FindStimulusFragmentBinding {
-        Log.d(TAG, "init")
         setHasOptionsMenu(true)
         val binding: FindStimulusFragmentBinding = DataBindingUtil.inflate(
             inflater,
@@ -55,6 +57,7 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
+                hideKeyboard()
                 Navigation.findNavController(binding.root)
                     .navigate(
                         FindStimulusFragmentDirections.actionFindStimulusToFindEmotion(
@@ -70,6 +73,12 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(binding.editTx.windowToken, 0);
     }
 
     private fun getEmotionType(): EmotionType =

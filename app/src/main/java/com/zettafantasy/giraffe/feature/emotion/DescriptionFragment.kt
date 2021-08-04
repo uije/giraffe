@@ -1,7 +1,6 @@
 package com.zettafantasy.giraffe.feature.emotion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -17,7 +16,6 @@ class DescriptionFragment : BaseBindingFragment<EmotionDescriptionFragmentBindin
         inflater: LayoutInflater,
         container: ViewGroup?
     ): EmotionDescriptionFragmentBinding {
-        Log.d(TAG, "init")
         val binding: EmotionDescriptionFragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.emotion_description_fragment,

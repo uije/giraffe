@@ -1,6 +1,7 @@
 package com.zettafantasy.giraffe.common
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ abstract class BaseBindingFragment<T : ViewBinding> : Fragment() {
     ): View? {
         if (!initialized) {
             binding = init(inflater, container)
+            Log.d(javaClass.simpleName, "init")
             initialized = true
         }
 

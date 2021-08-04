@@ -1,10 +1,8 @@
 package com.zettafantasy.giraffe.feature.need
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -15,41 +13,33 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.AppExecutors
-import com.zettafantasy.giraffe.common.ItemAdapter
-import com.zettafantasy.giraffe.common.SelectedItemAdapter
+import com.zettafantasy.giraffe.common.*
 import com.zettafantasy.giraffe.data.NeedInventory
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.FindNeedFragmentBinding
 import com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment
-import com.zettafantasy.giraffe.common.SnapPagerScrollListener
-import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.model.Need
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-class FindNeedFragment : Fragment() {
+class FindNeedFragment : BaseBindingFragment<FindNeedFragmentBinding>() {
     private var doneMenu: MenuItem? = null
     private lateinit var needs: List<Need>
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
-    private lateinit var binding: FindNeedFragmentBinding
     private lateinit var viewModel: FindNeedViewModel
     private val args by navArgs<FindNeedFragmentArgs>()
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+    override fun init(inflater: LayoutInflater, container: ViewGroup?): FindNeedFragmentBinding {
         setHasOptionsMenu(true)
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.find_need_fragment, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.find_need_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         viewModel = ViewModelProvider(this).get(FindNeedViewModel::class.java)
         binding.viewModel = viewModel
         initUI()
         setData()
 
-        return binding.root
+        return binding
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

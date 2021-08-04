@@ -1,6 +1,5 @@
 package com.zettafantasy.giraffe.feature
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -15,7 +14,6 @@ class IntroFragment : BaseBindingFragment<IntroFragmentBinding>() {
         inflater: LayoutInflater,
         container: ViewGroup?
     ): IntroFragmentBinding {
-        Log.d(TAG, "init")
         val binding: IntroFragmentBinding = DataBindingUtil.inflate(
             inflater,
             R.layout.intro_fragment,

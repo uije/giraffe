@@ -1,10 +1,8 @@
 package com.zettafantasy.giraffe.feature.emotion
 
-import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -14,10 +12,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.AppExecutors
-import com.zettafantasy.giraffe.common.ItemAdapter
-import com.zettafantasy.giraffe.common.SelectedItemAdapter
-import com.zettafantasy.giraffe.common.SnapPagerScrollListener
+import com.zettafantasy.giraffe.common.*
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
@@ -27,11 +22,10 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 
-class FindEmotionFragment : Fragment() {
+class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
     private lateinit var viewModel: FindEmotionViewModel
-    private lateinit var binding: FindEmotionFragmentBinding
     private lateinit var emotions: List<Emotion>
     private var doneMenu: MenuItem? = null
     private val args by navArgs<FindEmotionFragmentArgs>()
@@ -40,11 +34,7 @@ class FindEmotionFragment : Fragment() {
         const val TAG = "FindEmotionFragment"
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun init(inflater: LayoutInflater, container: ViewGroup?): FindEmotionFragmentBinding {
         setHasOptionsMenu(true)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
@@ -53,7 +43,7 @@ class FindEmotionFragment : Fragment() {
         binding.viewModel = viewModel
         initUI()
         setData()
-        return binding.root
+        return binding
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
