@@ -11,7 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Record::class], version = 1)
+@Database(entities = [Record::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class GiraffeRoomDatabase : RoomDatabase() {
 

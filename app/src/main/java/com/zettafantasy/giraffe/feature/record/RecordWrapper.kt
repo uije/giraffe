@@ -20,4 +20,7 @@ class RecordWrapper(
 
     val id: Long?
         get() = record.id
+
+    val stimulus: String
+        get() = record.stimulus
 }

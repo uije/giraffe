@@ -34,7 +34,16 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.266"
+                    android:text="@string/stimulus"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="0.266"
                     android:text="@string/emotion"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
@@ -43,7 +52,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="0.266"
                     android:text="@string/need"
                     android:textColor="@color/black"
                     android:textSize="20dp" />

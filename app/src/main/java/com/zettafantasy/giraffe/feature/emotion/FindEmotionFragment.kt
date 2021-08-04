@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -18,9 +19,10 @@ import com.zettafantasy.giraffe.common.ItemAdapter
 import com.zettafantasy.giraffe.common.SelectedItemAdapter
 import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.data.EmotionInventory
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.FindEmotionFragmentBinding
 import com.zettafantasy.giraffe.model.Emotion
-import com.zettafantasy.giraffe.model.EmotionType
+import java.util.*
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -32,6 +34,7 @@ class FindEmotionFragment : Fragment() {
     private lateinit var binding: FindEmotionFragmentBinding
     private lateinit var emotions: List<Emotion>
     private var doneMenu: MenuItem? = null
+    private val args by navArgs<FindEmotionFragmentArgs>()
 
     companion object {
         const val TAG = "FindEmotionFragment"
@@ -64,14 +67,15 @@ class FindEmotionFragment : Fragment() {
         return when (item.itemId) {
             R.id.menu_done -> {
 
-                val args = Bundle()
-                args.putSerializable(EmotionType::class.simpleName, getEmotionType())
-                args.putParcelableArrayList(
-                    Emotion::class.simpleName,
-                    viewModel.selectedItems.value?.let { ArrayList(it.toMutableList()) }
-                )
                 Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_find_emotion_to_find_need, args)
+                    .navigate(
+                        FindEmotionFragmentDirections.actionFindEmotionToFindNeed(
+                            Record(
+                                viewModel.selectedItems.value!!.map { it.id!! }.toList(),
+                                Collections.emptyList(), args.record.stimulus
+                            )
+                        )
+                    )
 
                 super.onOptionsItemSelected(item)
             }
@@ -81,13 +85,10 @@ class FindEmotionFragment : Fragment() {
 
     private fun setData() {
         Log.d(TAG, arguments.toString())
-        this.emotions = EmotionInventory.getInstance(resources).getListByType(getEmotionType())
+        this.emotions = EmotionInventory.getInstance(resources).getListByType(args.emotionType)
         itemAdapter.submitList(this.emotions)
         binding.progressbar.max = max(emotions.size - 1, 0)
     }
-
-    private fun getEmotionType(): EmotionType =
-        arguments?.get(EmotionType::class.simpleName) as EmotionType
 
     private fun initUI() {
         initItemRv()

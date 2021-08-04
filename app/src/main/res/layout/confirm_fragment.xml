@@ -10,6 +10,43 @@
         tools:context="com.zettafantasy.giraffe.feature.confirm.ConfirmFragment"
         tools:layout_editor_absoluteY="81dp">
 
+        <!-- 자극 제목 -->
+        <TextView
+            android:id="@+id/title_stimulus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/stimulus"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="?colorOnSecondary"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/btn_save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0" />
+
+        <TextView
+            android:id="@+id/stimulus"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:scrollbars="vertical"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="?colorOnSecondary"
+            android:textSize="30dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toTopOf="@id/title_emotion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_stimulus"
+            tools:text="어제밤 그와의 통화" />
+
         <!-- 감정 제목 -->
         <TextView
             android:id="@+id/title_emotion"
@@ -22,11 +59,11 @@
             android:textColor="?colorOnSecondary"
             android:textSize="40dp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/btn_save"
+            app:layout_constraintBottom_toTopOf="@id/title_need"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_stimulus"
             app:layout_constraintVertical_bias="0" />
 
         <TextView

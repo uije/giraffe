@@ -1,6 +1,5 @@
 package com.zettafantasy.giraffe.feature
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -9,8 +8,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.FindStimulusFragmentBinding
 import com.zettafantasy.giraffe.model.EmotionType
+import java.util.*
 
 class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() {
 
@@ -54,12 +55,16 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
-
-                val args = Bundle()
-                args.putSerializable(EmotionType::class.simpleName, getEmotionType())
-                args.putString("stimulus", binding.editTx.text.toString().trim())
                 Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_find_stimulus_to_find_emotion, args)
+                    .navigate(
+                        FindStimulusFragmentDirections.actionFindStimulusToFindEmotion(
+                            Record(
+                                Collections.emptyList(),
+                                Collections.emptyList(),
+                                binding.editTx.text.toString().trim()
+                            ), getEmotionType()
+                        )
+                    )
 
                 super.onOptionsItemSelected(item)
             }

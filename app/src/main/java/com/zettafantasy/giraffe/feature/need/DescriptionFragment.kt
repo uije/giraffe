@@ -11,10 +11,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.model.Emotion
+import com.zettafantasy.giraffe.data.EmotionInventory
 
 class DescriptionFragment : Fragment() {
+    private val args by navArgs<DescriptionFragmentArgs>()
+    private lateinit var emotionInventory: EmotionInventory
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,10 +25,8 @@ class DescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.need_description_fragment, container, false)
-
-        val emotions =
-            arguments?.getParcelableArrayList<Emotion>(Emotion::class.simpleName)
-
+        emotionInventory = EmotionInventory.getInstance(resources)
+        val emotions = emotionInventory.getListByIds(args.record.emotionIds)
         emotions?.let {
             view.findViewById<TextView>(R.id.state).text = HtmlCompat.fromHtml(
                 getString(
@@ -40,21 +41,9 @@ class DescriptionFragment : Fragment() {
         }
 
         view.findViewById<AppCompatButton>(R.id.start_btn).setOnClickListener {
-            navigateFindNeedScreen(emotions, view)
+            Navigation.findNavController(view)
+                .navigate(DescriptionFragmentDirections.actionDescriptionToFindNeed(args.record))
         }
         return view
-    }
-
-    private fun navigateFindNeedScreen(
-        emotions: java.util.ArrayList<Emotion>?,
-        view: View
-    ) {
-        val args = Bundle()
-        args.putParcelableArrayList(
-            Emotion::class.simpleName,
-            emotions?.let { ArrayList(it.toMutableList()) }
-        )
-        Navigation.findNavController(view)
-            .navigate(R.id.action_description_to_find_need, args)
     }
 }

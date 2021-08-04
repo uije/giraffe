@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -21,6 +22,7 @@ import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.FindNeedFragmentBinding
 import com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment
 import com.zettafantasy.giraffe.common.SnapPagerScrollListener
+import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.model.Need
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -32,7 +34,7 @@ class FindNeedFragment : Fragment() {
     private lateinit var selectedAdapter: SelectedItemAdapter
     private lateinit var binding: FindNeedFragmentBinding
     private lateinit var viewModel: FindNeedViewModel
-
+    private val args by navArgs<FindNeedFragmentArgs>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,15 +70,16 @@ class FindNeedFragment : Fragment() {
     }
 
     private fun navigateConfirmScreen() {
-        val args = Bundle()
-        args.putAll(arguments)
-        args.putParcelableArrayList(
-            Need::class.simpleName,
-            viewModel.selectedItems.value?.let { ArrayList(it.toMutableList()) }
-        )
-
         Navigation.findNavController(binding.root)
-            .navigate(R.id.action_find_need_to_confirm, args)
+            .navigate(
+                FindNeedFragmentDirections.actionFindNeedToConfirm(
+                    Record(
+                        args.record.emotionIds,
+                        viewModel.selectedItems.value!!.map { it.id!! }.toList(),
+                        args.record.stimulus
+                    )
+                )
+            )
     }
 
     private fun setData() {

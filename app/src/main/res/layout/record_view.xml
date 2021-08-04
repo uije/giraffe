@@ -37,7 +37,7 @@
             android:gravity="center"
             android:text="@{@string/format_date(item.date)}"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toTopOf="@id/time"
             app:layout_constraintEnd_toStartOf="@id/guideline_20"
             app:layout_constraintStart_toStartOf="parent"
@@ -53,19 +53,42 @@
             android:gravity="center"
             android:text="@{@string/format_time(item.date)}"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="13dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/date"
             app:layout_constraintStart_toStartOf="@id/date"
             app:layout_constraintTop_toBottomOf="@id/date"
             tools:text="12:57" />
-        <!-- 가이드라인 60% -->
+
+        <!-- 가이드라인 46% -->
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_60"
+            android:id="@+id/guideline_46"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.466" />
+
+        <!-- 자극 -->
+        <TextView
+            android:id="@+id/stimulus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text='@{item.stimulus}'
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline_46"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/guideline_20"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="백업데이터가 날라감" />
+
         <!-- 감정들 -->
         <TextView
             android:id="@+id/emotions"
@@ -78,14 +101,23 @@
             android:singleLine="true"
             android:text='@{StringUtils.join(item.emotions,",")}'
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="15dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline_60"
+            app:layout_constraintEnd_toEndOf="@id/guideline_73"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@id/guideline_20"
+            app:layout_constraintStart_toStartOf="@id/guideline_46"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="기쁨,슬픔,기쁨,슬픔,기쁨,슬픔" />
+
+        <!-- 가이드라인 73% -->
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_73"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.733" />
+
         <!-- 욕구들 -->
         <TextView
             android:id="@+id/needs"
@@ -97,12 +129,12 @@
             android:singleLine="true"
             android:text='@{StringUtils.join(item.needs,",")}'
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="15dp"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="@id/guideline_60"
+            app:layout_constraintStart_toStartOf="@id/guideline_73"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="자유,돈,공기,자유,돈,공기" />
 
