@@ -19,7 +19,7 @@ class FindNeedFragment : FindItemFragment() {
     }
 
     override fun getDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem {
-        inflater.inflate(R.menu.find_emotion, menu)
+        inflater.inflate(R.menu.find_need, menu)
         return menu.findItem(R.id.menu_done)
     }
 
