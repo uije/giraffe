@@ -29,8 +29,8 @@
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_close_exit">
             <argument
-                android:name="recordId"
-                app:argType="long" />
+                android:name="record"
+                app:argType="com.zettafantasy.giraffe.data.Record" />
         </action>
     </fragment>
 
@@ -40,8 +40,8 @@
         android:label="기록"
         tools:layout="@layout/record_fragment">
         <argument
-            android:name="recordId"
-            app:argType="long" />
+            android:name="record"
+            app:argType="com.zettafantasy.giraffe.data.Record" />
     </fragment>
 
     <fragment

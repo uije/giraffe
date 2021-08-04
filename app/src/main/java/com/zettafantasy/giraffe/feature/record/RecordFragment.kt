@@ -70,7 +70,7 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
-                .navigate(RecordFragmentDirections.actionViewRecord(record.id!!))
+                .navigate(RecordFragmentDirections.actionViewRecord(record.record))
         }
 
         binding.recordRv.adapter = adapter
