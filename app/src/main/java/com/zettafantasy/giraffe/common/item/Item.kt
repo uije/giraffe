@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.common
+package com.zettafantasy.giraffe.common.item
 
 interface Item {
     fun getId(): Int

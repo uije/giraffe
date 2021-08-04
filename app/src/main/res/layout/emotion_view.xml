@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.zettafantasy.giraffe.common.FindItemViewModel" />
+            type="com.zettafantasy.giraffe.common.item.FindItemViewModel" />
 
         <variable
             name="item"
-            type="com.zettafantasy.giraffe.common.Item" />
+            type="com.zettafantasy.giraffe.common.item.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

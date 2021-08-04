@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.common
+package com.zettafantasy.giraffe.common.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import com.zettafantasy.giraffe.BR
+import com.zettafantasy.giraffe.common.AppExecutors
+import com.zettafantasy.giraffe.common.DataBoundListAdapter
 
 class ItemAdapter(
     appExecutors: AppExecutors,

@@ -1,7 +1,7 @@
 package com.zettafantasy.giraffe.model
 
 import android.os.Parcelable
-import com.zettafantasy.giraffe.common.Item
+import com.zettafantasy.giraffe.common.item.Item
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
