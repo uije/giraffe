@@ -27,14 +27,14 @@ class FindNeedFragment : BaseBindingFragment<FindNeedFragmentBinding>() {
     private lateinit var needs: List<Need>
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
-    private lateinit var viewModel: FindNeedViewModel
+    private lateinit var viewModel: FindItemViewModel
     private val args by navArgs<FindNeedFragmentArgs>()
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?): FindNeedFragmentBinding {
         setHasOptionsMenu(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.find_need_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProvider(this).get(FindNeedViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FindItemViewModel::class.java)
         binding.viewModel = viewModel
         initUI()
         setData()
@@ -65,7 +65,7 @@ class FindNeedFragment : BaseBindingFragment<FindNeedFragmentBinding>() {
                 FindNeedFragmentDirections.actionFindNeedToConfirm(
                     Record(
                         args.record.emotionIds,
-                        viewModel.selectedItems.value!!.map { it.id!! }.toList(),
+                        viewModel.selectedItems.value!!.map { it.getId() }.toList(),
                         args.record.stimulus
                     )
                 )
@@ -85,7 +85,7 @@ class FindNeedFragment : BaseBindingFragment<FindNeedFragmentBinding>() {
 
     private fun initItemRv() {
         itemAdapter = ItemAdapter(AppExecutors, viewModel, R.layout.need_view) { item ->
-            val pos = viewModel.toggle(item as Need)
+            val pos = viewModel.toggle(item)
             if (pos >= 0) {
                 binding.selectedRv.smoothScrollToPosition(pos)
             }

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zettafantasy.giraffe.feature.need.FindNeedViewModel" />
+            type="com.zettafantasy.giraffe.common.FindItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

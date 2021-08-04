@@ -25,7 +25,7 @@ import kotlin.math.roundToInt
 class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
-    private lateinit var viewModel: FindEmotionViewModel
+    private lateinit var viewModel: FindItemViewModel
     private lateinit var emotions: List<Emotion>
     private var doneMenu: MenuItem? = null
     private val args by navArgs<FindEmotionFragmentArgs>()
@@ -39,7 +39,7 @@ class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_emotion_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProvider(this).get(FindEmotionViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(FindItemViewModel::class.java)
         binding.viewModel = viewModel
         initUI()
         setData()
@@ -61,7 +61,7 @@ class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
                     .navigate(
                         FindEmotionFragmentDirections.actionFindEmotionToFindNeed(
                             Record(
-                                viewModel.selectedItems.value!!.map { it.id!! }.toList(),
+                                viewModel.selectedItems.value!!.map { it.getId() }.toList(),
                                 Collections.emptyList(), args.record.stimulus
                             )
                         )
@@ -74,7 +74,6 @@ class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
     }
 
     private fun setData() {
-        Log.d(TAG, arguments.toString())
         this.emotions = EmotionInventory.getInstance(resources).getListByType(args.emotionType)
         itemAdapter.submitList(this.emotions)
         binding.progressbar.max = max(emotions.size - 1, 0)
@@ -87,7 +86,7 @@ class FindEmotionFragment : BaseBindingFragment<FindEmotionFragmentBinding>() {
 
     private fun initItemRv() {
         itemAdapter = ItemAdapter(AppExecutors, viewModel, R.layout.emotion_view) { emotion ->
-            val pos = viewModel.toggle(emotion as Emotion)
+            val pos = viewModel.toggle(emotion)
             if (pos >= 0) {
                 binding.selectedRv.smoothScrollToPosition(pos)
             }

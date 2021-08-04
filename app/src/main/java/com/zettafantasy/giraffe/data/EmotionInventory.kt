@@ -32,7 +32,7 @@ class EmotionInventory private constructor(resources: Resources) {
         for (item in stringArray) {
             val emotion = Emotion(list.size, item, type)
             list.add(emotion)
-            map[emotion.id] = emotion
+            map[emotion.getId()] = emotion
         }
     }
 

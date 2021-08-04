@@ -36,7 +36,7 @@ class NeedInventory private constructor(resources: Resources) {
         for (item in stringArray) {
             val need = Need(list.size, item, type)
             list.add(need)
-            map[need.id] = need
+            map[need.getId()] = need
         }
     }
 

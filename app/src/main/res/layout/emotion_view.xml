@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.zettafantasy.giraffe.feature.emotion.FindEmotionViewModel" />
+            type="com.zettafantasy.giraffe.common.FindItemViewModel" />
 
         <variable
             name="item"
