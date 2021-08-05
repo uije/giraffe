@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.rizafu.coachmark.WidgetCoachTooltipViewModel"/>
+    </data>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/triangle_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tooltipTintColor="@{viewModel.backgroundColor}"
+            tooltipTintColorString="@{viewModel.backgroundColorString}"
+            app:srcCompat="@drawable/ic_triangle"/>
+
+        <LinearLayout
+            android:id="@+id/tooltip"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-1dp"
+            tooltipMatchWidth="@{viewModel.matchWidth}"
+            tooltipBackgroundColor="@{viewModel.backgroundColor}"
+            tooltipBackgroundColorString="@{viewModel.backgroundColorString}"
+            tooltipChild="@{viewModel.tooltipChild}" />
+
+        <ImageView
+            android:id="@+id/triangle_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rotation="180"
+            android:layout_marginTop="-1dp"
+            android:visibility="gone"
+            tooltipTintColor="@{viewModel.backgroundColor}"
+            tooltipTintColorString="@{viewModel.backgroundColorString}"
+            app:srcCompat="@drawable/ic_triangle"/>
+    </LinearLayout>
+
+</layout>
