@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.item.FindItemFragment
 import com.zettafantasy.giraffe.common.item.FindItemViewModel
 import com.zettafantasy.giraffe.common.item.Item
@@ -29,7 +30,7 @@ class FindEmotionFragment : FindItemFragment() {
 
     override fun provideViewModel(): FindItemViewModel {
         val viewModel = ViewModelProvider(this).get(FindItemViewModel::class.java)
-        viewModel.showCoachMark = true
+        viewModel.showCoachMark = !Preferences.shownCoachMarkFindEmotion
         viewModel.coachMarkText = getString(R.string.tooltip_find_item)
         return viewModel
     }
@@ -52,5 +53,9 @@ class FindEmotionFragment : FindItemFragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun afterShowCoachMark() {
+        Preferences.shownCoachMarkFindEmotion = true
     }
 }

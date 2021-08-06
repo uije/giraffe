@@ -166,10 +166,14 @@ abstract class FindItemFragment : Fragment() {
             .setTooltipPointer(CoachMark.POINTER_GONE)
             .show()
 
+        afterShowCoachMark()
+
         Handler(Looper.getMainLooper()).postDelayed({
             coachMark?.dismiss()
         }, HIDE_COACH_MARK_MILLIS)
     }
+
+    open fun afterShowCoachMark() {}
 
     private fun stretchWidthMatchParent(
         tooltip: TooltipFindItemBinding,
