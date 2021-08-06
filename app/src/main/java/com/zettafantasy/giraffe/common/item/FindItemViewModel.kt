@@ -4,8 +4,12 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import org.apache.commons.lang3.StringUtils
 
 class FindItemViewModel : ViewModel() {
+    var coachMarkText: String = StringUtils.EMPTY
+    var showCoachMark: Boolean = false
+
     private val list = mutableListOf<Item>()
     private val _selectedItems = MutableLiveData<List<Item>>(list)
     val selectedItems: LiveData<List<Item>>

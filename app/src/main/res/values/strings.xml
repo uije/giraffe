@@ -23,4 +23,5 @@
     <string name="stimulus_desc2"><![CDATA[그때 상황을 충분히 되짚어 봅니다.]]></string>
     <string name="stimulus_desc3"><![CDATA[그 사건을 단어 혹은 짧은 문장으로 써주세요.]]></string>
     <string name="done"><![CDATA[완료]]></string>
+    <string name="tooltip_find_item"><![CDATA[화면을 넘기며 관련된 감정들을 선택해 주세요]]></string>
 </resources>

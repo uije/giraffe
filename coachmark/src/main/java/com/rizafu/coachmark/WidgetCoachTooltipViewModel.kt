@@ -1,13 +1,13 @@
 package com.rizafu.coachmark
 
-import android.databinding.*
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
+import androidx.databinding.*
 import java.util.*
 
 

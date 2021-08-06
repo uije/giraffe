@@ -63,6 +63,7 @@ dependencies {
     implementation('com.github.thekhaeng:recycler-margin:1.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+    implementation project(path: ':coachmark')
 
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"

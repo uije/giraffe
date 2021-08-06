@@ -1,17 +1,22 @@
 package com.zettafantasy.giraffe.common.item
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.*
+import com.zettafantasy.giraffe.common.AppExecutors
+import com.zettafantasy.giraffe.common.BaseBindingFragment
+import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.databinding.FindItemFragmentBinding
+import com.zettafantasy.giraffe.databinding.TooltipFindItemBinding
 import kotlin.math.max
 import kotlin.math.roundToInt
 
@@ -21,26 +26,38 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
     private lateinit var selectedAdapter: SelectedItemAdapter
     protected lateinit var viewModel: FindItemViewModel
     private var doneMenu: MenuItem? = null
+    private var coachMark: CoachMark? = null
 
-    abstract fun getItems(): List<Item>
+    companion object {
+        private const val HIDE_COACH_MARK_MILLIS: Long = 2000
+    }
 
-    abstract fun getDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem
+    abstract fun provideItems(): List<Item>
+
+    abstract fun provideDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem
+
+    abstract fun provideViewModel(): FindItemViewModel
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?): FindItemFragmentBinding {
         setHasOptionsMenu(true)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_item_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-        viewModel = ViewModelProvider(this).get(FindItemViewModel::class.java)
+        viewModel = provideViewModel()
         binding.viewModel = viewModel
         initUI()
-        setData(getItems())
+        setData(provideItems())
+
+        if (viewModel.showCoachMark) {
+            showCoachMark(viewModel.coachMarkText)
+        }
+
         return binding
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        doneMenu = getDoneMenu(inflater, menu)
+        doneMenu = provideDoneMenu(inflater, menu)
         doneMenu?.isVisible = viewModel.hasItem()
     }
 
@@ -121,5 +138,29 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
         super.onDestroyView()
         itemAdapter.setLifecycleDestroyed()
         selectedAdapter.setLifecycleDestroyed()
+        coachMark?.dismiss()
+    }
+
+    private fun showCoachMark(desc: String) {
+        val tooltip = DataBindingUtil.inflate<TooltipFindItemBinding>(
+            LayoutInflater.from(context),
+            R.layout.tooltip_find_item,
+            null,
+            false
+        )
+
+        tooltip.desc.text = desc
+        coachMark = CoachMark.Builder(requireActivity())
+            .addTooltipChild(tooltip.root)
+            .setTooltipAlignment(CoachMark.ROOT_CENTER)
+            .setTooltipBackgroundColor(android.R.color.transparent)
+            .setBackgroundAlpha(0.6f)
+            .setDismissible()
+            .setTooltipPointer(CoachMark.POINTER_GONE)
+            .show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            coachMark?.dismiss()
+        }, HIDE_COACH_MARK_MILLIS)
     }
 }

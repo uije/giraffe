@@ -2,15 +2,8 @@ package com.rizafu.coachmark
 
 import android.app.Activity
 import android.content.Context
-import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.graphics.Rect
-import android.support.annotation.ColorRes
-import android.support.annotation.IdRes
-import android.support.annotation.IntDef
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.ViewPropertyAnimatorListenerAdapter
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
@@ -18,6 +11,13 @@ import android.view.animation.Animation
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.annotation.IdRes
+import androidx.annotation.IntDef
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.ViewPropertyAnimatorListenerAdapter
+import androidx.databinding.DataBindingUtil
 import com.rizafu.coachmark.databinding.WidgetCoachTooltipBinding
 import java.util.*
 
@@ -31,8 +31,11 @@ class CoachMark private constructor(builder: Builder) {
     private val activity: Activity
     private val container: FrameLayout
 
-    @TooltipAlignment private var tooltipAlignment: Long = 0
-    @PointerTooltipAlignment private var tooltipPointerAlignment: Long = 0
+    @TooltipAlignment
+    private var tooltipAlignment: Long = 0
+
+    @PointerTooltipAlignment
+    private var tooltipPointerAlignment: Long = 0
     private val overlayPadding: Int
     private val tooltipMargin: Int
     private val backgroundColorResource: Int
@@ -83,11 +86,29 @@ class CoachMark private constructor(builder: Builder) {
             return result
         }
 
-    @IntDef(ROOT_TOP, ROOT_CENTER, ROOT_BOTTOM, TARGET_TOP, TARGET_BOTTOM, TARGET_TOP_LEFT, TARGET_BOTTOM_LEFT, TARGET_TOP_RIGHT, TARGET_BOTTOM_RIGHT, TARGET_FILL_IN, TARGET_LEFT, TARGET_RIGHT)
+    @IntDef(
+        ROOT_TOP.toInt(),
+        ROOT_CENTER.toInt(),
+        ROOT_BOTTOM.toInt(),
+        TARGET_TOP.toInt(),
+        TARGET_BOTTOM.toInt(),
+        TARGET_TOP_LEFT.toInt(),
+        TARGET_BOTTOM_LEFT.toInt(),
+        TARGET_TOP_RIGHT.toInt(),
+        TARGET_BOTTOM_RIGHT.toInt(),
+        TARGET_FILL_IN.toInt(),
+        TARGET_LEFT.toInt(),
+        TARGET_RIGHT.toInt()
+    )
     @Retention(AnnotationRetention.SOURCE)
     annotation class TooltipAlignment
 
-    @IntDef(POINTER_RIGHT, POINTER_MIDDLE, POINTER_LEFT, POINTER_GONE)
+    @IntDef(
+        POINTER_RIGHT.toInt(),
+        POINTER_MIDDLE.toInt(),
+        POINTER_LEFT.toInt(),
+        POINTER_GONE.toInt()
+    )
     @Retention(AnnotationRetention.SOURCE)
     annotation class PointerTooltipAlignment
 
@@ -95,7 +116,12 @@ class CoachMark private constructor(builder: Builder) {
         this.activity = builder.activity
         this.container = FrameLayout(activity)
         this.tooltipViewModel = WidgetCoachTooltipViewModel()
-        this.tooltipBinding = DataBindingUtil.inflate(activity.layoutInflater, R.layout.widget_coach_tooltip, container, false)
+        this.tooltipBinding = DataBindingUtil.inflate(
+            activity.layoutInflater,
+            R.layout.widget_coach_tooltip,
+            container,
+            false
+        )
         this.tooltipBinding.viewModel = this.tooltipViewModel
 
         this.backgroundColorResource = builder.backgroundColor
@@ -123,8 +149,11 @@ class CoachMark private constructor(builder: Builder) {
             val decorView = window.decorView as ViewGroup?
             decorView?.let {
                 val content = it.findViewById<View>(android.R.id.content) as ViewGroup?
-                content?.let{
-                    val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
+                content?.let {
+                    val layoutParams = FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.MATCH_PARENT,
+                        FrameLayout.LayoutParams.MATCH_PARENT
+                    )
                     container.setBackgroundColor(Color.TRANSPARENT)
 
                     decorView.addView(container, layoutParams)
@@ -148,10 +177,14 @@ class CoachMark private constructor(builder: Builder) {
         this.targetOnClick = targetOnClick
     }
 
-    private fun setTooltipAlignment(@TooltipAlignment tooltipAlignment: Long, @PointerTooltipAlignment pointerTooltipAlignment: Long) {
+    private fun setTooltipAlignment(
+        @TooltipAlignment tooltipAlignment: Long,
+        @PointerTooltipAlignment pointerTooltipAlignment: Long
+    ) {
         this.tooltipAlignment = tooltipAlignment
         this.tooltipPointerAlignment = pointerTooltipAlignment
-        tooltipBinding.root.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+        tooltipBinding.root.viewTreeObserver.addOnPreDrawListener(object :
+            ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 relocationTooltip(targetView, tooltipAlignment)
                 pointerTooltipAlignment(targetView, pointerTooltipAlignment)
@@ -165,7 +198,8 @@ class CoachMark private constructor(builder: Builder) {
         if (targetView == null) {
             setTooltipAlignment(tooltipAlignment, tooltipPointerAlignment)
         } else {
-            targetView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            targetView.viewTreeObserver.addOnPreDrawListener(object :
+                ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
                     if (isCircleMark) {
                         addCircleRect(targetView)
@@ -202,7 +236,8 @@ class CoachMark private constructor(builder: Builder) {
         val cx = rect.centerX()
         val cy = rect.centerY()
 
-        val radius = (Math.max(rect.width(), rect.height()) / 2f * CIRCLE_ADDITIONAL_RADIUS_RATIO).toInt()
+        val radius =
+            (Math.max(rect.width(), rect.height()) / 2f * CIRCLE_ADDITIONAL_RADIUS_RATIO).toInt()
         addTargetClick(rect, view)
         coachMarkOverlay.setBackgroundResource(backgroundColorResource)
         coachMarkOverlay.alpha = backgroundAlpha
@@ -215,8 +250,14 @@ class CoachMark private constructor(builder: Builder) {
 
         val tooltipHeight = tooltipView.height
         val padding = overlayPadding + tooltipMargin
-        val triangleHeight = if (tooltipPointerAlignment != POINTER_GONE) ViewUtils.dpToPx(12) else ViewUtils.dpToPx(0)
-        val triangleWidth = if (tooltipPointerAlignment != POINTER_GONE) ViewUtils.dpToPx(12) else ViewUtils.dpToPx(0)
+        val triangleHeight =
+            if (tooltipPointerAlignment != POINTER_GONE) ViewUtils.dpToPx(12) else ViewUtils.dpToPx(
+                0
+            )
+        val triangleWidth =
+            if (tooltipPointerAlignment != POINTER_GONE) ViewUtils.dpToPx(12) else ViewUtils.dpToPx(
+                0
+            )
 
         if (view != null && !tooltipViewModel.isEmptyValue()) {
             val rect = Rect()
@@ -250,8 +291,8 @@ class CoachMark private constructor(builder: Builder) {
                     result -= (tooltipMargin * CIRCLE_ADDITIONAL_RADIUS_RATIO).toFloat()
                 }
                 tooltipView.y = result
-            } else if (!tooltipViewModel.matchWidth.get() && alignment == TARGET_LEFT || alignment == TARGET_RIGHT){
-                result = (y + (height/2) - (tooltipHeight/2)).toFloat()
+            } else if (!tooltipViewModel.matchWidth.get() && alignment == TARGET_LEFT || alignment == TARGET_RIGHT) {
+                result = (y + (height / 2) - (tooltipHeight / 2)).toFloat()
                 tooltipView.y = result
             }
 
@@ -266,9 +307,9 @@ class CoachMark private constructor(builder: Builder) {
                     (rightXTarget - tooltipBinding.tooltip.width).toFloat()
                 } else if (alignment == TARGET_BOTTOM_LEFT || alignment == TARGET_TOP_LEFT) {
                     x.toFloat()
-                } else if (alignment == TARGET_LEFT){
+                } else if (alignment == TARGET_LEFT) {
                     (x - tooltipBinding.tooltip.width - margin - triangleWidth).toFloat()
-                } else if (alignment == TARGET_RIGHT){
+                } else if (alignment == TARGET_RIGHT) {
                     (rightXTarget + margin - triangleWidth).toFloat()
                 } else {
                     (centerXTarget - tooltipBinding.tooltip.width / 2).toFloat()
@@ -294,12 +335,16 @@ class CoachMark private constructor(builder: Builder) {
         when (alignment) {
             ROOT_TOP -> tooltipView.y = statusBarHeight.toFloat()
             ROOT_BOTTOM -> tooltipView.y = (screenHeight - tooltipHeight).toFloat()
-            ROOT_CENTER -> tooltipView.y = (screenHeight / 2 - tooltipHeight / 2 + statusBarHeight / 2).toFloat()
+            ROOT_CENTER -> tooltipView.y =
+                (screenHeight / 2 - tooltipHeight / 2 + statusBarHeight / 2).toFloat()
         }
         tooltipView.postInvalidate()
     }
 
-    private fun pointerTooltipAlignment(view: View?, @PointerTooltipAlignment pointerTooltipAlignment: Long) {
+    private fun pointerTooltipAlignment(
+        view: View?,
+        @PointerTooltipAlignment pointerTooltipAlignment: Long
+    ) {
         if (view == null) return
         val rect = Rect()
         view.getGlobalVisibleRect(rect)
@@ -315,14 +360,15 @@ class CoachMark private constructor(builder: Builder) {
         val tooltipX = tooltipView.x
         var result = 0
 
-        if (pointerTooltipAlignment != POINTER_GONE){
+        if (pointerTooltipAlignment != POINTER_GONE) {
             if (this.tooltipAlignment == TARGET_RIGHT || this.tooltipAlignment == TARGET_LEFT) {
 
                 tooltipBinding.container.orientation = LinearLayout.HORIZONTAL
 
-                val triangle = if (this.tooltipAlignment == TARGET_LEFT)tooltipBinding.triangleBottom else tooltipBinding.triangleTop
+                val triangle =
+                    if (this.tooltipAlignment == TARGET_LEFT) tooltipBinding.triangleBottom else tooltipBinding.triangleTop
                 triangle.visibility = View.VISIBLE
-                triangle.y = (tooltipView.y + tooltipHeight/2 - ViewUtils.dpToPx(6))
+                triangle.y = (tooltipView.y + tooltipHeight / 2 - ViewUtils.dpToPx(6))
 
                 if (this.tooltipAlignment == TARGET_RIGHT) {
                     triangle.rotation = (-90).toFloat()
@@ -333,12 +379,16 @@ class CoachMark private constructor(builder: Builder) {
                 }
             } else if (tooltipAlignment != ROOT_CENTER && tooltipAlignment != ROOT_BOTTOM && tooltipAlignment != ROOT_TOP) {
                 when (pointerTooltipAlignment) {
-                    POINTER_LEFT -> result = if (tooltipViewModel.matchWidth.get()) x + margin else (tooltipX + margin).toInt()
-                    POINTER_MIDDLE -> result = if (tooltipViewModel.matchWidth.get()) x + width / 2 else (tooltipX + tooltipWidth / 2).toInt()
-                    POINTER_RIGHT -> result = if (tooltipViewModel.matchWidth.get()) x + (width - margin) else (tooltipX + tooltipWidth - margin).toInt()
+                    POINTER_LEFT -> result =
+                        if (tooltipViewModel.matchWidth.get()) x + margin else (tooltipX + margin).toInt()
+                    POINTER_MIDDLE -> result =
+                        if (tooltipViewModel.matchWidth.get()) x + width / 2 else (tooltipX + tooltipWidth / 2).toInt()
+                    POINTER_RIGHT -> result =
+                        if (tooltipViewModel.matchWidth.get()) x + (width - margin) else (tooltipX + tooltipWidth - margin).toInt()
                 }
 
-                val triangle = if (this.tooltipAlignment == TARGET_TOP || this.tooltipAlignment == TARGET_TOP_LEFT || this.tooltipAlignment == TARGET_TOP_RIGHT) tooltipBinding.triangleBottom else tooltipBinding.triangleTop
+                val triangle =
+                    if (this.tooltipAlignment == TARGET_TOP || this.tooltipAlignment == TARGET_TOP_LEFT || this.tooltipAlignment == TARGET_TOP_RIGHT) tooltipBinding.triangleBottom else tooltipBinding.triangleTop
                 triangle.visibility = View.VISIBLE
                 triangle.x = (result - triangleWidth / 2).toFloat()
             }
@@ -372,7 +422,8 @@ class CoachMark private constructor(builder: Builder) {
     }
 
     private fun animateTooltipShow() {
-        tooltipBinding.root.visibility = if (tooltipViewModel.isEmptyValue()) View.GONE else View.VISIBLE
+        tooltipBinding.root.visibility =
+            if (tooltipViewModel.isEmptyValue()) View.GONE else View.VISIBLE
         if (!tooltipViewModel.isEmptyValue() && tooltipShowAnimation != null) {
             tooltipBinding.root.startAnimation(tooltipShowAnimation)
         }
@@ -403,9 +454,9 @@ class CoachMark private constructor(builder: Builder) {
         container.visibility = View.VISIBLE
         animateTooltipShow()
         ViewCompat.animate(container)
-                .alpha(1f)
-                .setDuration(animDuration.toLong())
-                .start()
+            .alpha(1f)
+            .setDuration(animDuration.toLong())
+            .start()
 
         isShow = true
         container.setOnClickListener { if (dismissible) dismiss() }
@@ -417,20 +468,20 @@ class CoachMark private constructor(builder: Builder) {
         onDismissListener?.invoke()
         animateTooltipDismiss()
         ViewCompat.animate(container)
-                .alpha(0f)
-                .setDuration(animDuration.toLong())
-                .setListener(object : ViewPropertyAnimatorListenerAdapter() {
-                    override fun onAnimationEnd(view: View?) {
-                        super.onAnimationEnd(view)
-                        if (container.alpha == 0f) {
-                            val parent = view?.parent
-                            (parent as? ViewGroup)?.removeView(view)
-                            isShow = false
-                            afterDismiss?.invoke()
-                            onAfterDismissListener?.invoke()
-                        }
+            .alpha(0f)
+            .setDuration(animDuration.toLong())
+            .setListener(object : ViewPropertyAnimatorListenerAdapter() {
+                override fun onAnimationEnd(view: View?) {
+                    super.onAnimationEnd(view)
+                    if (container.alpha == 0f) {
+                        val parent = view?.parent
+                        (parent as? ViewGroup)?.removeView(view)
+                        isShow = false
+                        afterDismiss?.invoke()
+                        onAfterDismissListener?.invoke()
                     }
-                }).start()
+                }
+            }).start()
     }
 
     class Builder
@@ -438,9 +489,9 @@ class CoachMark private constructor(builder: Builder) {
      * this constructor for initial default value
      * @param activity for parent view
      */
-    (internal val activity: Activity) {
+        (internal val activity: Activity) {
         internal var target: View? = null
-        internal var tooltipChilds: ArrayList<View> =  ArrayList()
+        internal var tooltipChilds: ArrayList<View> = ArrayList()
         internal var markerPadding: Int = 0
         internal var tooltipMatchWidth: Boolean = false
         internal var backgroundAlpha: Float = 0.5f
@@ -535,26 +586,37 @@ class CoachMark private constructor(builder: Builder) {
             return this
         }
 
-        private fun createTooltipChildText(context: Context, message: String = ""): TextView{
+        private fun createTooltipChildText(context: Context, message: String = ""): TextView {
             val padding = ViewUtils.dpToPx(8)
             val textView = TextView(context)
-            textView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            textView.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
             textView.text = message
             textView.setPadding(padding, padding, padding, padding)
             return textView
         }
 
-        fun addTooltipChildText(context: Context, message: String, @ColorRes textColor: Int): Builder {
+        fun addTooltipChildText(
+            context: Context,
+            message: String,
+            @ColorRes textColor: Int
+        ): Builder {
             val textView = createTooltipChildText(context, message)
             textView.setTextColor(ContextCompat.getColor(context, textColor))
             return addTooltipChild(textView)
         }
 
-        fun addTooltipChildText(context: Context, message: String, textColorString: String): Builder {
-            val textView = createTooltipChildText(context,message)
+        fun addTooltipChildText(
+            context: Context,
+            message: String,
+            textColorString: String
+        ): Builder {
+            val textView = createTooltipChildText(context, message)
             try {
                 textView.setTextColor(Color.parseColor(textColorString))
-            } catch (e: IllegalArgumentException){
+            } catch (e: IllegalArgumentException) {
                 textView.setTextColor(ContextCompat.getColor(context, android.R.color.black))
             }
             return addTooltipChild(textView)
@@ -614,23 +676,23 @@ class CoachMark private constructor(builder: Builder) {
 
     companion object {
 
-        const val ROOT_TOP :Long = 1
-        const val ROOT_BOTTOM :Long = 2
-        const val ROOT_CENTER :Long = 3
-        const val TARGET_TOP :Long = 4
-        const val TARGET_BOTTOM :Long = 5
-        const val TARGET_TOP_LEFT :Long = 6
-        const val TARGET_BOTTOM_LEFT :Long = 7
-        const val TARGET_TOP_RIGHT :Long = 8
-        const val TARGET_BOTTOM_RIGHT :Long = 9
-        const val TARGET_FILL_IN :Long = 10
-        const val TARGET_LEFT :Long = 11
-        const val TARGET_RIGHT :Long = 12
+        const val ROOT_TOP: Long = 1
+        const val ROOT_BOTTOM: Long = 2
+        const val ROOT_CENTER: Long = 3
+        const val TARGET_TOP: Long = 4
+        const val TARGET_BOTTOM: Long = 5
+        const val TARGET_TOP_LEFT: Long = 6
+        const val TARGET_BOTTOM_LEFT: Long = 7
+        const val TARGET_TOP_RIGHT: Long = 8
+        const val TARGET_BOTTOM_RIGHT: Long = 9
+        const val TARGET_FILL_IN: Long = 10
+        const val TARGET_LEFT: Long = 11
+        const val TARGET_RIGHT: Long = 12
 
-        const val POINTER_RIGHT :Long = 1
-        const val POINTER_MIDDLE :Long = 2
-        const val POINTER_LEFT :Long = 3
-        const val POINTER_GONE :Long = 4
+        const val POINTER_RIGHT: Long = 1
+        const val POINTER_MIDDLE: Long = 2
+        const val POINTER_LEFT: Long = 3
+        const val POINTER_GONE: Long = 4
 
         internal const val CIRCLE_ADDITIONAL_RADIUS_RATIO = 1.5
     }
