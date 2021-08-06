@@ -1,10 +1,12 @@
 package com.zettafantasy.giraffe.common.item
 
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -13,7 +15,6 @@ import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
-import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.databinding.FindItemFragmentBinding
 import com.zettafantasy.giraffe.databinding.TooltipFindItemBinding
@@ -21,7 +22,8 @@ import kotlin.math.max
 import kotlin.math.roundToInt
 
 
-abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>() {
+abstract class FindItemFragment : Fragment() {
+    protected lateinit var binding: FindItemFragmentBinding
     private lateinit var itemAdapter: ItemAdapter
     private lateinit var selectedAdapter: SelectedItemAdapter
     protected lateinit var viewModel: FindItemViewModel
@@ -38,7 +40,11 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
 
     abstract fun provideViewModel(): FindItemViewModel
 
-    override fun init(inflater: LayoutInflater, container: ViewGroup?): FindItemFragmentBinding {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         setHasOptionsMenu(true)
         binding =
             DataBindingUtil.inflate(inflater, R.layout.find_item_fragment, container, false)
@@ -52,7 +58,7 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
             showCoachMark(viewModel.coachMarkText, container)
         }
 
-        return binding
+        return binding.root
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -127,9 +133,7 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
         )
 
         viewModel.selectedItems.observe(viewLifecycleOwner, {
-            if (it.isNotEmpty()) {
-                it.toList().let(selectedAdapter::submitList)
-            }
+            selectedAdapter.submitList(it)
             doneMenu?.isVisible = it.isNotEmpty()
         })
     }
