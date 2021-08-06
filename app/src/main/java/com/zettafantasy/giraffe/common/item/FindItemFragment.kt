@@ -49,7 +49,7 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
         setData(provideItems())
 
         if (viewModel.showCoachMark) {
-            showCoachMark(viewModel.coachMarkText)
+            showCoachMark(viewModel.coachMarkText, container)
         }
 
         return binding
@@ -141,13 +141,16 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
         coachMark?.dismiss()
     }
 
-    private fun showCoachMark(desc: String) {
+    private fun showCoachMark(desc: String, container: ViewGroup?) {
         val tooltip = DataBindingUtil.inflate<TooltipFindItemBinding>(
             LayoutInflater.from(context),
             R.layout.tooltip_find_item,
-            null,
+            container,
             false
         )
+
+        //이상하게(?) match_parent 적용이 안되서 코드로 재작업
+        stretchWidthMatchParent(tooltip, container)
 
         tooltip.desc.text = desc
         coachMark = CoachMark.Builder(requireActivity())
@@ -162,5 +165,14 @@ abstract class FindItemFragment : BaseBindingFragment<FindItemFragmentBinding>()
         Handler(Looper.getMainLooper()).postDelayed({
             coachMark?.dismiss()
         }, HIDE_COACH_MARK_MILLIS)
+    }
+
+    private fun stretchWidthMatchParent(
+        tooltip: TooltipFindItemBinding,
+        container: ViewGroup?
+    ) {
+        val layoutParams = tooltip.root.layoutParams
+        layoutParams.width = container?.width ?: layoutParams.width
+        tooltip.root.layoutParams = layoutParams
     }
 }
