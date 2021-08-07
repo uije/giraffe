@@ -18,7 +18,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/gray50_200"
+                android:background="?attr/colorPrimary"
                 android:orientation="horizontal">
 
                 <TextView
@@ -27,7 +27,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="0.2"
                     android:text="@string/date"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20dp" />
 
                 <TextView
@@ -36,7 +36,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="0.266"
                     android:text="@string/stimulus"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20dp" />
 
                 <TextView
@@ -45,7 +45,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="0.266"
                     android:text="@string/emotion"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20dp" />
 
                 <TextView
@@ -54,7 +54,7 @@
                     android:layout_margin="10dp"
                     android:layout_weight="0.266"
                     android:text="@string/need"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/colorOnPrimary"
                     android:textSize="20dp" />
             </LinearLayout>
 

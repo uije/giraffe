@@ -16,4 +16,5 @@
     <color name="gray50_500">#9E9E9E</color>
 
     <color name="accent">@color/lime50_700</color>
+    <color name="red">#FF0000</color>
 </resources>

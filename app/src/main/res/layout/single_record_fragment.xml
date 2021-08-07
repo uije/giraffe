@@ -23,7 +23,6 @@
                 android:gravity="end"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="23dp"
                 tools:text="21.07.22 12:23" />
 
@@ -37,7 +36,6 @@
                 android:text="@string/stimulus"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
@@ -48,7 +46,6 @@
                 android:layout_margin="10dp"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="30dp"
                 tools:text="백업데이터가 날라감" />
 
@@ -62,7 +59,6 @@
                 android:text="@string/emotion"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
@@ -73,7 +69,6 @@
                 android:layout_margin="10dp"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="30dp"
                 tools:text="감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는 감동받은, 떨리는" />
 
@@ -87,7 +82,6 @@
                 android:text="@string/need"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
@@ -99,7 +93,6 @@
                 android:ellipsize="end"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textColor="?colorOnSecondary"
                 android:textSize="30dp"
                 tools:text="소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 소통, 여유, 자유 " />
         </LinearLayout>

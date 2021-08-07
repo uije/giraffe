@@ -21,7 +21,6 @@
             android:layout_gravity="center"
             android:padding="10dp"
             android:text="@{item.name}"
-            android:textColor="@color/black"
             android:textSize="20dp"
             tools:text="기쁨" />
     </FrameLayout>
