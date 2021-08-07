@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -132,10 +133,10 @@ abstract class FindItemFragment : Fragment() {
             )
         )
 
-        viewModel.selectedItems.observe(viewLifecycleOwner, {
-            selectedAdapter.submitList(it)
+        viewModel.selectedItems.observe(viewLifecycleOwner) {
+            selectedAdapter.submitList(it.toList())
             doneMenu?.isVisible = it.isNotEmpty()
-        })
+        }
     }
 
     override fun onDestroyView() {
