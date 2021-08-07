@@ -15,6 +15,6 @@ object Preferences {
     var shownCoachMarkFindEmotion: Boolean
         get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, false)
         set(value) {
-            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, value)
+            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, value).commit()
         }
 }
