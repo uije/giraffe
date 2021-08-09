@@ -118,7 +118,7 @@ abstract class FindItemFragment : Fragment() {
 
     private fun initSelectedRv() {
         selectedAdapter = SelectedItemAdapter(AppExecutors, viewModel) { item ->
-            val pos = selectedAdapter.currentList.indexOf(item)
+            val pos = itemAdapter.currentList.indexOf(item)
             if (pos >= 0) {
                 binding.itemRv.scrollToPosition(pos)
                 binding.progressbar.progress = pos
