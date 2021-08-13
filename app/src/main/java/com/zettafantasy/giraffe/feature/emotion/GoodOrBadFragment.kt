@@ -1,6 +1,5 @@
 package com.zettafantasy.giraffe.feature.emotion
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -24,17 +23,13 @@ class GoodOrBadFragment : BaseBindingFragment<GoodOrBadFragmentBinding>() {
         )
 
         binding.startBtnGood.setOnClickListener {
-            val args = Bundle()
-            args.putSerializable(EmotionType::class.simpleName, EmotionType.SATISFIED)
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_description_to_find_stimulus, args)
+                .navigate(GoodOrBadFragmentDirections.actionDescriptionToFindStimulus(EmotionType.SATISFIED))
         }
 
         binding.startBtnBad.setOnClickListener {
-            val args = Bundle()
-            args.putSerializable(EmotionType::class.simpleName, EmotionType.UNSATISFIED)
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_description_to_find_stimulus, args)
+                .navigate(GoodOrBadFragmentDirections.actionDescriptionToFindStimulus(EmotionType.UNSATISFIED))
         }
 
         return binding

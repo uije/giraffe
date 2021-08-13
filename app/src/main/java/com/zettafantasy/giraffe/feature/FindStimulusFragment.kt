@@ -3,21 +3,20 @@ package com.zettafantasy.giraffe.feature
 import android.app.Activity
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.FindStimulusFragmentBinding
-import com.zettafantasy.giraffe.model.EmotionType
 import java.util.*
 
 
 class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() {
-
+    private val args by navArgs<FindStimulusFragmentArgs>()
     private var doneMenu: MenuItem? = null
 
     override fun init(
@@ -65,7 +64,7 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
                                 Collections.emptyList(),
                                 Collections.emptyList(),
                                 binding.editTx.text.toString().trim()
-                            ), getEmotionType()
+                            ), args.emotionType
                         )
                     )
 
@@ -80,9 +79,6 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
             requireActivity().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.editTx.windowToken, 0);
     }
-
-    private fun getEmotionType(): EmotionType =
-        arguments?.get(EmotionType::class.simpleName) as EmotionType
 
     companion object {
         const val TAG = "FindStimulusFragment"

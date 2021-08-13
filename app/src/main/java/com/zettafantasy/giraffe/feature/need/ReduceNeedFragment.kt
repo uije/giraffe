@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.emotion
+package com.zettafantasy.giraffe.feature.need
 
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,14 +13,13 @@ import com.zettafantasy.giraffe.common.item.FindItemViewModel
 import com.zettafantasy.giraffe.common.item.Item
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.Record
-import java.util.*
 
 
-class ReduceEmotionFragment : FindItemFragment() {
-    private val args by navArgs<ReduceEmotionFragmentArgs>()
+class ReduceNeedFragment : FindItemFragment() {
+    private val args by navArgs<ReduceNeedFragmentArgs>()
 
     override fun provideItems(): List<Item> {
-        return EmotionInventory.getInstance(resources).getListByIds(args.record.emotionIds)
+        return EmotionInventory.getInstance(resources).getListByIds(args.record.needIds)
     }
 
     override fun provideDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem {
@@ -40,10 +39,11 @@ class ReduceEmotionFragment : FindItemFragment() {
 
                 Navigation.findNavController(binding.root)
                     .navigate(
-                        ReduceEmotionFragmentDirections.actionReduceEmotionToFindNeed(
+                        ReduceNeedFragmentDirections.actionReduceNeedToConfirm(
                             Record(
+                                args.record.emotionIds,
                                 viewModel.selectedItems.value!!.map { it.getId() }.toList(),
-                                Collections.emptyList(), args.record.stimulus
+                                args.record.stimulus
                             )
                         )
                     )

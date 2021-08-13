@@ -27,11 +27,7 @@
             app:exitAnim="@anim/fragment_close_exit"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_close_exit">
-            <argument
-                android:name="record"
-                app:argType="com.zettafantasy.giraffe.data.Record" />
-        </action>
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
 
     <fragment
@@ -51,7 +47,7 @@
         tools:layout="@layout/intro_fragment">
         <action
             android:id="@+id/action_intro_to_emotion_description"
-            app:destination="@id/emotion_description"
+            app:destination="@id/good_or_bad"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
@@ -60,7 +56,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/emotion_description"
+        android:id="@+id/good_or_bad"
         android:name="com.zettafantasy.giraffe.feature.emotion.GoodOrBadFragment"
         android:label="감정찾기"
         tools:layout="@layout/good_or_bad_fragment">
@@ -79,6 +75,9 @@
         android:name="com.zettafantasy.giraffe.feature.FindStimulusFragment"
         android:label="자극찾기"
         tools:layout="@layout/find_stimulus_fragment">
+        <argument
+            android:name="emotionType"
+            app:argType="com.zettafantasy.giraffe.model.EmotionType" />
         <action
             android:id="@+id/action_find_stimulus_to_find_emotion"
             app:destination="@id/find_emotion"
@@ -86,14 +85,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="record"
-                app:argType="com.zettafantasy.giraffe.data.Record" />
-            <argument
-                android:name="emotionType"
-                app:argType="com.zettafantasy.giraffe.model.EmotionType" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
 
     <fragment
@@ -101,6 +93,12 @@
         android:name="com.zettafantasy.giraffe.feature.emotion.FindEmotionFragment"
         android:label="감정찾기"
         tools:layout="@layout/find_emotion_fragment">
+        <argument
+            android:name="record"
+            app:argType="com.zettafantasy.giraffe.data.Record" />
+        <argument
+            android:name="emotionType"
+            app:argType="com.zettafantasy.giraffe.model.EmotionType" />
         <action
             android:id="@+id/action_go_need_desc"
             app:destination="@id/need_intro"
@@ -117,12 +115,6 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="record"
-            app:argType="com.zettafantasy.giraffe.data.Record" />
-        <argument
-            android:name="emotionType"
-            app:argType="com.zettafantasy.giraffe.model.EmotionType" />
     </fragment>
 
     <fragment
@@ -133,7 +125,6 @@
         <argument
             android:name="record"
             app:argType="com.zettafantasy.giraffe.data.Record" />
-
         <action
             android:id="@+id/action_intro_to_reduce_emotion"
             app:destination="@id/reduce_emotion"
@@ -141,11 +132,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="record"
-                app:argType="com.zettafantasy.giraffe.data.Record" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -153,6 +140,9 @@
         android:name="com.zettafantasy.giraffe.feature.emotion.ReduceEmotionFragment"
         android:label="감정찾기"
         tools:layout="@layout/find_emotion_fragment">
+        <argument
+            android:name="record"
+            app:argType="com.zettafantasy.giraffe.data.Record" />
         <action
             android:id="@+id/action_reduce_emotion_to_find_need"
             app:destination="@id/need_intro"
@@ -161,9 +151,6 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        <argument
-            android:name="record"
-            app:argType="com.zettafantasy.giraffe.data.Record" />
     </fragment>
 
     <fragment
@@ -181,11 +168,7 @@
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="record"
-                app:argType="com.zettafantasy.giraffe.data.Record" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -203,11 +186,51 @@
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="record"
-                app:argType="com.zettafantasy.giraffe.data.Record" />
-        </action>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_go_reduce_need_intro"
+            app:destination="@id/reduce_need_intro"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reduce_need_intro"
+        android:name="com.zettafantasy.giraffe.feature.need.ReduceNeedIntroFragment"
+        android:label="욕구찾기"
+        tools:layout="@layout/reduce_need_intro_fragment">
+        <argument
+            android:name="record"
+            app:argType="com.zettafantasy.giraffe.data.Record" />
+        <action
+            android:id="@+id/action_intro_to_reduce_need"
+            app:destination="@id/reduce_need"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/reduce_need"
+        android:name="com.zettafantasy.giraffe.feature.need.ReduceNeedFragment"
+        android:label="욕구찾기"
+        tools:layout="@layout/find_need_fragment">
+        <argument
+            android:name="record"
+            app:argType="com.zettafantasy.giraffe.data.Record" />
+        <action
+            android:id="@+id/action_reduce_need_to_confirm"
+            app:destination="@id/confirm"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment

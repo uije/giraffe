@@ -27,4 +27,6 @@
     <string name="reduce_emotion_intro_desc1"><![CDATA[다양한 감정을 고르셨네요.]]></string>
     <string name="reduce_emotion_intro_desc2"><![CDATA[그중에 좀더 와닿는 감정을<br>최대 <font color="#%1$s">%2$s개</font>까지 골라주세요.]]></string>
     <string name="alert_over_max_item_count"><![CDATA[최대 %1$d까지 선택할 수 있습니다]]></string>
+    <string name="reduce_need_intro_desc1"><![CDATA[다양한 욕구를 고르셨네요.]]></string>
+    <string name="reduce_need_intro_desc2"><![CDATA[그중에 좀더 와닿는 욕구를<br>최대 <font color="#%1$s">%2$s개</font>까지 골라주세요.]]></string>
 </resources>

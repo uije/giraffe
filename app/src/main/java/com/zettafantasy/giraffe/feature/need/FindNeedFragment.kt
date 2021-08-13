@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.item.FindItemFragment
 import com.zettafantasy.giraffe.common.item.FindItemViewModel
@@ -32,23 +33,22 @@ class FindNeedFragment : FindItemFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
-                navigateConfirmScreen()
+                val record = Record(
+                    args.record.emotionIds,
+                    viewModel.selectedItems.value!!.map { it.getId() }.toList(),
+                    args.record.stimulus
+                )
+
+                if (record.needIds.size > GiraffeConstant.ITEM_COUNT) {
+                    Navigation.findNavController(binding.root)
+                        .navigate(FindNeedFragmentDirections.actionGoReduceNeedIntro(record))
+                } else {
+                    Navigation.findNavController(binding.root)
+                        .navigate(FindNeedFragmentDirections.actionFindNeedToConfirm(record))
+                }
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    private fun navigateConfirmScreen() {
-        Navigation.findNavController(binding.root)
-            .navigate(
-                FindNeedFragmentDirections.actionFindNeedToConfirm(
-                    Record(
-                        args.record.emotionIds,
-                        viewModel.selectedItems.value!!.map { it.getId() }.toList(),
-                        args.record.stimulus
-                    )
-                )
-            )
     }
 }
