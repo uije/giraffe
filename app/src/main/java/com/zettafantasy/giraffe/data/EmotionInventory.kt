@@ -21,7 +21,7 @@ class EmotionInventory private constructor(resources: Resources) {
     }
 
     private val list = mutableListOf<Emotion>()
-    private val map = mutableMapOf<Int?, Emotion>()
+    private val map = mutableMapOf<Int, Emotion>()
 
     init {
         load(resources.getStringArray(R.array.emotion_satisfied), EmotionType.SATISFIED)
@@ -38,5 +38,5 @@ class EmotionInventory private constructor(resources: Resources) {
 
     fun getListByType(type: EmotionType) = list.filter { it.type == type }.toList()
 
-    fun getListByIds(ids: List<Int>) = ids.map { map[it] }.toList()
+    fun getListByIds(ids: List<Int>) = ids.mapNotNull { map[it] }.toList()
 }

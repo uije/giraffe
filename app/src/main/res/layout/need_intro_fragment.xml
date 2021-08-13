@@ -5,11 +5,11 @@
     android:id="@+id/title_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zettafantasy.giraffe.feature.need.DescriptionFragment"
+    tools:context="com.zettafantasy.giraffe.feature.need.NeedIntroFragment"
     tools:layout_editor_absoluteY="81dp">
 
     <TextView
-        android:id="@+id/state"
+        android:id="@+id/desc1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -21,14 +21,14 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@id/desc2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/description"
+        android:id="@+id/desc2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@id/start_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/state"
+        app:layout_constraintTop_toBottomOf="@id/desc1"
         app:layout_constraintVertical_chainStyle="packed" />
 
 
@@ -63,6 +63,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description" />
+        app:layout_constraintTop_toBottomOf="@+id/desc2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

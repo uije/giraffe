@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.item.FindItemFragment
@@ -17,11 +16,11 @@ import com.zettafantasy.giraffe.data.Record
 import java.util.*
 
 
-class FindEmotionFragment : FindItemFragment() {
-    private val args by navArgs<FindEmotionFragmentArgs>()
+class ReduceEmotionFragment : FindItemFragment() {
+    private val args by navArgs<ReduceEmotionFragmentArgs>()
 
     override fun provideItems(): List<Item> {
-        return EmotionInventory.getInstance(resources).getListByType(args.emotionType)
+        return EmotionInventory.getInstance(resources).getListByIds(args.record.emotionIds)
     }
 
     override fun provideDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem {
@@ -30,30 +29,22 @@ class FindEmotionFragment : FindItemFragment() {
     }
 
     override fun provideViewModel(): FindItemViewModel {
-        return ViewModelProvider(this).get(FindItemViewModel::class.java).apply {
-            showCoachMark = !Preferences.shownCoachMarkFindEmotion
-            coachMarkText = getString(R.string.tooltip_find_item)
-        }
+        return ViewModelProvider(this).get(FindItemViewModel::class.java)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_done -> {
 
-                val record = Record(
-                    viewModel.selectedItems.value!!.map { it.getId() }.toList(),
-                    Collections.emptyList(), args.record.stimulus
-                )
-
-                if (record.emotionIds.size > GiraffeConstant.ITEM_COUNT) {
-                    Navigation.findNavController(binding.root)
-                        .navigate(
-                            FindEmotionFragmentDirections.actionGoReduceEmotionIntro(record)
+                Navigation.findNavController(binding.root)
+                    .navigate(
+                        ReduceEmotionFragmentDirections.actionReduceEmotionToFindNeed(
+                            Record(
+                                viewModel.selectedItems.value!!.map { it.getId() }.toList(),
+                                Collections.emptyList(), args.record.stimulus
+                            )
                         )
-                } else {
-                    Navigation.findNavController(binding.root)
-                        .navigate(FindEmotionFragmentDirections.actionGoNeedDesc(record))
-                }
+                    )
 
                 super.onOptionsItemSelected(item)
             }

@@ -15,8 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.data.EmotionInventory
 
-class DescriptionFragment : Fragment() {
-    private val args by navArgs<DescriptionFragmentArgs>()
+class NeedIntroFragment : Fragment() {
+    private val args by navArgs<NeedIntroFragmentArgs>()
     private lateinit var emotionInventory: EmotionInventory
 
     override fun onCreateView(
@@ -24,11 +24,11 @@ class DescriptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.need_description_fragment, container, false)
+        val view = inflater.inflate(R.layout.need_intro_fragment, container, false)
         emotionInventory = EmotionInventory.getInstance(resources)
         val emotions = emotionInventory.getListByIds(args.record.emotionIds)
         emotions?.let {
-            view.findViewById<TextView>(R.id.state).text = HtmlCompat.fromHtml(
+            view.findViewById<TextView>(R.id.desc1).text = HtmlCompat.fromHtml(
                 getString(
                     R.string.emotion_state_desc,
                     Integer.toHexString(
@@ -42,7 +42,7 @@ class DescriptionFragment : Fragment() {
 
         view.findViewById<AppCompatButton>(R.id.start_btn).setOnClickListener {
             Navigation.findNavController(view)
-                .navigate(DescriptionFragmentDirections.actionDescriptionToFindNeed(args.record))
+                .navigate(NeedIntroFragmentDirections.actionDescriptionToFindNeed(args.record))
         }
         return view
     }

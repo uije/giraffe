@@ -7,18 +7,18 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
-import com.zettafantasy.giraffe.databinding.EmotionDescriptionFragmentBinding
+import com.zettafantasy.giraffe.databinding.GoodOrBadFragmentBinding
 import com.zettafantasy.giraffe.model.EmotionType
 
-class DescriptionFragment : BaseBindingFragment<EmotionDescriptionFragmentBinding>() {
+class GoodOrBadFragment : BaseBindingFragment<GoodOrBadFragmentBinding>() {
 
     override fun init(
         inflater: LayoutInflater,
         container: ViewGroup?
-    ): EmotionDescriptionFragmentBinding {
-        val binding: EmotionDescriptionFragmentBinding = DataBindingUtil.inflate(
+    ): GoodOrBadFragmentBinding {
+        val binding: GoodOrBadFragmentBinding = DataBindingUtil.inflate(
             inflater,
-            R.layout.emotion_description_fragment,
+            R.layout.good_or_bad_fragment,
             container,
             false
         )
@@ -38,9 +38,5 @@ class DescriptionFragment : BaseBindingFragment<EmotionDescriptionFragmentBindin
         }
 
         return binding
-    }
-
-    companion object {
-        const val TAG = "DescriptionFragment"
     }
 }
