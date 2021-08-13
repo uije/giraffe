@@ -26,7 +26,7 @@ class ReduceEmotionIntroFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.desc2).text = HtmlCompat.fromHtml(
             getString(
-                R.string.reduce_emotion_intro_desc,
+                R.string.reduce_emotion_intro_desc2,
                 Integer.toHexString(
                     ContextCompat.getColor(requireContext(), R.color.accent)
                 ).substring(2), GiraffeConstant.ITEM_COUNT.toString()

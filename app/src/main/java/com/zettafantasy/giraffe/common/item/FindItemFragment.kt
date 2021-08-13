@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
@@ -80,9 +81,17 @@ abstract class FindItemFragment : Fragment() {
 
     private fun initItemRv() {
         itemAdapter = ItemAdapter(AppExecutors, viewModel, R.layout.emotion_view) { emotion ->
-            val pos = viewModel.toggle(emotion)
-            if (pos >= 0) {
-                binding.selectedRv.smoothScrollToPosition(pos)
+            try {
+                val pos = viewModel.toggle(emotion)
+                if (pos >= 0) {
+                    binding.selectedRv.smoothScrollToPosition(pos)
+                }
+            } catch (e: IllegalStateException) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.alert_over_max_item_count, viewModel.maxItemCount),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 

@@ -5,10 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.apache.commons.lang3.StringUtils
+import java.lang.IllegalStateException
 
 class FindItemViewModel : ViewModel() {
     var coachMarkText: String = StringUtils.EMPTY
     var showCoachMark: Boolean = false
+    var maxItemCount = Int.MAX_VALUE
 
     private val list = mutableListOf<Item>()
     private val _selectedItems = MutableLiveData<List<Item>>(list)
@@ -20,6 +22,8 @@ class FindItemViewModel : ViewModel() {
 
         if (list.contains(item)) {
             list.remove(item)
+        } else if (list.size >= maxItemCount) {
+            throw IllegalStateException()
         } else {
             list.add(item)
         }

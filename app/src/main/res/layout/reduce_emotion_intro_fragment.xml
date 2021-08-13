@@ -15,7 +15,7 @@
         android:gravity="center_horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="다양한 감정을 고르셨네요"
+        android:text="@string/reduce_emotion_intro_desc1"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -35,7 +35,6 @@
         android:gravity="center_horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        tools:text="@string/reduce_emotion_intro_desc"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -45,7 +44,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/desc1"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/reduce_emotion_intro_desc2" />
 
 
     <androidx.appcompat.widget.AppCompatButton

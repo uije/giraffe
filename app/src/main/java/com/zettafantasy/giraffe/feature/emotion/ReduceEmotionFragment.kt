@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.item.FindItemFragment
@@ -29,7 +30,9 @@ class ReduceEmotionFragment : FindItemFragment() {
     }
 
     override fun provideViewModel(): FindItemViewModel {
-        return ViewModelProvider(this).get(FindItemViewModel::class.java)
+        return ViewModelProvider(this).get(FindItemViewModel::class.java).apply {
+            maxItemCount = GiraffeConstant.ITEM_COUNT
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
