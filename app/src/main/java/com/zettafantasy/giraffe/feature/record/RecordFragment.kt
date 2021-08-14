@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
+import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.data.Record
@@ -41,8 +43,13 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         var binding: RecordFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
         binding.fab.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_create_record)
+            if (Preferences.shownRecordIntro) {
+                Navigation.findNavController(binding.root)
+                    .navigate(RecordFragmentDirections.actionGoGoodOrBad())
+            } else {
+                Navigation.findNavController(binding.root)
+                    .navigate(RecordFragmentDirections.actionGoIntroDesc())
+            }
         }
 
         initRecordRv(binding)

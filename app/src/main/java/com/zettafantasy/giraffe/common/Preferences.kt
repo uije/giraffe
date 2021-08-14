@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 
 object Preferences {
     private const val KEY_SHOWN_COACH_MARK_FIND_EMOTION = "shownCoachMarkFindEmotion"
+    private const val KEY_SHOWN_RECORD_INTRO = "shownRecordIntro"
     private lateinit var preferences: SharedPreferences
 
     fun init(context: Context) {
@@ -16,5 +17,11 @@ object Preferences {
         get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, false)
         set(value) {
             preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, value).commit()
+        }
+
+    var shownRecordIntro: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_RECORD_INTRO, false)
+        set(value) {
+            preferences.edit().putBoolean(KEY_SHOWN_RECORD_INTRO, value).commit()
         }
 }
