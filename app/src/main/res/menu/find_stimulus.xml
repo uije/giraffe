@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/menu_done"
-        android:title="@string/done"
+        android:id="@+id/menu_complete"
+        android:title="@string/complete"
         android:visible="false"
         app:showAsAction="always"
         tools:visible="true" />

@@ -49,13 +49,13 @@ class FindStimulusFragment : BaseBindingFragment<FindStimulusFragmentBinding>() 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.find_stimulus, menu)
-        doneMenu = menu.findItem(R.id.menu_done)
+        doneMenu = menu.findItem(R.id.menu_complete)
         doneMenu?.isVisible = binding.editTx.text.trim().isNotEmpty()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_done -> {
+            R.id.menu_complete -> {
                 hideKeyboard()
                 Navigation.findNavController(binding.root)
                     .navigate(

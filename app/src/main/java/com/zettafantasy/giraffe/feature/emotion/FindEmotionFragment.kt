@@ -26,7 +26,7 @@ class FindEmotionFragment : FindItemFragment() {
 
     override fun provideDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem {
         inflater.inflate(R.menu.find_emotion, menu)
-        return menu.findItem(R.id.menu_done)
+        return menu.findItem(R.id.menu_complete)
     }
 
     override fun provideViewModel(): FindItemViewModel {
@@ -38,7 +38,7 @@ class FindEmotionFragment : FindItemFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.menu_done -> {
+            R.id.menu_complete -> {
 
                 val record = Record(
                     viewModel.selectedItems.value!!.map { it.getId() }.toList(),

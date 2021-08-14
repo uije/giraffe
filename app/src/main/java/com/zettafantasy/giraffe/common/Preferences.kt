@@ -24,4 +24,8 @@ object Preferences {
         set(value) {
             preferences.edit().putBoolean(KEY_SHOWN_RECORD_INTRO, value).commit()
         }
+
+    fun clear(): Boolean {
+        return preferences.edit().clear().commit()
+    }
 }

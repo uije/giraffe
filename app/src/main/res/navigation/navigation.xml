@@ -27,7 +27,6 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_fade_enter"
             app:popExitAnim="@anim/fragment_fade_exit" />
-        <!-- 기록 상세보기 -->
         <action
             android:id="@+id/action_view_record"
             app:destination="@id/record"
@@ -36,7 +35,20 @@
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
+        <action
+            android:id="@+id/action_go_setting"
+            app:destination="@id/setting"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
     </fragment>
+
+    <fragment
+        android:id="@+id/setting"
+        android:name="com.zettafantasy.giraffe.feature.setting.SettingFragment"
+        android:label="설정" />
 
     <fragment
         android:id="@+id/record"

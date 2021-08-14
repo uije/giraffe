@@ -1,8 +1,7 @@
 package com.zettafantasy.giraffe.feature.record
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -40,6 +39,7 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
     }
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?): RecordFragmentBinding {
+        setHasOptionsMenu(true)
         var binding: RecordFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
         binding.fab.setOnClickListener {
@@ -125,6 +125,22 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
             if (this@RecordFragment.isVisible) {
                 onSuccess()
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.record, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_setting -> {
+                Navigation.findNavController(binding.root)
+                    .navigate(RecordFragmentDirections.actionGoSetting())
+                super.onOptionsItemSelected(item)
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

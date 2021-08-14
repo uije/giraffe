@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
-        android:id="@+id/menu_complete"
-        android:title="@string/complete"
-        android:visible="false"
-        app:showAsAction="always"
+        android:id="@+id/menu_setting"
+        android:title="@string/setting"
+        app:showAsAction="never"
         tools:visible="true" />
 </menu>
