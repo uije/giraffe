@@ -11,6 +11,7 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.BindingAdapter
 import androidx.databinding.adapters.Converters
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.zettafantasy.giraffe.data.Record
 
 
 object BindingAdapter {
@@ -48,6 +49,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("visibleGone")
     fun showHide(view: View, show: Boolean) {
+        Log.d(javaClass.simpleName, String.format("%s %s", view, show))
         view.visibility = if (show) View.VISIBLE else View.GONE
     }
 }

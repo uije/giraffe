@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
+import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
+import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.SnapPagerScrollListener
 import com.zettafantasy.giraffe.databinding.FindItemFragmentBinding
 import com.zettafantasy.giraffe.databinding.TooltipFindItemBinding
@@ -31,10 +33,6 @@ abstract class FindItemFragment : Fragment() {
     protected lateinit var viewModel: FindItemViewModel
     private var doneMenu: MenuItem? = null
     private var coachMark: CoachMark? = null
-
-    companion object {
-        private const val HIDE_COACH_MARK_MILLIS: Long = 2000
-    }
 
     abstract fun provideItems(): List<Item>
 
@@ -176,14 +174,11 @@ abstract class FindItemFragment : Fragment() {
             .setTooltipPointer(CoachMark.POINTER_GONE)
             .show()
 
-        afterShowCoachMark()
-
         Handler(Looper.getMainLooper()).postDelayed({
             coachMark?.dismiss()
-        }, HIDE_COACH_MARK_MILLIS)
+            Preferences.shownCoachMarkFindEmotion = true
+        }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
     }
-
-    open fun afterShowCoachMark() {}
 
     private fun stretchWidthMatchParent(
         tooltip: TooltipFindItemBinding,

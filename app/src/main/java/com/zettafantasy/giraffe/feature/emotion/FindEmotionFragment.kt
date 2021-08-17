@@ -60,8 +60,4 @@ class FindEmotionFragment : FindItemFragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-    override fun afterShowCoachMark() {
-        Preferences.shownCoachMarkFindEmotion = true
-    }
 }

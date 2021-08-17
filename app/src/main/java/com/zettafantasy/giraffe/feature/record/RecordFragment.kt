@@ -1,5 +1,7 @@
 package com.zettafantasy.giraffe.feature.record
 
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -10,8 +12,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
+import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
@@ -58,9 +62,14 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         needInventory = NeedInventory.getInstance(resources)
 
         viewModel.allRecords.observe(viewLifecycleOwner) { records ->
-            records.let { it ->
-                Log.d(TAG, String.format("allRecords %s", it.size))
-                adapter.submitList(it.map {
+            if (records.isEmpty()) {
+                binding.emptyView.visibility = View.VISIBLE
+                binding.content.visibility = View.GONE
+            } else {
+                binding.emptyView.visibility = View.GONE
+                binding.content.visibility = View.VISIBLE
+
+                adapter.submitList(records.map {
                     RecordWrapper(
                         it,
                         emotionInventory,
@@ -70,8 +79,31 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
             }
         }
 
+        if (!Preferences.shownCoachMarkFindEmotion) {
+            val coachMark = showCoachMark(binding)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                coachMark?.dismiss()
+                Preferences.shownCoachMarkStartBtn = true
+            }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
+        }
+
         return binding
     }
+
+    private fun showCoachMark(binding: RecordFragmentBinding) =
+        CoachMark.Builder(requireActivity())
+            .setTarget(binding.fab)
+            .addTooltipChildText(
+                requireActivity(),
+                getString(R.string.tooltip_start_btn),
+                android.R.color.black
+            )
+            .setTooltipAlignment(CoachMark.TARGET_TOP_RIGHT)
+            .setTooltipPointer(CoachMark.POINTER_RIGHT)
+            .setTooltipBackgroundColor(R.color.accent)
+            .setDismissible()
+            .show()
 
     private fun initRecordRv(binding: RecordFragmentBinding) {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
