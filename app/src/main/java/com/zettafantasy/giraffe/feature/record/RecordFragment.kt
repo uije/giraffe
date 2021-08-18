@@ -20,8 +20,6 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.common.Preferences
-import com.zettafantasy.giraffe.data.EmotionInventory
-import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.RecordFragmentBinding
 import kotlinx.coroutines.Dispatchers
@@ -32,10 +30,11 @@ import kotlinx.coroutines.withContext
 
 class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
     private lateinit var adapter: RecordAdapter
-    private lateinit var emotionInventory: EmotionInventory
-    private lateinit var needInventory: NeedInventory
     private val viewModel: RecordViewModel by viewModels {
-        RecordViewModelFactory((requireActivity().application as GiraffeApplication).repository)
+        RecordViewModelFactory(
+            (requireActivity().application as GiraffeApplication).repository,
+            resources
+        )
     }
 
     companion object {
@@ -46,6 +45,8 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         setHasOptionsMenu(true)
         var binding: RecordFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         binding.fab.setOnClickListener {
             if (Preferences.shownRecordIntro) {
                 Navigation.findNavController(binding.root)
@@ -58,25 +59,8 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
 
         initRecordRv(binding)
 
-        emotionInventory = EmotionInventory.getInstance(resources)
-        needInventory = NeedInventory.getInstance(resources)
-
         viewModel.allRecords.observe(viewLifecycleOwner) { records ->
-            if (records.isEmpty()) {
-                binding.emptyView.visibility = View.VISIBLE
-                binding.content.visibility = View.GONE
-            } else {
-                binding.emptyView.visibility = View.GONE
-                binding.content.visibility = View.VISIBLE
-
-                adapter.submitList(records.map {
-                    RecordWrapper(
-                        it,
-                        emotionInventory,
-                        needInventory
-                    )
-                }.toList())
-            }
+            adapter.submitList(records)
         }
 
         if (!Preferences.shownCoachMarkFindEmotion) {
