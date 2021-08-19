@@ -11,7 +11,7 @@ import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.item.FindItemFragment
 import com.zettafantasy.giraffe.common.item.FindItemViewModel
 import com.zettafantasy.giraffe.common.item.Item
-import com.zettafantasy.giraffe.data.EmotionInventory
+import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.data.Record
 
 
@@ -19,7 +19,7 @@ class ReduceNeedFragment : FindItemFragment() {
     private val args by navArgs<ReduceNeedFragmentArgs>()
 
     override fun provideItems(): List<Item> {
-        return EmotionInventory.getInstance(resources).getListByIds(args.record.needIds)
+        return NeedInventory.getInstance(resources).getListByIds(args.record.needIds)
     }
 
     override fun provideDoneMenu(inflater: MenuInflater, menu: Menu): MenuItem {

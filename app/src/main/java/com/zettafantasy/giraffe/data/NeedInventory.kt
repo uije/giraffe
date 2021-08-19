@@ -42,6 +42,6 @@ class NeedInventory private constructor(resources: Resources) {
 
     fun getList(): List<Need> = list.toList()
 
-    fun getListByIds(ids: List<Int>) = ids.map { map[it] }.toList()
+    fun getListByIds(ids: List<Int>) = ids.mapNotNull { map[it] }.toList()
 
 }
