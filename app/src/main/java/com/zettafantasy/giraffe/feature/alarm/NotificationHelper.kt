@@ -1,4 +1,4 @@
-package com.zettafantasy.giraffe.feature.notification
+package com.zettafantasy.giraffe.feature.alarm
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -31,7 +31,9 @@ object NotificationHelper {
             .setColor(ContextCompat.getColor(context, R.color.accent))
             .setContentTitle(context.getString(R.string.remind_alarm_title))
             .setContentText(context.getString(R.string.remind_alarm_text))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_REMINDER)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
 
@@ -49,7 +51,7 @@ object NotificationHelper {
     fun createNotificationChannel(context: Context) {
         val name = context.getString(R.string.notification_channel_remind_alarm_name)
         val descriptionText = context.getString(R.string.notification_channel_remind_alarm_desc)
-        val importance = NotificationManager.IMPORTANCE_DEFAULT
+        val importance = NotificationManager.IMPORTANCE_HIGH
 
         val channel = NotificationChannel(
             GiraffeConstant.NOTIFICATION_CHANNEL_ID_REMIND_ALARM,

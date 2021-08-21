@@ -5,7 +5,8 @@ import android.os.Build
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.GiraffeRoomDatabase
-import com.zettafantasy.giraffe.feature.notification.NotificationHelper
+import com.zettafantasy.giraffe.feature.alarm.GiraffeAlarmManager
+import com.zettafantasy.giraffe.feature.alarm.NotificationHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
@@ -25,5 +26,7 @@ class GiraffeApplication : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationHelper.createNotificationChannel(baseContext)
         }
+
+        GiraffeAlarmManager.init(baseContext)
     }
 }
