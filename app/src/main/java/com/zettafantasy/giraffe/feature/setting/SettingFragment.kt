@@ -6,12 +6,23 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.feature.notification.NotificationHelper
 
 class SettingFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
+        initClearPreference()
+
+        val notification: Preference? = this.findPreference("notification")
+        notification?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            NotificationHelper.notifyRemindAlarm(requireContext())
+            true
+        }
+    }
+
+    private fun initClearPreference() {
         val clear: Preference? = this.findPreference("clear_preference")
         clear?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             if (Preferences.clear()) {

@@ -10,4 +10,8 @@
         app:summary="코치마크, 가이드화면이 노출되도록 preference 값을 지웁니다."
         app:title="Preference 삭제" />
 
+    <Preference
+        app:key="notification"
+        app:title="알림테스트" />
+
 </PreferenceScreen>

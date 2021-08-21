@@ -63,8 +63,8 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
             adapter.submitList(records)
         }
 
-        if (!Preferences.shownCoachMarkFindEmotion) {
-            val coachMark = showCoachMark(binding)
+        if (!Preferences.shownCoachMarkStartBtn) {
+            val coachMark = showCoachMark(binding.fab)
 
             Handler(Looper.getMainLooper()).postDelayed({
                 coachMark?.dismiss()
@@ -75,9 +75,9 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         return binding
     }
 
-    private fun showCoachMark(binding: RecordFragmentBinding) =
+    private fun showCoachMark(view: View) =
         CoachMark.Builder(requireActivity())
-            .setTarget(binding.fab)
+            .setTarget(view)
             .addTooltipChildText(
                 requireActivity(),
                 getString(R.string.tooltip_start_btn),

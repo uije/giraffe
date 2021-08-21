@@ -60,7 +60,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.2'
 
-    implementation 'androidx.preference:preference:1.1.1' //setting
+    implementation 'androidx.preference:preference-ktx:1.1.1' //setting
 
     implementation('com.github.thekhaeng:recycler-margin:1.2.1') {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
