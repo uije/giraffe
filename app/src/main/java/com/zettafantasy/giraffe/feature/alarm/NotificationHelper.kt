@@ -36,6 +36,7 @@ object NotificationHelper {
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //lock screen 노출
 
         with(NotificationManagerCompat.from(context)) {
             // notificationId is a unique int for each notification that you must define

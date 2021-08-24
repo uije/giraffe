@@ -23,7 +23,7 @@ object GiraffeAlarmManager {
         val calendar = Calendar.getInstance().apply {
             timeInMillis = System.currentTimeMillis()
             set(Calendar.HOUR_OF_DAY, 21) //todo 시간 설정값으로 빼기
-            set(Calendar.MINUTE, 0)
+            set(Calendar.MINUTE, 30)
             set(Calendar.SECOND, 0)
         }
 
