@@ -18,6 +18,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         val notification: Preference? = this.findPreference("notification")
         notification?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             NotificationHelper.notifyRemindAlarm(requireContext())
+            //GiraffeAlarmManager.init(requireContext())
             true
         }
     }

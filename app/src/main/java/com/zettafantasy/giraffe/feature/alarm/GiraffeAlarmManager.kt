@@ -4,27 +4,44 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.SystemClock
 import android.util.Log
 import androidx.core.content.ContextCompat
+import java.text.SimpleDateFormat
+import java.util.*
 
 object GiraffeAlarmManager {
     private var alarmManager: AlarmManager? = null
-    private lateinit var alarmIntent: PendingIntent
+    private var alarmIntent: PendingIntent? = null
+    var sdf: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss", Locale.KOREA)
 
     fun init(context: Context) {
         alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java)
         alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, 0)
+            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
 
-        alarmManager?.cancel(alarmIntent)
-        Log.d(javaClass.simpleName, "alarm was canceled")
+        val calendar = Calendar.getInstance().apply {
+            timeInMillis = System.currentTimeMillis()
+            set(Calendar.HOUR_OF_DAY, 21) //todo 시간 설정값으로 빼기
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+        }
 
-        alarmManager?.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() + 10 * 1000, alarmIntent //todo
+        alarmManager?.setInexactRepeating(
+            AlarmManager.RTC_WAKEUP,
+            calendar.timeInMillis,
+            AlarmManager.INTERVAL_DAY,
+            alarmIntent
         )
-        Log.d(javaClass.simpleName, "alarm registered")
+
+//        alarmManager?.set(
+//            AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//            SystemClock.elapsedRealtime() + 10 * 1000, alarmIntent
+//        )
+
+        Log.d(
+            javaClass.simpleName,
+            String.format("alarm registered %s", sdf.format(calendar.time))
+        )
     }
 }
