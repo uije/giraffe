@@ -32,6 +32,11 @@ class GoodOrBadFragment : BaseBindingFragment<GoodOrBadFragmentBinding>() {
                 .navigate(GoodOrBadFragmentDirections.actionDescriptionToFindStimulus(EmotionType.UNSATISFIED))
         }
 
+        binding.startBtnUnclear.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(GoodOrBadFragmentDirections.actionDescriptionToFindStimulus(EmotionType.UNCLEAR))
+        }
+
         return binding
     }
 }

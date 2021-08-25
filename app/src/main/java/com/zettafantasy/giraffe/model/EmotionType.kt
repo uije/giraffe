@@ -8,5 +8,6 @@ import java.io.Serializable
 @Keep
 enum class EmotionType(@StringRes val nameRes: Int) : Serializable {
     SATISFIED(R.string.emotion_type_satisfied),
-    UNSATISFIED(R.string.emotion_type_unsatisfied)
+    UNSATISFIED(R.string.emotion_type_unsatisfied),
+    UNCLEAR(R.string.emotion_type_unclear)
 }

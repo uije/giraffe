@@ -39,7 +39,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_button"
-            android:text="좋다"
+            android:text="@string/emotion_type_satisfied"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/start_btn_bad"
@@ -56,12 +56,29 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_button"
-            android:text="나쁘다"
+            android:text="@string/emotion_type_unsatisfied"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/start_btn_unclear"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_btn_good" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/start_btn_unclear"
+            android:layout_width="144dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/emotion_type_unclear"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/start_btn_good" />
+            app:layout_constraintTop_toBottomOf="@+id/start_btn_bad" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

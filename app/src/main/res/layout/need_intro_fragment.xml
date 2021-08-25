@@ -15,7 +15,6 @@
         android:gravity="center_horizontal"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:text="현재 걱정스런 상태이시군요."
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
@@ -25,7 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/emotion_state_desc" />
 
     <TextView
         android:id="@+id/desc2"

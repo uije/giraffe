@@ -27,6 +27,12 @@ object GiraffeAlarmManager {
             set(Calendar.SECOND, 0)
         }
 
+        //목표시간 이후라면 재설정하지 않는다
+        if (Calendar.getInstance().after(calendar)) {
+            Log.d(javaClass.simpleName, String.format("alarm register was skipped"))
+            return
+        }
+
         alarmManager?.setInexactRepeating(
             AlarmManager.RTC_WAKEUP,
             calendar.timeInMillis,

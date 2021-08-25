@@ -36,7 +36,8 @@ class EmotionInventory private constructor(resources: Resources) {
         }
     }
 
-    fun getListByType(type: EmotionType) = list.filter { it.type == type }.toList()
+    fun getListByType(type: EmotionType) =
+        if (type == EmotionType.UNCLEAR) list.toList() else list.filter { it.type == type }.toList()
 
     fun getListByIds(ids: List<Int>) = ids.mapNotNull { map[it] }.toList()
 }
