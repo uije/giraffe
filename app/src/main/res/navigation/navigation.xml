@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/records"
-        android:name="com.zettafantasy.giraffe.feature.record.RecordFragment"
-        android:label="기록"
-        tools:layout="@layout/record_fragment">
+        android:name="com.zettafantasy.giraffe.MainFragment"
+        tools:layout="@layout/main_fragment">
         <!-- 기록하기 -->
         <action
             android:id="@+id/action_go_intro_desc"

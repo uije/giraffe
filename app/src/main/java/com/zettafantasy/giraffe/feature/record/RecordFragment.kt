@@ -16,6 +16,7 @@ import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.GiraffeConstant
+import com.zettafantasy.giraffe.MainFragmentDirections
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
@@ -50,10 +51,10 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         binding.fab.setOnClickListener {
             if (Preferences.shownRecordIntro) {
                 Navigation.findNavController(binding.root)
-                    .navigate(RecordFragmentDirections.actionGoGoodOrBad())
+                    .navigate(MainFragmentDirections.actionGoGoodOrBad())
             } else {
                 Navigation.findNavController(binding.root)
-                    .navigate(RecordFragmentDirections.actionGoIntroDesc())
+                    .navigate(MainFragmentDirections.actionGoIntroDesc())
             }
         }
 
@@ -93,7 +94,7 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
-                .navigate(RecordFragmentDirections.actionViewRecord(record.record))
+                .navigate(MainFragmentDirections.actionViewRecord(record.record))
         }
 
         binding.recordRv.adapter = adapter
@@ -153,7 +154,7 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
         return when (item.itemId) {
             R.id.menu_setting -> {
                 Navigation.findNavController(binding.root)
-                    .navigate(RecordFragmentDirections.actionGoSetting())
+                    .navigate(MainFragmentDirections.actionGoSetting())
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)
