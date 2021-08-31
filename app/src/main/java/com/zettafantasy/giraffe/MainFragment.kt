@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
+import com.zettafantasy.giraffe.feature.WordCloudFragment
 import com.zettafantasy.giraffe.feature.record.RecordFragment
 
 class MainFragment : Fragment() {
@@ -25,7 +26,10 @@ class MainFragment : Fragment() {
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
-                return RecordFragment()
+                return when (position) {
+                    0 -> RecordFragment()
+                    else -> WordCloudFragment()
+                }
             }
 
             override fun getItemCount(): Int {
@@ -34,7 +38,10 @@ class MainFragment : Fragment() {
         }
 
         TabLayoutMediator(binding.tabs, binding.viewPager) { tab, position ->
-            tab.text = "기록"
+            tab.text = when (position) {
+                0 -> "기록"
+                else -> "통계"
+            }
         }.attach()
 
         return binding.root
