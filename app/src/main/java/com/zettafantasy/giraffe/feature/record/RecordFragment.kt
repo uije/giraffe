@@ -1,7 +1,5 @@
 package com.zettafantasy.giraffe.feature.record
 
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
@@ -12,15 +10,12 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
-import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.MainFragmentDirections
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
-import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.RecordFragmentBinding
 import kotlinx.coroutines.Dispatchers
@@ -43,20 +38,10 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
     }
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?): RecordFragmentBinding {
-        setHasOptionsMenu(true)
         var binding: RecordFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.record_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
-        binding.fab.setOnClickListener {
-            if (Preferences.shownRecordIntro) {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoGoodOrBad())
-            } else {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoIntroDesc())
-            }
-        }
 
         initRecordRv(binding)
 
@@ -64,31 +49,8 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
             adapter.submitList(records)
         }
 
-        if (!Preferences.shownCoachMarkStartBtn) {
-            val coachMark = showCoachMark(binding.fab)
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                coachMark?.dismiss()
-                Preferences.shownCoachMarkStartBtn = true
-            }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
-        }
-
         return binding
     }
-
-    private fun showCoachMark(view: View) =
-        CoachMark.Builder(requireActivity())
-            .setTarget(view)
-            .addTooltipChildText(
-                requireActivity(),
-                getString(R.string.tooltip_start_btn),
-                android.R.color.black
-            )
-            .setTooltipAlignment(CoachMark.TARGET_TOP_RIGHT)
-            .setTooltipPointer(CoachMark.POINTER_RIGHT)
-            .setTooltipBackgroundColor(R.color.accent)
-            .setDismissible()
-            .show()
 
     private fun initRecordRv(binding: RecordFragmentBinding) {
         adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
@@ -142,22 +104,6 @@ class RecordFragment : BaseBindingFragment<RecordFragmentBinding>() {
             if (this@RecordFragment.isVisible) {
                 onSuccess()
             }
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.record, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_setting -> {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoSetting())
-                super.onOptionsItemSelected(item)
-            }
-            else -> super.onOptionsItemSelected(item)
         }
     }
 }
