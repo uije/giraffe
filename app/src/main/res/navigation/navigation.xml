@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation.xml"
-    app:startDestination="@id/records">
+    app:startDestination="@id/main">
 
     <fragment
-        android:id="@+id/records"
+        android:id="@+id/main"
         android:name="com.zettafantasy.giraffe.MainFragment"
+        android:label=""
         tools:layout="@layout/main_fragment">
+
         <!-- 기록하기 -->
         <action
             android:id="@+id/action_go_intro_desc"
@@ -262,13 +264,13 @@
             app:argType="com.zettafantasy.giraffe.data.Record" />
         <action
             android:id="@+id/action_confirm_to_record"
-            app:destination="@id/records"
+            app:destination="@id/main"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:launchSingleTop="true"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@id/records"
+            app:popUpTo="@id/main"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>
