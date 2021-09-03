@@ -15,7 +15,6 @@ class RecordViewModel(
 
     val allRecords: LiveData<List<RecordWrapper>> =
         Transformations.map(repository.allRecords.asLiveData()) { data ->
-            Log.d(javaClass.simpleName, String.format("uije %s", data.isEmpty()))
             data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
         }
 }

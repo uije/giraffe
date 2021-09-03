@@ -39,7 +39,7 @@ class MainFragment : Fragment() {
                 return 2
             }
         }
-        binding.viewPager.offscreenPageLimit = 1 //미리 로딩
+//        binding.viewPager.offscreenPageLimit = 1 //미리 로딩
 
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

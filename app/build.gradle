@@ -66,6 +66,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
     implementation project(path: ':coachmark')
+    implementation project(path: ':wordcloud')
+    //implementation 'net.alhazmy13.wordcloud:library:0.2.0-beta'
 
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
@@ -75,8 +77,6 @@ dependencies {
 
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.apache.commons:commons-lang3:3.6'
-
-    implementation 'net.alhazmy13.wordcloud:library:0.2.0-beta'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
