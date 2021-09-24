@@ -63,4 +63,12 @@ public class WordCloud {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return "WordCloud{" +
+                "text='" + text + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }

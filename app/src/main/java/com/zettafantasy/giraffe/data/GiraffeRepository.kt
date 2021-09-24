@@ -13,6 +13,10 @@ class GiraffeRepository(private val recordDao: RecordDao) {
         return recordDao.findRecord(id)
     }
 
+    fun findRecordsSince(date: Long): Flow<List<Record>> {
+        return recordDao.findRecordsSince(date)
+    }
+
     suspend fun deleteRecord(record: Record) {
         return recordDao.delete(record)
     }

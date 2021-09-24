@@ -2,6 +2,7 @@ package com.zettafantasy.giraffe.feature
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ import com.zettafantasy.giraffe.feature.record.RecordWrapper
 import com.zettafantasy.giraffe.model.Emotion
 import net.alhazmy13.wordcloud.ColorTemplate
 import net.alhazmy13.wordcloud.WordCloud
+import java.util.*
 
 
 class WordCloudFragment : Fragment() {
@@ -41,7 +43,7 @@ class WordCloudFragment : Fragment() {
 
         val emotionMap = mutableMapOf<Emotion, WordCloud>()
 
-        Transformations.map(repository.allRecords.asLiveData()) { data ->
+        Transformations.map(repository.findRecordsSince(oneMonthAgo()).asLiveData()) { data ->
             data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
         }.observe(viewLifecycleOwner) { records ->
             for (record in records) {
@@ -54,14 +56,22 @@ class WordCloudFragment : Fragment() {
                 }
             }
 
-            binding.wordCloud.setDataSet(emotionMap.values.toList())
+            val dataset = emotionMap.values.toList()
+            Log.d(javaClass.simpleName, dataset.toString())
+            binding.wordCloud.setDataSet(dataset)
             binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
             binding.wordCloud.notifyDataSetChanged()
-
         }
 
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
         return binding.root
+    }
+
+    private fun oneMonthAgo(): Long {
+        return Calendar.getInstance().run {
+            add(Calendar.MONTH, -1)
+            timeInMillis
+        }
     }
 }
