@@ -13,7 +13,7 @@ import com.rizafu.coachmark.CoachMark
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
 import com.zettafantasy.giraffe.feature.WordCloudFragment
-import com.zettafantasy.giraffe.feature.record.RecordFragment
+import com.zettafantasy.giraffe.feature.record.RecordsFragment
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
@@ -30,7 +30,7 @@ class MainFragment : Fragment() {
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    0 -> RecordFragment()
+                    0 -> RecordsFragment()
                     else -> WordCloudFragment()
                 }
             }
@@ -99,7 +99,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.record, menu)
+        inflater.inflate(R.menu.records, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
