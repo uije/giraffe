@@ -12,7 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.rizafu.coachmark.CoachMark
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
-import com.zettafantasy.giraffe.feature.WordCloudFragment
+import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
 import com.zettafantasy.giraffe.feature.record.RecordsFragment
 
 class MainFragment : Fragment() {
