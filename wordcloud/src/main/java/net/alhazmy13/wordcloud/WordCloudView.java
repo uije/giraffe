@@ -140,10 +140,9 @@ public class WordCloudView extends WebView {
     private float scale(int inputY) {
         float x = inputY - old_min;
         float y = old_max - old_min;
-        float percent = x / y;
+        float percent = (y == 0 ? 0.5f : x / y);
         return percent * (max - min) + min;
     }
-
 
     private void updateMaxMinValues() {
         old_min = Integer.MAX_VALUE;
