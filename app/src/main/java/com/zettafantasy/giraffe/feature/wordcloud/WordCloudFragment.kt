@@ -1,5 +1,6 @@
 package com.zettafantasy.giraffe.feature.wordcloud
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.observe
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
@@ -20,7 +22,7 @@ import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.WordCloudFragmentBinding
 import com.zettafantasy.giraffe.databinding.WordCloudViewBinding
-import java.util.*
+import net.alhazmy13.wordcloud.ColorTemplate
 
 
 class WordCloudFragment : Fragment() {
@@ -53,65 +55,31 @@ class WordCloudFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-        Log.d(javaClass.simpleName, viewModel.name)
         binding.pager.adapter = adapter
-
-//        val emotionMap = mutableMapOf<Emotion, WordCloud>()
-//
-//        Transformations.map(repository.findRecordsSince(oneMonthAgo()).asLiveData()) { data ->
-//            data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
-//        }.observe(viewLifecycleOwner) { records ->
-//            for (record in records) {
-//                for (emotion in record.emotions) {
-//                    if (emotionMap.containsKey(emotion)) {
-//                        emotionMap[emotion]?.weight = emotionMap[emotion]!!.weight + 1
-//                    } else {
-//                        emotionMap[emotion!!] = WordCloud(emotion.getName(), 1)
-//                    }
-//                }
-//            }
-//
-//            val dataset = emotionMap.values.toList()
-//            Log.d(javaClass.simpleName, dataset.toString())
-//            binding.wordCloud.setDataSet(dataset)
-//            binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
-//            binding.wordCloud.notifyDataSetChanged()
-//        }
-//
-//        binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
+        viewModel.load(viewLifecycleOwner)
 
         return binding.root
     }
-
-    private fun oneMonthAgo(): Long {
-        return Calendar.getInstance().run {
-            add(Calendar.MONTH, -1)
-            timeInMillis
-        }
-    }
 }
 
-class WordCloudPagerAdapter(@NonNull fragmentManager: FragmentManager, @NonNull lifecycle: Lifecycle) :
+class WordCloudPagerAdapter(
+    @NonNull fragmentManager: FragmentManager,
+    @NonNull lifecycle: Lifecycle
+) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
     @NonNull
     override fun createFragment(position: Int): Fragment {
-        // Return a NEW fragment instance in createFragment(int)
-        val fragment: Fragment = DemoObjectFragment()
-        val args = Bundle()
-        // Our object is just an integer :-P
-        args.putInt(DemoObjectFragment.ARG_OBJECT, position + 1)
-        fragment.arguments = args
-        return fragment
+        return EmotionCloudFragment()
     }
 
     override fun getItemCount(): Int {
-        return 2
+        return 1
     }
 }
 
 // Instances of this class are fragments representing a single
 // object in our collection.
-class DemoObjectFragment : Fragment() {
+class EmotionCloudFragment : Fragment() {
     private lateinit var binding: WordCloudViewBinding
 
     val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
@@ -122,15 +90,18 @@ class DemoObjectFragment : Fragment() {
         @Nullable savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_view, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
-        binding.text?.text = viewModel.name
-        Log.d(javaClass.simpleName, viewModel.name)
+        viewModel.emotions.observe(viewLifecycleOwner) {
+            binding.wordCloud.setDataSet(it)
+            binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
+            binding.wordCloud.notifyDataSetChanged()
+            Log.d(this.javaClass.simpleName, it.toString())
+        }
 
-        return binding.wordCloud
-    }
-
-    companion object {
-        const val ARG_OBJECT = "object"
+        Log.d(javaClass.simpleName, "onCreateView")
+        return binding.root
     }
 }
 
