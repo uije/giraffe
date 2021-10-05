@@ -15,6 +15,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.observe
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.data.EmotionInventory
@@ -58,6 +60,16 @@ class WordCloudFragment : Fragment() {
         binding.pager.adapter = adapter
         viewModel.load(viewLifecycleOwner)
 
+        TabLayoutMediator(
+            binding.tabLayout, binding.pager
+        ) { tab: TabLayout.Tab, position: Int ->
+            if (position == 0) {
+                tab.text = getString(R.string.emotion)
+            } else {
+                tab.text = getString(R.string.need)
+            }
+        }.attach()
+
         return binding.root
     }
 }
@@ -69,16 +81,18 @@ class WordCloudPagerAdapter(
     FragmentStateAdapter(fragmentManager, lifecycle) {
     @NonNull
     override fun createFragment(position: Int): Fragment {
-        return EmotionCloudFragment()
+        return if (position == 0) {
+            EmotionCloudFragment()
+        } else {
+            NeedCloudFragment()
+        }
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return 2
     }
 }
 
-// Instances of this class are fragments representing a single
-// object in our collection.
 class EmotionCloudFragment : Fragment() {
     private lateinit var binding: WordCloudViewBinding
 
@@ -94,6 +108,32 @@ class EmotionCloudFragment : Fragment() {
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
         viewModel.emotions.observe(viewLifecycleOwner) {
+            binding.wordCloud.setDataSet(it)
+            binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
+            binding.wordCloud.notifyDataSetChanged()
+            Log.d(this.javaClass.simpleName, it.toString())
+        }
+
+        Log.d(javaClass.simpleName, "onCreateView")
+        return binding.root
+    }
+}
+
+class NeedCloudFragment : Fragment() {
+    private lateinit var binding: WordCloudViewBinding
+
+    val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
+
+    @Nullable
+    override fun onCreateView(
+        @NonNull inflater: LayoutInflater, @Nullable container: ViewGroup?,
+        @Nullable savedInstanceState: Bundle?
+    ): View? {
+        binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_view, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
+
+        viewModel.needs.observe(viewLifecycleOwner) {
             binding.wordCloud.setDataSet(it)
             binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
             binding.wordCloud.notifyDataSetChanged()

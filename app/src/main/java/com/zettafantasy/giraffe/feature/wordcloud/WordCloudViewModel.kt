@@ -6,13 +6,8 @@ import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.feature.record.RecordWrapper
-import com.zettafantasy.giraffe.model.Emotion
 import net.alhazmy13.wordcloud.WordCloud
 import java.util.*
-import kotlin.collections.map
-import kotlin.collections.mutableMapOf
-import kotlin.collections.set
-import kotlin.collections.toList
 
 class WordCloudViewModel(
     private val repository: GiraffeRepository,
@@ -24,23 +19,24 @@ class WordCloudViewModel(
     val emotions: LiveData<List<WordCloud>>
         get() = _emotions
 
-    fun load(viewLifecycleOwner: LifecycleOwner) {
-        val emotionMap = mutableMapOf<Emotion, WordCloud>()
+    private val _needs = MutableLiveData<List<WordCloud>>()
+    val needs: LiveData<List<WordCloud>>
+        get() = _needs
 
+    fun load(viewLifecycleOwner: LifecycleOwner) {
         Transformations.map(repository.findRecordsSince(oneMonthAgo()).asLiveData()) { data ->
             data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
         }.observe(viewLifecycleOwner) { records ->
-            for (record in records) {
-                for (emotion in record.emotions) {
-                    if (emotionMap.containsKey(emotion)) {
-                        emotionMap[emotion]?.weight = emotionMap[emotion]!!.weight + 1
-                    } else {
-                        emotionMap[emotion!!] = WordCloud(emotion.getName(), 1)
-                    }
-                }
-            }
 
-            _emotions.value = emotionMap.values.toList()
+            _emotions.value =
+                records.map { it.emotions }.flatten().groupingBy { it }.eachCount().toList()
+                    .map { WordCloud(it.first?.getName(), it.second) }
+
+            _needs.value =
+                records.map { it.needs }.flatten().groupingBy { it }.eachCount().toList()
+                    .map { WordCloud(it.first?.getName(), it.second) }
+
+            //Log.d(javaClass.simpleName, _emotions.value.toString())
         }
     }
 
