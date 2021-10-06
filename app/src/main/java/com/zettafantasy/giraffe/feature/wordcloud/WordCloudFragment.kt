@@ -38,14 +38,7 @@ class WordCloudFragment : Fragment() {
             resources
         )
     }
-
-    private val adapter: WordCloudPagerAdapter by lazy {
-        WordCloudPagerAdapter(
-            fragmentManager = childFragmentManager,
-            lifecycle = lifecycle
-        )
-    }
-
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,10 +49,15 @@ class WordCloudFragment : Fragment() {
         needInventory = NeedInventory.getInstance(resources)
         binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.pager.adapter = WordCloudPagerAdapter(childFragmentManager, lifecycle)
+        initTabLayout()
 
-        binding.pager.adapter = adapter
         viewModel.load(viewLifecycleOwner)
 
+        return binding.root
+    }
+
+    private fun initTabLayout() {
         TabLayoutMediator(
             binding.tabLayout, binding.pager
         ) { tab: TabLayout.Tab, position: Int ->
@@ -69,8 +67,6 @@ class WordCloudFragment : Fragment() {
                 tab.text = getString(R.string.need)
             }
         }.attach()
-
-        return binding.root
     }
 }
 

@@ -10,7 +10,7 @@ var t = test.map(function(d) {  return {text: d.word, size: d.size, color: d.col
     var fill = d3.scale.category20();
     var layout = d3.layout.cloud()
         .size([parentWidth, parentHeight])
-       .words(t)
+        .words(t)
         .padding(5)
         .rotate(function() { return ~~(Math.random() * 2) * 90; })
         .font(userChosenFontFace)
