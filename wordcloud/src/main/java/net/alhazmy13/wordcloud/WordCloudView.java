@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.Subject;
+
 /**
  * The type Word cloud view.
  */
@@ -26,6 +29,7 @@ public class WordCloudView extends WebView {
     private int viewPortWidth;
     private int max;
     private int min;
+    Subject<Boolean> onMeasuredSubject = BehaviorSubject.create();
 
     /**
      * Instantiates a new Word cloud view.
@@ -93,7 +97,9 @@ public class WordCloudView extends WebView {
      */
     public void notifyDataSetChanged() {
         updateMaxMinValues();
-        init();
+        onMeasuredSubject
+                .firstOrError()
+                .subscribe(pair -> init());
     }
 
     /**
@@ -127,6 +133,7 @@ public class WordCloudView extends WebView {
         this.setMeasuredDimension(width, height);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         Log.d(this.getClass().getSimpleName(), String.format("onMeasure px(%s %s) vp(%s %s)", width, height, viewPortWidth, viewPortHeight));
+        onMeasuredSubject.onNext(true);
     }
 
 
