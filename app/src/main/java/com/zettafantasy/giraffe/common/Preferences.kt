@@ -8,6 +8,7 @@ object Preferences {
     private const val KEY_SHOWN_COACH_MARK_FIND_EMOTION = "shownCoachMarkFindEmotion"
     private const val KEY_SHOWN_RECORD_INTRO = "shownRecordIntro"
     private const val KEY_SHOWN_START_BTN = "shownStartBtn"
+    private const val KEY_LAST_USED_TIME = "lastUsedTime"
 
     private lateinit var preferences: SharedPreferences
 
@@ -31,6 +32,12 @@ object Preferences {
         get() = preferences.getBoolean(KEY_SHOWN_RECORD_INTRO, false)
         set(value) {
             preferences.edit().putBoolean(KEY_SHOWN_RECORD_INTRO, value).commit()
+        }
+
+    var lastUsedTime: Long
+        get() = preferences.getLong(KEY_LAST_USED_TIME, 0)
+        set(value) {
+            preferences.edit().putLong(KEY_LAST_USED_TIME, value).commit()
         }
 
     fun clear(): Boolean {
