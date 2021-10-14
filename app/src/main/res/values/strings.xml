@@ -39,4 +39,8 @@
     <string name="remind_alarm_title">오늘 하루 어땠어요?</string>
     <string name="remind_alarm_text">내 마음이 괜찮은지 확인해보세요!</string>
     <string name="delete"><![CDATA[삭제]]></string>
+    <string name="recent_year"><![CDATA[최근 1년]]></string>
+    <string name="recent_month"><![CDATA[최근 한달]]></string>
+    <string name="recent_week"><![CDATA[최근 7일]]></string>
+    <string name="recent_day"><![CDATA[최근 하루]]></string>
 </resources>

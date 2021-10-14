@@ -2,14 +2,15 @@ package com.zettafantasy.giraffe.feature.wordcloud
 
 import android.content.res.Resources
 import androidx.lifecycle.*
+import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.feature.record.RecordWrapper
 import net.alhazmy13.wordcloud.WordCloud
-import java.util.*
 
 class WordCloudViewModel(
+    private val viewLifecycleOwner: LifecycleOwner,
     private val repository: GiraffeRepository,
     private val emotionInventory: EmotionInventory,
     private val needInventory: NeedInventory
@@ -23,8 +24,10 @@ class WordCloudViewModel(
     val needs: LiveData<List<WordCloud>>
         get() = _needs
 
-    fun load(viewLifecycleOwner: LifecycleOwner) {
-        Transformations.map(repository.findRecordsSince(oneMonthAgo()).asLiveData()) { data ->
+    fun load() {
+        Transformations.map(
+            repository.findRecordsSince(Preferences.wordCloudPeriod.getTime()).asLiveData()
+        ) { data ->
             data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
         }.observe(viewLifecycleOwner) { records ->
 
@@ -39,16 +42,10 @@ class WordCloudViewModel(
             //Log.d(javaClass.simpleName, _emotions.value.toString())
         }
     }
-
-    private fun oneMonthAgo(): Long {
-        return Calendar.getInstance().run {
-            add(Calendar.MONTH, -1)
-            timeInMillis
-        }
-    }
 }
 
 class WordCloudViewModelFactory(
+    private val viewLifecycleOwner: LifecycleOwner,
     private val repository: GiraffeRepository,
     private val resources: Resources
 ) :
@@ -57,6 +54,7 @@ class WordCloudViewModelFactory(
         if (modelClass.isAssignableFrom(WordCloudViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return WordCloudViewModel(
+                viewLifecycleOwner,
                 repository,
                 EmotionInventory.getInstance(resources),
                 NeedInventory.getInstance(resources)

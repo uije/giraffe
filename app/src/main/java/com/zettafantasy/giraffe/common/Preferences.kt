@@ -3,12 +3,14 @@ package com.zettafantasy.giraffe.common
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.zettafantasy.giraffe.feature.wordcloud.WordCloudPeriod
 
 object Preferences {
     private const val KEY_SHOWN_COACH_MARK_FIND_EMOTION = "shownCoachMarkFindEmotion"
     private const val KEY_SHOWN_RECORD_INTRO = "shownRecordIntro"
     private const val KEY_SHOWN_START_BTN = "shownStartBtn"
     private const val KEY_LAST_USED_TIME = "lastUsedTime"
+    private const val KEY_WORD_CLOUD_PERIOD = "wordCloudPeriod"
 
     private lateinit var preferences: SharedPreferences
 
@@ -38,6 +40,15 @@ object Preferences {
         get() = preferences.getLong(KEY_LAST_USED_TIME, 0)
         set(value) {
             preferences.edit().putLong(KEY_LAST_USED_TIME, value).commit()
+        }
+
+    var wordCloudPeriod: WordCloudPeriod
+        get() = WordCloudPeriod.values()[preferences.getInt(
+            KEY_WORD_CLOUD_PERIOD,
+            WordCloudPeriod.RECENT_MONTH.ordinal
+        )]
+        set(value) {
+            preferences.edit().putInt(KEY_WORD_CLOUD_PERIOD, value.ordinal).commit()
         }
 
     fun clear(): Boolean {
