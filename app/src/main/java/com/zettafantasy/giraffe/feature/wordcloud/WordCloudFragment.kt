@@ -37,7 +37,6 @@ class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
     private lateinit var binding: WordCloudFragmentBinding
     private val viewModel: WordCloudViewModel by viewModels {
         WordCloudViewModelFactory(
-            viewLifecycleOwner,
             (requireActivity().application as GiraffeApplication).repository,
             resources
         )
@@ -87,7 +86,7 @@ class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
         )
 
         Preferences.wordCloudPeriod = WordCloudPeriod.values()[position]
-        viewModel.load()
+        viewModel.load(viewLifecycleOwner)
     }
 
     private fun initTabLayout() {

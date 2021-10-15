@@ -10,7 +10,6 @@ import com.zettafantasy.giraffe.feature.record.RecordWrapper
 import net.alhazmy13.wordcloud.WordCloud
 
 class WordCloudViewModel(
-    private val viewLifecycleOwner: LifecycleOwner,
     private val repository: GiraffeRepository,
     private val emotionInventory: EmotionInventory,
     private val needInventory: NeedInventory
@@ -24,7 +23,7 @@ class WordCloudViewModel(
     val needs: LiveData<List<WordCloud>>
         get() = _needs
 
-    fun load() {
+    fun load(viewLifecycleOwner: LifecycleOwner) {
         Transformations.map(
             repository.findRecordsSince(Preferences.wordCloudPeriod.getTime()).asLiveData()
         ) { data ->
@@ -45,7 +44,6 @@ class WordCloudViewModel(
 }
 
 class WordCloudViewModelFactory(
-    private val viewLifecycleOwner: LifecycleOwner,
     private val repository: GiraffeRepository,
     private val resources: Resources
 ) :
@@ -54,7 +52,6 @@ class WordCloudViewModelFactory(
         if (modelClass.isAssignableFrom(WordCloudViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return WordCloudViewModel(
-                viewLifecycleOwner,
                 repository,
                 EmotionInventory.getInstance(resources),
                 NeedInventory.getInstance(resources)

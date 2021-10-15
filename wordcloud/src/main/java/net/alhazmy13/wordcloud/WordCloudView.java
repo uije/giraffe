@@ -43,12 +43,11 @@ public class WordCloudView extends WebView {
         this.dataSet = new ArrayList<>();
         this.viewPortHeight = 300;
         this.viewPortWidth = 450;
-        this.max = 80;
-        this.min = 20;
+        this.max = 75;
+        this.min = 15;
         this.colors = new int[0];
         this.random = new Random();
         this.displayDensity = context.getResources().getDisplayMetrics().density;
-        //  init();
         setVerticalScrollBarEnabled(false);
         setHorizontalScrollBarEnabled(false);
     }
@@ -129,11 +128,14 @@ public class WordCloudView extends WebView {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        setSize(width, height);
         this.setMeasuredDimension(width, height);
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         Log.d(this.getClass().getSimpleName(), String.format("onMeasure px(%s %s) vp(%s %s)", width, height, viewPortWidth, viewPortHeight));
-        onMeasuredSubject.onNext(true);
+        //중간에 값이 0인 데이터가 들어와서 필터링
+        if (width != 0 && height != 0) {
+            setSize(width, height);
+            onMeasuredSubject.onNext(true);
+        }
     }
 
 
