@@ -14,6 +14,9 @@ interface RecordDao {
     @Query("SELECT * FROM record WHERE date >= :date")
     fun findRecordsSince(date: Long): Flow<List<Record>>
 
+    @Query("SELECT COUNT(id) FROM record")
+    fun getRowCount(): Flow<Int>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(record: Record)
 

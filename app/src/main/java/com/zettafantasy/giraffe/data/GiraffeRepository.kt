@@ -17,6 +17,8 @@ class GiraffeRepository(private val recordDao: RecordDao) {
         return recordDao.findRecordsSince(date)
     }
 
+    fun getRowCount() = recordDao.getRowCount()
+
     suspend fun deleteRecord(record: Record) {
         return recordDao.delete(record)
     }

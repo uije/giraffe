@@ -3,20 +3,26 @@ package com.zettafantasy.giraffe
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.rizafu.coachmark.CoachMark
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
 import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
 import com.zettafantasy.giraffe.feature.record.RecordsFragment
 
 class MainFragment : Fragment() {
-    private lateinit var binding: MainFragmentBinding
+    lateinit var binding: MainFragmentBinding
+    private val repository: GiraffeRepository by lazy {
+        (requireActivity().application as GiraffeApplication).repository
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +33,25 @@ class MainFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
 
+        initViewPager()
+        initFab()
+
+        repository.getRowCount().asLiveData().observe(viewLifecycleOwner) {
+            Log.d(this.javaClass.simpleName, "$it ${GiraffeConstant.INSIGHT_COUNT}")
+
+            binding.viewPager.currentItem =
+                if (it > GiraffeConstant.INSIGHT_COUNT) INSIGHT else RECORD
+        }
+
+        return binding.root
+    }
+
+    private fun initViewPager() {
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    0 -> RecordsFragment()
+                    RECORD -> RecordsFragment()
+                    INSIGHT -> WordCloudFragment()
                     else -> WordCloudFragment()
                 }
             }
@@ -51,15 +72,11 @@ class MainFragment : Fragment() {
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 // itemId에 따라 viewPager 바뀜
-                R.id.menu_record -> binding.viewPager.currentItem = 0
-                R.id.menu_insight -> binding.viewPager.currentItem = 1
+                R.id.menu_record -> binding.viewPager.currentItem = RECORD
+                R.id.menu_insight -> binding.viewPager.currentItem = INSIGHT
             }
             true
         }
-
-        initFab()
-
-        return binding.root
     }
 
     private fun initFab() {
@@ -111,5 +128,10 @@ class MainFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    companion object {
+        const val RECORD = 0
+        const val INSIGHT = 1
     }
 }
