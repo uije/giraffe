@@ -5,8 +5,10 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.*
+import androidx.core.view.doOnAttach
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -32,21 +34,26 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
-
         initViewPager()
         initFab()
 
-        repository.getRowCount().asLiveData().observe(viewLifecycleOwner) {
-            Log.d(this.javaClass.simpleName, "$it ${GiraffeConstant.INSIGHT_COUNT}")
-
-            binding.viewPager.currentItem =
-                if (it > GiraffeConstant.INSIGHT_COUNT) INSIGHT else RECORD
-        }
+        Transformations.map(
+            repository.getRowCount().asLiveData()
+        ) { if (it > GiraffeConstant.INSIGHT_COUNT) INSIGHT else RECORD }
+            .observe(viewLifecycleOwner) {
+                Log.d(this.javaClass.simpleName, "$it ${GiraffeConstant.INSIGHT_COUNT}")
+                binding.viewPager.currentItem = it
+                Preferences.lastScreen = it
+            }
 
         return binding.root
     }
 
     private fun initViewPager() {
+        binding.viewPager.doOnAttach {
+            binding.viewPager.setCurrentItem(Preferences.lastScreen, false)
+        }
+
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
