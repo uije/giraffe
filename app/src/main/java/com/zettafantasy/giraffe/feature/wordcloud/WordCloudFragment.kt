@@ -133,6 +133,7 @@ class EmotionCloudFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_view, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
         viewModel.emotions.observe(viewLifecycleOwner) {
@@ -159,6 +160,7 @@ class NeedCloudFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_view, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
         viewModel.needs.observe(viewLifecycleOwner) {
