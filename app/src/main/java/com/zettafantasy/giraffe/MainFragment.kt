@@ -14,6 +14,8 @@ import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.rizafu.coachmark.CoachMark
+import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_INSIGHT
+import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_RECORD
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
@@ -25,6 +27,7 @@ class MainFragment : Fragment() {
     private val repository: GiraffeRepository by lazy {
         (requireActivity().application as GiraffeApplication).repository
     }
+    var currentScreen: Int = Preferences.defaultScreen
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,29 +39,29 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
         initViewPager()
         initFab()
-
-        Transformations.map(
-            repository.getRowCount().asLiveData()
-        ) { if (it > GiraffeConstant.INSIGHT_COUNT) INSIGHT else RECORD }
-            .observe(viewLifecycleOwner) {
-                Log.d(this.javaClass.simpleName, "$it ${GiraffeConstant.INSIGHT_COUNT}")
-                binding.viewPager.currentItem = it
-                Preferences.lastScreen = it
-            }
-
         return binding.root
     }
 
     private fun initViewPager() {
         binding.viewPager.doOnAttach {
-            binding.viewPager.setCurrentItem(Preferences.lastScreen, false)
+            binding.viewPager.setCurrentItem(currentScreen, false)
+            binding.bottomNavigation.menu.getItem(currentScreen).isChecked = true
+
+            binding.viewPager.registerOnPageChangeCallback(object :
+                ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    // 네비게이션 메뉴 아이템 체크상태
+                    binding.bottomNavigation.menu.getItem(position).isChecked = true
+                    currentScreen = position
+                }
+            })
         }
 
         binding.viewPager.adapter = object : FragmentStateAdapter(this) {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
-                    RECORD -> RecordsFragment()
-                    INSIGHT -> WordCloudFragment()
+                    SCREEN_RECORD -> RecordsFragment()
+                    SCREEN_INSIGHT -> WordCloudFragment()
                     else -> WordCloudFragment()
                 }
             }
@@ -69,18 +72,11 @@ class MainFragment : Fragment() {
         }
         binding.viewPager.offscreenPageLimit = 1 //미리 로딩
 
-        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                // 네비게이션 메뉴 아이템 체크상태
-                binding.bottomNavigation.menu.getItem(position).isChecked = true
-            }
-        })
-
         binding.bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 // itemId에 따라 viewPager 바뀜
-                R.id.menu_record -> binding.viewPager.currentItem = RECORD
-                R.id.menu_insight -> binding.viewPager.currentItem = INSIGHT
+                R.id.menu_record -> binding.viewPager.currentItem = SCREEN_RECORD
+                R.id.menu_insight -> binding.viewPager.currentItem = SCREEN_INSIGHT
             }
             true
         }
@@ -135,10 +131,5 @@ class MainFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    companion object {
-        const val RECORD = 0
-        const val INSIGHT = 1
     }
 }
