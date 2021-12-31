@@ -7,10 +7,10 @@ import com.zettafantasy.giraffe.model.Emotion
 import com.zettafantasy.giraffe.model.Need
 import java.util.*
 
-class RecordWrapper(
+data class RecordWrapper(
     val record: Record,
-    emotionInventory: EmotionInventory,
-    needInventory: NeedInventory
+    val emotionInventory: EmotionInventory,
+    val needInventory: NeedInventory
 ) {
     val emotions: List<Emotion?> = emotionInventory.getListByIds(record.emotionIds)
     val needs: List<Need?> = needInventory.getListByIds(record.needIds)

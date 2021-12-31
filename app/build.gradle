@@ -67,6 +67,7 @@ dependencies {
     }
     implementation project(path: ':coachmark')
     implementation project(path: ':wordcloud')
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.0'
     //implementation 'net.alhazmy13.wordcloud:library:0.2.0-beta'
 
     def room_version = "2.2.5"

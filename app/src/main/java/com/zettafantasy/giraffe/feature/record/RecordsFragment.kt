@@ -12,7 +12,6 @@ import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.MainFragmentDirections
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.databinding.RecordsFragmentBinding
 
@@ -43,7 +42,7 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
     }
 
     private fun initRecordRv(binding: RecordsFragmentBinding) {
-        adapter = RecordAdapter(AppExecutors, viewModel, R.layout.record_view) { record ->
+        adapter = RecordAdapter(viewModel) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
                 .navigate(MainFragmentDirections.actionViewRecord(record.record))
