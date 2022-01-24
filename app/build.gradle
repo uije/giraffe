@@ -7,13 +7,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "30.0.0"
+    compileSdkVersion 31
 
     defaultConfig {
         applicationId "com.zettafantasy.giraffe"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -70,9 +69,10 @@ dependencies {
     implementation 'androidx.paging:paging-runtime-ktx:3.1.0'
     //implementation 'net.alhazmy13.wordcloud:library:0.2.0-beta'
 
-    def room_version = "2.2.5"
+    def room_version = "2.4.0"
     implementation "androidx.room:room-runtime:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-paging:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     androidTestImplementation "androidx.room:room-testing:$room_version"
 

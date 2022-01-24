@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +14,8 @@ import com.zettafantasy.giraffe.MainFragmentDirections
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.databinding.RecordsFragmentBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
@@ -33,9 +35,11 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
 
         initRecordRv(binding)
 
-        viewModel.allRecords.observe(viewLifecycleOwner) { records ->
-            Log.d(javaClass.simpleName, "records updated")
-            adapter.submitList(records)
+        lifecycleScope.launch {
+            viewModel.allRecords.collectLatest {
+                Log.d(javaClass.simpleName, "records updated")
+                adapter.submitData(it)
+            }
         }
 
         return binding

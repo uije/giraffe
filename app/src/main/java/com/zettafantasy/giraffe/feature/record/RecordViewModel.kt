@@ -1,22 +1,36 @@
 package com.zettafantasy.giraffe.feature.record
 
 import android.content.res.Resources
-import android.util.Log
 import androidx.lifecycle.*
+import androidx.paging.*
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class RecordViewModel(
-    val repository: GiraffeRepository,
+    private val repository: GiraffeRepository,
     emotionInventory: EmotionInventory,
     needInventory: NeedInventory
 ) : ViewModel() {
 
-    val allRecords: LiveData<List<RecordWrapper>> =
-        Transformations.map(repository.allRecords.asLiveData()) { data ->
-            data.map { RecordWrapper(it, emotionInventory, needInventory) }.toList()
-        }
+    val allRecords: Flow<PagingData<RecordWrapper>> = Pager(
+        config = PagingConfig(
+            pageSize = 30,
+            enablePlaceholders = true,
+            maxSize = 200
+        )
+    ) { repository.allRecords }.flow
+        .map { pagingData ->
+            pagingData.map { record ->
+                RecordWrapper(
+                    record,
+                    emotionInventory,
+                    needInventory
+                )
+            }
+        }.cachedIn(viewModelScope)
 }
 
 class RecordViewModelFactory(

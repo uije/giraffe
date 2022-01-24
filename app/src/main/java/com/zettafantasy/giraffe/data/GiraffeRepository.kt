@@ -1,13 +1,14 @@
 package com.zettafantasy.giraffe.data
 
 import androidx.annotation.WorkerThread
+import androidx.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
 
 class GiraffeRepository(private val recordDao: RecordDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    val allRecords: Flow<List<Record>> = recordDao.getRecords()
+    val allRecords: PagingSource<Int, Record> = recordDao.getRecords()
 
     fun findRecord(id: Long): Flow<Record> {
         return recordDao.findRecord(id)
