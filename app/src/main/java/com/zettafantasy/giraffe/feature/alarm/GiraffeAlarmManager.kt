@@ -18,7 +18,12 @@ object GiraffeAlarmManager {
     fun init(context: Context) {
         alarmManager = ContextCompat.getSystemService(context, AlarmManager::class.java)
         alarmIntent = Intent(context, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            )
         }
 
         val calendar = Calendar.getInstance().apply {

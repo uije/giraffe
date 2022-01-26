@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Giraffe">
-        <activity android:name="com.zettafantasy.giraffe.MainActivity">
+        <activity android:name="com.zettafantasy.giraffe.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +21,8 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".feature.alarm.AlarmReceiver">
+        <receiver android:name=".feature.alarm.AlarmReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
