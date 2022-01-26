@@ -43,7 +43,7 @@ public class WordCloudView extends WebView {
         this.dataSet = new ArrayList<>();
         this.viewPortHeight = 300;
         this.viewPortWidth = 450;
-        this.max = 75;
+        this.max = 70;
         this.min = 15;
         this.colors = new int[0];
         this.random = new Random();
