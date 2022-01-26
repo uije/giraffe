@@ -2,10 +2,13 @@ package com.zettafantasy.giraffe.feature.record
 
 import android.util.Log
 import android.view.*
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
@@ -52,6 +55,16 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
                 .navigate(MainFragmentDirections.actionViewRecord(record.record))
         }
 
+        adapter.addLoadStateListener { loadState ->
+            if (isDataEmpty(loadState)) {
+                binding.recordRv?.isVisible = false
+                binding.emptyView?.isVisible = true
+            } else {
+                binding.recordRv?.isVisible = true
+                binding.emptyView?.isVisible = false
+            }
+        }
+
         binding.recordRv.adapter = adapter
         binding.recordRv.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
@@ -60,4 +73,7 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
             LayoutMarginDecoration(resources.getDimensionPixelSize(R.dimen.record_margin))
         )
     }
+
+    private fun isDataEmpty(loadState: CombinedLoadStates) =
+        loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1
 }
