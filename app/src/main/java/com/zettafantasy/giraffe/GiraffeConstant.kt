@@ -8,4 +8,6 @@ object GiraffeConstant {
     const val ALARM_NOT_USED_HOURS = 24
     const val SCREEN_RECORD = 0
     const val SCREEN_INSIGHT = 1
+
+    const val EXTRA_KEY_SCREEN_DESTINATION = "screen_destination"
 }

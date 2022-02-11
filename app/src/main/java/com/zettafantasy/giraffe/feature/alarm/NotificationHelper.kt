@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.MainActivity
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.DestinationScreen
 
 object NotificationHelper {
 
@@ -20,6 +21,7 @@ object NotificationHelper {
         // Create an explicit intent for an Activity in your app
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            putExtra(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION, DestinationScreen.RECORD)
         }
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)

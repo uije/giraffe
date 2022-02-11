@@ -3,31 +3,34 @@ package com.zettafantasy.giraffe
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.*
 import androidx.core.view.doOnAttach
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.asLiveData
 import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.rizafu.coachmark.CoachMark
 import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_INSIGHT
 import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_RECORD
+import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
-import com.zettafantasy.giraffe.data.GiraffeRepository
+import com.zettafantasy.giraffe.common.navigate
+import com.zettafantasy.giraffe.common.navigateRecord
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
-import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
 import com.zettafantasy.giraffe.feature.record.RecordsFragment
+import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
 
 class MainFragment : Fragment() {
     lateinit var binding: MainFragmentBinding
-    private val repository: GiraffeRepository by lazy {
-        (requireActivity().application as GiraffeApplication).repository
-    }
     var currentScreen: Int = Preferences.defaultScreen
+    private val navController by lazy {
+        Navigation.findNavController(binding.root)
+    }
+    private val destinationScreen: DestinationScreen? by lazy {
+        arguments?.getSerializable(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION) as DestinationScreen?
+    }
+    private var destinationNavigated = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +43,14 @@ class MainFragment : Fragment() {
         initViewPager()
         initFab()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        if (!destinationNavigated) {
+            destinationScreen?.navigate(navController)
+            destinationNavigated = true
+        }
     }
 
     private fun initViewPager() {
@@ -84,13 +95,7 @@ class MainFragment : Fragment() {
 
     private fun initFab() {
         binding.fab.setOnClickListener {
-            if (Preferences.shownRecordIntro) {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoGoodOrBad())
-            } else {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoIntroDesc())
-            }
+            navController.navigateRecord()
         }
 
         if (!Preferences.shownCoachMarkStartBtn) {
@@ -125,8 +130,7 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.menu_setting -> {
-                Navigation.findNavController(binding.root)
-                    .navigate(MainFragmentDirections.actionGoSetting())
+                navController.navigate(MainFragmentDirections.actionGoSetting())
                 super.onOptionsItemSelected(item)
             }
             else -> super.onOptionsItemSelected(item)

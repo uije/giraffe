@@ -1,5 +1,6 @@
 package com.zettafantasy.giraffe
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -7,7 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.common.navigate
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -17,7 +20,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_activity)
 
         navController = findNavController(R.id.my_nav_host_fragment)
+        navController.setGraph(R.navigation.navigation, getStartDestinationArgs())
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+    }
+
+    private fun getStartDestinationArgs(): Bundle? {
+        return Bundle().apply {
+            putSerializable(
+                GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION,
+                getDestinationScreen(intent)
+            )
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -29,4 +42,12 @@ class MainActivity : AppCompatActivity() {
         super.onPause()
         Preferences.lastUsedTime = System.currentTimeMillis()
     }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        getDestinationScreen(intent)?.navigate(navController)
+    }
+
+    private fun getDestinationScreen(intent: Intent?) =
+        intent?.extras?.getSerializable(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION) as DestinationScreen?
 }
