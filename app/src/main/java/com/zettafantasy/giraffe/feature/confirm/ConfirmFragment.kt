@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
@@ -41,7 +42,7 @@ class ConfirmFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.confirm_fragment, container, false)
 
         binding.btnSave.setOnClickListener {
-            save { navigateRecordScreen(binding.root) }
+            save { navigateNextScreen(binding.root) }
         }
 
         emotionInventory = EmotionInventory.getInstance(resources)
@@ -76,8 +77,13 @@ class ConfirmFragment : Fragment() {
         }
     }
 
-    private fun navigateRecordScreen(view: View) {
-        Navigation.findNavController(view)
-            .navigate(R.id.action_confirm_to_record)
+    private fun navigateNextScreen(view: View) {
+        if (Preferences.shownCelebrateScreen) {
+            Navigation.findNavController(view)
+                .navigate(ConfirmFragmentDirections.actionConfirmToRecord())
+        } else {
+            Navigation.findNavController(view)
+                .navigate(ConfirmFragmentDirections.actionConfirmToCelebrate())
+        }
     }
 }

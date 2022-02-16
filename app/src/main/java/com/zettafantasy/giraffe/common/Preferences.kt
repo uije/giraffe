@@ -12,6 +12,7 @@ object Preferences {
     private const val KEY_LAST_USED_TIME = "lastUsedTime"
     private const val KEY_WORD_CLOUD_PERIOD = "wordCloudPeriod"
     private const val KEY_DEFAULT_SCREEN = "defaultScreen"
+    private const val KEY_SHOWN_CELEBRATE_SCREEN = "shownCelebrateScreen"
 
     private lateinit var preferences: SharedPreferences
 
@@ -56,6 +57,12 @@ object Preferences {
         get() = preferences.getInt(KEY_DEFAULT_SCREEN, 0)
         set(value) {
             preferences.edit().putInt(KEY_DEFAULT_SCREEN, value).commit()
+        }
+
+    var shownCelebrateScreen: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_CELEBRATE_SCREEN, false)
+        set(value) {
+            preferences.edit().putBoolean(KEY_SHOWN_CELEBRATE_SCREEN, value).commit()
         }
 
     fun clear(): Boolean {
