@@ -19,7 +19,7 @@ interface RecordDao {
     fun getRowCount(): Flow<Int>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(record: Record)
+    suspend fun insert(record: Record) : Long
 
     @Query("DELETE FROM record")
     suspend fun deleteAll()

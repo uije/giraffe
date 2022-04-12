@@ -40,12 +40,12 @@ class RecordDaoTest {
     @Throws(Exception::class)
     fun insertAndGetRecord() = runBlocking {
         val record1 = Record(listOf(0, 1), listOf(1, 2), "stimulus")
-        recordDao.insert(record1)
-        val record2 = recordDao.getRecords().first()
-        assertNotNull(record2[0].id)
-        assertEquals(record1.needIds, record2[0].needIds)
-        assertEquals(record1.emotionIds, record2[0].emotionIds)
-        assertEquals(record1.date, record2[0].date)
-        assertEquals(record1.stimulus, record2[0].stimulus)
+        val id = recordDao.insert(record1)
+        val record2 = recordDao.findRecord(id).first()
+        assertNotNull(record2.id)
+        assertEquals(record1.needIds, record2.needIds)
+        assertEquals(record1.emotionIds, record2.emotionIds)
+        assertEquals(record1.date, record2.date)
+        assertEquals(record1.stimulus, record2.stimulus)
     }
 }
