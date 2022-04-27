@@ -281,5 +281,23 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@id/main" />
+
+        <action
+            android:id="@+id/action_confirm_to_celebrate"
+            app:destination="@id/celebrate"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/main" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/celebrate"
+        android:name="com.zettafantasy.giraffe.feature.CelebrateFragment"
+        android:label=""
+        tools:layout="@layout/celebrate_fragment">
+        <action
+            android:id="@+id/action_celebrate_to_record"
+            app:destination="@id/main"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/main" />
     </fragment>
 </navigation>
