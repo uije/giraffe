@@ -37,10 +37,12 @@ class WordCloudViewModel(
 
             _emotions.value =
                 records.map { it.emotions }.flatten().groupingBy { it }.eachCount().toList()
+                    .sortedByDescending { it.second }
                     .map { WordCloud(it.first?.getName(), it.second) }
 
             _needs.value =
                 records.map { it.needs }.flatten().groupingBy { it }.eachCount().toList()
+                    .sortedByDescending { it.second }
                     .map { WordCloud(it.first?.getName(), it.second) }
 
             _isLoading.value = false

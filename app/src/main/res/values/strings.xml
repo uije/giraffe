@@ -36,8 +36,12 @@
     <string name="desc_empty_record"><![CDATA[저장된 기록이 없네요...]]></string>
     <string name="notification_channel_remind_alarm_name">꾸준히 사용 알림</string>
     <string name="notification_channel_remind_alarm_desc">주기적으로 마음을 확인할 수 있도록 알려준다.</string>
-    <string name="remind_alarm_title">오늘 하루 어땠어요?</string>
-    <string name="remind_alarm_text">내 마음이 괜찮은지 확인해보세요!</string>
+    <string name="remind_noti_default_title">오늘 하루 어땠어요?</string>
+    <string name="remind_noti_default_text">내 마음이 괜찮은지 확인해보세요!</string>
+    <string name="remind_noti_emotion_title">익숙한 감정 → %1$s</string>
+    <string name="remind_noti_emotion_text">나의 최근 감정들을 확인해 보세요!</string>
+    <string name="remind_noti_need_title">익숙한 필요 → %1$s</string>
+    <string name="remind_noti_need_text">나의 최근 필요들을 확인해 보세요!</string>
     <string name="delete"><![CDATA[삭제]]></string>
     <string name="recent_year"><![CDATA[최근 1년]]></string>
     <string name="recent_3month"><![CDATA[최근 3개월]]></string>

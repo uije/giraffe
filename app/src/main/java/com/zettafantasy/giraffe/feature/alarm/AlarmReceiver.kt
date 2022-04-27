@@ -6,6 +6,7 @@ import android.content.Intent
 import android.util.Log
 import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.feature.remind.NotificationHelper
 import java.util.concurrent.TimeUnit
 
 class AlarmReceiver : BroadcastReceiver() {

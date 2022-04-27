@@ -6,7 +6,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.Preferences
-import com.zettafantasy.giraffe.feature.alarm.NotificationHelper
+import com.zettafantasy.giraffe.feature.remind.NotificationHelper
 
 class SettingFragment : PreferenceFragmentCompat() {
 

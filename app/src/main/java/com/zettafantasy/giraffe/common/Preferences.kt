@@ -3,6 +3,7 @@ package com.zettafantasy.giraffe.common
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import com.zettafantasy.giraffe.feature.remind.RemindNotificationType
 import com.zettafantasy.giraffe.feature.wordcloud.WordCloudPeriod
 
 object Preferences {
@@ -12,6 +13,7 @@ object Preferences {
     private const val KEY_LAST_USED_TIME = "lastUsedTime"
     private const val KEY_WORD_CLOUD_PERIOD = "wordCloudPeriod"
     private const val KEY_DEFAULT_SCREEN = "defaultScreen"
+    private const val KEY_LAST_REMIND_TYPE = "lastRemindType"
 
     private lateinit var preferences: SharedPreferences
 
@@ -56,6 +58,15 @@ object Preferences {
         get() = preferences.getInt(KEY_DEFAULT_SCREEN, 0)
         set(value) {
             preferences.edit().putInt(KEY_DEFAULT_SCREEN, value).commit()
+        }
+
+    var lastRemindType: RemindNotificationType
+        get() = RemindNotificationType.values()[preferences.getInt(
+            KEY_LAST_REMIND_TYPE,
+            RemindNotificationType.DEFAULT.ordinal
+        )]
+        set(value) {
+            preferences.edit().putInt(KEY_LAST_REMIND_TYPE, value.ordinal).commit()
         }
 
     fun clear(): Boolean {

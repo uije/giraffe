@@ -3,7 +3,9 @@ package com.zettafantasy.giraffe.common
 import androidx.navigation.NavController
 
 enum class DestinationScreen {
-    RECORD
+    RECORD,
+    INSIGHT_EMOTION,
+    INSIGHT_NEED
 }
 
 fun DestinationScreen?.navigate(navController: NavController) {

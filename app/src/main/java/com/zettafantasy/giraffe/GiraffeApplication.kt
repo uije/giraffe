@@ -7,7 +7,7 @@ import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.GiraffeRoomDatabase
 import com.zettafantasy.giraffe.feature.alarm.GiraffeAlarmManager
-import com.zettafantasy.giraffe.feature.alarm.NotificationHelper
+import com.zettafantasy.giraffe.feature.remind.NotificationHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -20,7 +20,7 @@ class GiraffeApplication : Application() {
 
     // Using by lazy so the database and the repository are only created when they're needed
     // rather than when the application starts
-    val database by lazy { GiraffeRoomDatabase.getDatabase(this, applicationScope) }
+    private val database by lazy { GiraffeRoomDatabase.getDatabase(this, applicationScope) }
     val repository by lazy { GiraffeRepository(database.recordDao()) }
 
     override fun onCreate() {

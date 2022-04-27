@@ -1,5 +1,6 @@
-package com.zettafantasy.giraffe.feature.alarm
+package com.zettafantasy.giraffe.feature.remind
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -10,14 +11,41 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.MainActivity
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.DestinationScreen
+import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.data.Record
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 
 object NotificationHelper {
 
     fun notifyRemindAlarm(context: Context) {
+        val repository = (context.applicationContext as GiraffeApplication).repository
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val records =
+                repository.findRecordsSince(Preferences.wordCloudPeriod.getTime()).firstOrNull()
+            val remindNotificationType = getRemindNotificationType(records)
+            val notification = createNotification(
+                context,
+                title = remindNotificationType.getDecoratedTitle(context, records),
+                text = context.resources.getString(remindNotificationType.text)
+            )
+            with(NotificationManagerCompat.from(context)) {
+                // notificationId is a unique int for each notification that you must define
+                notify(0, notification)
+            }
+            Preferences.lastRemindType = remindNotificationType
+        }
+    }
+
+    private fun createNotification(context: Context, title: String, text: String): Notification {
         // Create an explicit intent for an Activity in your app
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -26,24 +54,32 @@ object NotificationHelper {
         val pendingIntent: PendingIntent =
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        var builder = NotificationCompat.Builder(
+        return NotificationCompat.Builder(
             context,
             GiraffeConstant.NOTIFICATION_CHANNEL_ID_REMIND_ALARM
         )
             .setSmallIcon(R.drawable.ic_self_improvement_24dp)
             .setColor(ContextCompat.getColor(context, R.color.accent))
-            .setContentTitle(context.getString(R.string.remind_alarm_title))
-            .setContentText(context.getString(R.string.remind_alarm_text))
+            .setContentTitle(title)
+            .setContentText(text)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC) //lock screen 노출
+            .build()
+    }
 
-        with(NotificationManagerCompat.from(context)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(0, builder.build())
+    private fun getRemindNotificationType(records: List<Record>?): RemindNotificationType {
+        if (records.isNullOrEmpty() || Preferences.defaultScreen == GiraffeConstant.SCREEN_RECORD) {
+            return RemindNotificationType.DEFAULT
+        }
+
+        return when (Preferences.lastRemindType) {
+            RemindNotificationType.DEFAULT -> RemindNotificationType.EMOTION
+            RemindNotificationType.EMOTION -> RemindNotificationType.NEED
+            RemindNotificationType.NEED -> RemindNotificationType.DEFAULT
         }
     }
 
