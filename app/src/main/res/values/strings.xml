@@ -40,8 +40,8 @@
     <string name="remind_noti_default_text">내 마음이 괜찮은지 확인해보세요!</string>
     <string name="remind_noti_emotion_title">익숙한 감정 → %1$s</string>
     <string name="remind_noti_emotion_text">나의 최근 감정들을 확인해 보세요!</string>
-    <string name="remind_noti_need_title">익숙한 필요 → %1$s</string>
-    <string name="remind_noti_need_text">나의 최근 필요들을 확인해 보세요!</string>
+    <string name="remind_noti_need_title">익숙한 욕구 → %1$s</string>
+    <string name="remind_noti_need_text">나의 최근 욕구들을 확인해 보세요!</string>
     <string name="delete"><![CDATA[삭제]]></string>
     <string name="recent_year"><![CDATA[최근 1년]]></string>
     <string name="recent_3month"><![CDATA[최근 3개월]]></string>
