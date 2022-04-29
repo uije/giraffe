@@ -72,8 +72,8 @@ class MainFragment : Fragment() {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     SCREEN_RECORD -> RecordsFragment()
-                    SCREEN_INSIGHT -> WordCloudFragment()
-                    else -> WordCloudFragment()
+                    SCREEN_INSIGHT -> WordCloudFragment(destinationScreen)
+                    else -> WordCloudFragment(destinationScreen)
                 }
             }
 

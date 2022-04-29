@@ -35,7 +35,8 @@ object NotificationHelper {
             val notification = createNotification(
                 context,
                 title = remindNotificationType.getDecoratedTitle(context, records),
-                text = context.resources.getString(remindNotificationType.text)
+                text = context.resources.getString(remindNotificationType.text),
+                destinationScreen = remindNotificationType.dest
             )
             with(NotificationManagerCompat.from(context)) {
                 // notificationId is a unique int for each notification that you must define
@@ -45,14 +46,24 @@ object NotificationHelper {
         }
     }
 
-    private fun createNotification(context: Context, title: String, text: String): Notification {
+    private fun createNotification(
+        context: Context,
+        title: String,
+        text: String,
+        destinationScreen: DestinationScreen
+    ): Notification {
         // Create an explicit intent for an Activity in your app
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            putExtra(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION, DestinationScreen.RECORD)
+            putExtra(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION, destinationScreen)
         }
         val pendingIntent: PendingIntent =
-            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getActivity(
+                context,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
 
         return NotificationCompat.Builder(
             context,

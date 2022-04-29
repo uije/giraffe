@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
@@ -30,7 +31,14 @@ import com.zettafantasy.giraffe.databinding.WordCloudViewBinding
 import net.alhazmy13.wordcloud.ColorTemplate
 
 
-class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
+class WordCloudFragment(private val initialPosition: Int = 0) : Fragment(), AdapterView.OnItemSelectedListener {
+    constructor(destinationScreen: DestinationScreen?) : this(
+        when (destinationScreen) {
+            DestinationScreen.INSIGHT_NEED -> 1
+            else -> 0
+        }
+    )
+
     private lateinit var needInventory: NeedInventory
     private lateinit var emotionInventory: EmotionInventory
     private lateinit var repository: GiraffeRepository
@@ -56,6 +64,9 @@ class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
         initTabLayout()
         initSpinner()
         Log.d(javaClass.simpleName, viewModel.toString()) //lazy loading
+        binding.pager.post {
+            binding.pager.setCurrentItem(initialPosition, true)
+        }
 
         return binding.root
     }
