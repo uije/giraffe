@@ -4,6 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/menu_share"
+        android:icon="@drawable/ic_share_black_24"
+        android:title="@string/share"
+        app:iconTint="?colorOnBackground"
+        app:showAsAction="always"
+        tools:visible="true" />
+
+    <item
         android:id="@+id/menu_setting"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/setting"

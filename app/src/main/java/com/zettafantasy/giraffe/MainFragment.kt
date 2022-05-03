@@ -64,6 +64,7 @@ class MainFragment : Fragment() {
                     // 네비게이션 메뉴 아이템 체크상태
                     binding.bottomNavigation.menu.getItem(position).isChecked = true
                     currentScreen = position
+                    activity?.invalidateOptionsMenu()
                 }
             })
         }
@@ -125,15 +126,21 @@ class MainFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.records, menu)
+
+        val shareItem = menu.findItem(R.id.menu_share)
+        shareItem.isVisible = binding.viewPager.currentItem == SCREEN_INSIGHT
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+        when (item.itemId) {
             R.id.menu_setting -> {
                 navController.navigate(MainFragmentDirections.actionGoSetting())
-                super.onOptionsItemSelected(item)
             }
-            else -> super.onOptionsItemSelected(item)
+            R.id.menu_share -> {
+                //todo
+            }
         }
+
+        return super.onOptionsItemSelected(item)
     }
 }

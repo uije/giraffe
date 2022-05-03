@@ -31,6 +31,7 @@
     <string name="reduce_need_intro_desc1"><![CDATA[다양한 욕구를 고르셨네요.]]></string>
     <string name="reduce_need_intro_desc2"><![CDATA[그중에 좀더 와닿는 욕구를<br>최대 <font color="#%1$s">%2$s개</font>까지 골라주세요.]]></string>
     <string name="setting"><![CDATA[설정]]></string>
+    <string name="share"><![CDATA[공유하기]]></string>
     <string name="fail"><![CDATA[실패]]></string>
     <string name="tooltip_start_btn"><![CDATA[내 감정과 욕구를 찾아보세요.]]></string>
     <string name="desc_empty_record"><![CDATA[저장된 기록이 없네요...]]></string>
