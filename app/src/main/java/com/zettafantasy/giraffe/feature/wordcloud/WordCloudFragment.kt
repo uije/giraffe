@@ -10,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
+import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -25,6 +26,7 @@ import com.zettafantasy.giraffe.MainViewModel
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.common.save
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
@@ -204,6 +206,7 @@ class NeedCloudFragment : Fragment() {
 
         model.shareNeedEvent.observe(viewLifecycleOwner) {
             Log.d(javaClass.simpleName, "onShareClicked")
+            context?.let { c -> binding.wordCloud.drawToBitmap().save(c) }
         }
 
         Log.d(javaClass.simpleName, "onCreateView")
