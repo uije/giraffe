@@ -7,6 +7,7 @@ import android.view.*
 import androidx.core.view.doOnAttach
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -31,6 +32,7 @@ class MainFragment : Fragment() {
         arguments?.getSerializable(GiraffeConstant.EXTRA_KEY_SCREEN_DESTINATION) as DestinationScreen?
     }
     private var destinationNavigated = false
+    private val model: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,8 +75,8 @@ class MainFragment : Fragment() {
             override fun createFragment(position: Int): Fragment {
                 return when (position) {
                     SCREEN_RECORD -> RecordsFragment()
-                    SCREEN_INSIGHT -> WordCloudFragment(destinationScreen)
-                    else -> WordCloudFragment(destinationScreen)
+                    SCREEN_INSIGHT -> WordCloudFragment()
+                    else -> WordCloudFragment()
                 }
             }
 
@@ -133,12 +135,8 @@ class MainFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_setting -> {
-                navController.navigate(MainFragmentDirections.actionGoSetting())
-            }
-            R.id.menu_share -> {
-                //todo
-            }
+            R.id.menu_setting -> navController.navigate(MainFragmentDirections.actionGoSetting())
+            R.id.menu_share -> model.callShareClickEvent()
         }
 
         return super.onOptionsItemSelected(item)

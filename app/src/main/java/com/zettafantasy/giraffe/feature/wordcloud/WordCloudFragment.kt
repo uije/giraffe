@@ -13,6 +13,7 @@ import androidx.annotation.Nullable
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.observe
@@ -20,6 +21,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.zettafantasy.giraffe.GiraffeApplication
+import com.zettafantasy.giraffe.MainViewModel
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
@@ -30,14 +32,7 @@ import com.zettafantasy.giraffe.databinding.WordCloudFragmentBinding
 import com.zettafantasy.giraffe.databinding.WordCloudViewBinding
 import net.alhazmy13.wordcloud.ColorTemplate
 
-
-class WordCloudFragment(private val initialPosition: Int = 0) : Fragment(), AdapterView.OnItemSelectedListener {
-    constructor(destinationScreen: DestinationScreen?) : this(
-        when (destinationScreen) {
-            DestinationScreen.INSIGHT_NEED -> 1
-            else -> 0
-        }
-    )
+class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var needInventory: NeedInventory
     private lateinit var emotionInventory: EmotionInventory
@@ -49,6 +44,8 @@ class WordCloudFragment(private val initialPosition: Int = 0) : Fragment(), Adap
             resources
         )
     }
+
+    private val model: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,8 +61,19 @@ class WordCloudFragment(private val initialPosition: Int = 0) : Fragment(), Adap
         initTabLayout()
         initSpinner()
         Log.d(javaClass.simpleName, viewModel.toString()) //lazy loading
-        binding.pager.post {
-            binding.pager.setCurrentItem(initialPosition, true)
+
+        if (model.destinationScreen == DestinationScreen.INSIGHT_NEED) {
+            binding.pager.post {
+                binding.pager.setCurrentItem(POS_NEED, true)
+            }
+        }
+
+        model.shareClickEvent.observe(viewLifecycleOwner) {
+            if (binding.pager.currentItem == POS_EMOTION) {
+                model.callShareEmotionEvent()
+            } else if (binding.pager.currentItem == POS_NEED) {
+                model.callShareNeedEvent()
+            }
         }
 
         return binding.root
@@ -111,6 +119,11 @@ class WordCloudFragment(private val initialPosition: Int = 0) : Fragment(), Adap
             }
         }.attach()
     }
+
+    companion object {
+        const val POS_EMOTION = 0
+        const val POS_NEED = 1
+    }
 }
 
 class WordCloudPagerAdapter(
@@ -135,7 +148,9 @@ class WordCloudPagerAdapter(
 class EmotionCloudFragment : Fragment() {
     private lateinit var binding: WordCloudViewBinding
 
-    val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
+    private val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
+
+    private val model: MainViewModel by activityViewModels()
 
     @Nullable
     override fun onCreateView(
@@ -154,6 +169,10 @@ class EmotionCloudFragment : Fragment() {
             Log.d(this.javaClass.simpleName, it.toString())
         }
 
+        model.shareEmotionEvent.observe(viewLifecycleOwner) {
+            Log.d(javaClass.simpleName, "onShareClicked")
+        }
+
         Log.d(javaClass.simpleName, "onCreateView")
         return binding.root
     }
@@ -163,6 +182,8 @@ class NeedCloudFragment : Fragment() {
     private lateinit var binding: WordCloudViewBinding
 
     val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
+
+    private val model: MainViewModel by activityViewModels()
 
     @Nullable
     override fun onCreateView(
@@ -181,9 +202,11 @@ class NeedCloudFragment : Fragment() {
             Log.d(this.javaClass.simpleName, it.toString())
         }
 
+        model.shareNeedEvent.observe(viewLifecycleOwner) {
+            Log.d(javaClass.simpleName, "onShareClicked")
+        }
+
         Log.d(javaClass.simpleName, "onCreateView")
         return binding.root
     }
 }
-
-

@@ -3,6 +3,7 @@ package com.zettafantasy.giraffe
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -18,6 +19,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
+        val model: MainViewModel by viewModels()
+        model.destinationScreen = getDestinationScreen(intent)
 
         navController = findNavController(R.id.my_nav_host_fragment)
         navController.setGraph(R.navigation.navigation, getStartDestinationArgs())
