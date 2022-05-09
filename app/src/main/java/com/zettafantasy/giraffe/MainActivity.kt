@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.navigate
+import com.zettafantasy.giraffe.feature.wordcloud.NeedCloudFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController

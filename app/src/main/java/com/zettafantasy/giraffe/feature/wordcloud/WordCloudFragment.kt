@@ -1,5 +1,6 @@
 package com.zettafantasy.giraffe.feature.wordcloud
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -24,15 +25,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.MainViewModel
 import com.zettafantasy.giraffe.R
-import com.zettafantasy.giraffe.common.DestinationScreen
-import com.zettafantasy.giraffe.common.Preferences
-import com.zettafantasy.giraffe.common.save
+import com.zettafantasy.giraffe.common.*
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.databinding.WordCloudFragmentBinding
 import com.zettafantasy.giraffe.databinding.WordCloudViewBinding
 import net.alhazmy13.wordcloud.ColorTemplate
+import java.io.File
 
 class WordCloudFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
@@ -147,45 +147,38 @@ class WordCloudPagerAdapter(
     }
 }
 
-class EmotionCloudFragment : Fragment() {
-    private lateinit var binding: WordCloudViewBinding
-
-    private val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
-
-    private val model: MainViewModel by activityViewModels()
-
-    @Nullable
-    override fun onCreateView(
-        @NonNull inflater: LayoutInflater, @Nullable container: ViewGroup?,
-        @Nullable savedInstanceState: Bundle?
-    ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.word_cloud_view, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.viewModel = viewModel
-        binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
-
+class EmotionCloudFragment : WordCloudItemFragment() {
+    override fun init() {
         viewModel.emotions.observe(viewLifecycleOwner) {
             binding.wordCloud.setDataSet(it)
             binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
             binding.wordCloud.notifyDataSetChanged()
             Log.d(this.javaClass.simpleName, it.toString())
         }
-
-        model.shareEmotionEvent.observe(viewLifecycleOwner) {
-            Log.d(javaClass.simpleName, "onShareClicked")
-        }
-
-        Log.d(javaClass.simpleName, "onCreateView")
-        return binding.root
     }
 }
 
-class NeedCloudFragment : Fragment() {
-    private lateinit var binding: WordCloudViewBinding
+class NeedCloudFragment : WordCloudItemFragment() {
+    override fun init() {
+        viewModel.needs.observe(viewLifecycleOwner) {
+            binding.wordCloud.setDataSet(it)
+            binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
+            binding.wordCloud.notifyDataSetChanged()
+            Log.d(this.javaClass.simpleName, it.toString())
+        }
+    }
+}
 
-    val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
+abstract class WordCloudItemFragment : Fragment() {
+    protected lateinit var binding: WordCloudViewBinding
+
+    protected val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
 
     private val model: MainViewModel by activityViewModels()
+
+    private var shareFile: File? = null
+
+    abstract fun init()
 
     @Nullable
     override fun onCreateView(
@@ -197,19 +190,35 @@ class NeedCloudFragment : Fragment() {
         binding.viewModel = viewModel
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
 
-        viewModel.needs.observe(viewLifecycleOwner) {
-            binding.wordCloud.setDataSet(it)
-            binding.wordCloud.setColors(ColorTemplate.MATERIAL_COLORS)
-            binding.wordCloud.notifyDataSetChanged()
-            Log.d(this.javaClass.simpleName, it.toString())
-        }
+        init()
 
         model.shareNeedEvent.observe(viewLifecycleOwner) {
-            Log.d(javaClass.simpleName, "onShareClicked")
-            context?.let { c -> binding.wordCloud.drawToBitmap().save(c) }
+            shareFile = binding.wordCloud.drawToBitmap().save(requireContext())
+            shareFile?.getUri(requireContext())?.let {
+                startActivityForResult(
+                    Intent.createChooser(
+                        it.getShareIntent(),
+                        resources.getText(R.string.share)
+                    ), REQ_SHARE_IMAGE
+                )
+            }
         }
 
         Log.d(javaClass.simpleName, "onCreateView")
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(javaClass.simpleName, "onActivityResult($requestCode $resultCode $data)")
+
+        if (requestCode == REQ_SHARE_IMAGE && shareFile != null) {
+            shareFile?.delete()
+            Log.d(javaClass.simpleName, "File deleted $shareFile")
+        }
+    }
+
+    companion object {
+        const val REQ_SHARE_IMAGE = 1001
     }
 }
