@@ -1,6 +1,8 @@
 package com.zettafantasy.giraffe.feature.wordcloud
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.annotation.ColorInt
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import androidx.core.view.drawToBitmap
@@ -155,6 +158,10 @@ class EmotionCloudFragment : WordCloudItemFragment() {
             binding.wordCloud.notifyDataSetChanged()
             Log.d(this.javaClass.simpleName, it.toString())
         }
+
+        model.shareEmotionEvent.observe(viewLifecycleOwner) {
+            shareWordCloud()
+        }
     }
 }
 
@@ -166,6 +173,10 @@ class NeedCloudFragment : WordCloudItemFragment() {
             binding.wordCloud.notifyDataSetChanged()
             Log.d(this.javaClass.simpleName, it.toString())
         }
+
+        model.shareNeedEvent.observe(viewLifecycleOwner) {
+            shareWordCloud()
+        }
     }
 }
 
@@ -174,7 +185,7 @@ abstract class WordCloudItemFragment : Fragment() {
 
     protected val viewModel: WordCloudViewModel by viewModels({ requireParentFragment() })
 
-    private val model: MainViewModel by activityViewModels()
+    protected val model: MainViewModel by activityViewModels()
 
     private var shareFile: File? = null
 
@@ -192,20 +203,30 @@ abstract class WordCloudItemFragment : Fragment() {
 
         init()
 
-        model.shareNeedEvent.observe(viewLifecycleOwner) {
-            shareFile = binding.wordCloud.drawToBitmap().save(requireContext())
-            shareFile?.getUri(requireContext())?.let {
-                startActivityForResult(
-                    Intent.createChooser(
-                        it.getShareIntent(),
-                        resources.getText(R.string.share)
-                    ), REQ_SHARE_IMAGE
-                )
-            }
-        }
-
         Log.d(javaClass.simpleName, "onCreateView")
         return binding.root
+    }
+
+    protected fun shareWordCloud() {
+        shareFile =
+            applyBgColor(binding.wordCloud.drawToBitmap(), Color.WHITE)?.save(requireContext())
+        shareFile?.getUri(requireContext())?.let {
+            startActivityForResult(
+                Intent.createChooser(
+                    it.getShareIntent(),
+                    resources.getText(R.string.share)
+                ), REQ_SHARE_IMAGE
+            )
+        }
+    }
+
+    private fun applyBgColor(bitmap: Bitmap, @ColorInt color: Int): Bitmap? {
+        return Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config).also {
+            with(Canvas(it)) {
+                drawColor(color)
+                drawBitmap(bitmap, 0f, 0f, null)
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
