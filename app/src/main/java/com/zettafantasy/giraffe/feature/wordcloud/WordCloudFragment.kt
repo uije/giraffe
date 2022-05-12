@@ -211,12 +211,10 @@ abstract class WordCloudItemFragment : Fragment() {
         shareFile =
             applyBgColor(binding.wordCloud.drawToBitmap(), Color.WHITE)?.save(requireContext())
         shareFile?.getUri(requireContext())?.let {
-            startActivityForResult(
-                Intent.createChooser(
-                    it.getShareIntent(),
-                    resources.getText(R.string.share)
-                ), REQ_SHARE_IMAGE
-            )
+            val intent =
+                Intent.createChooser(it.getShareIntent(), resources.getText(R.string.share))
+            requireContext().grantUriPermission(intent, it)
+            startActivityForResult(intent, REQ_SHARE_IMAGE)
         }
     }
 

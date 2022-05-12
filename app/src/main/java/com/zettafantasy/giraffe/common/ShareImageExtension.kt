@@ -2,6 +2,8 @@ package com.zettafantasy.giraffe.common
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.util.Log
@@ -48,4 +50,20 @@ fun Uri.getShareIntent() = Intent().also {
     it.action = Intent.ACTION_SEND
     it.putExtra(Intent.EXTRA_STREAM, this)
     it.type = "image/jpeg"
+}
+
+fun Context.grantUriPermission(intent: Intent, uri: Uri) {
+    val resInfoList: List<ResolveInfo> =
+        packageManager.queryIntentActivities(
+            intent,
+            PackageManager.MATCH_DEFAULT_ONLY
+        )
+    for (resolveInfo in resInfoList) {
+        val packageName: String = resolveInfo.activityInfo.packageName
+        grantUriPermission(
+            packageName,
+            uri,
+            Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
+        )
+    }
 }
