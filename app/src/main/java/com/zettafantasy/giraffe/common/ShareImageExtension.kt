@@ -4,10 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
-import android.graphics.Bitmap
+import android.graphics.*
 import android.net.Uri
 import android.util.Log
 import androidx.core.content.FileProvider
+import com.zettafantasy.giraffe.R
 import java.io.File
 import java.io.FileOutputStream
 
@@ -66,4 +67,30 @@ fun Context.grantUriPermission(intent: Intent, uri: Uri) {
             Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
         )
     }
+}
+
+fun Context.drawAppSignature(canvas: Canvas, bitmap: Bitmap) {
+    val appIcon = resources.getDrawable(R.mipmap.ic_launcher, null)
+    val padding = resources.getDimensionPixelSize(R.dimen.app_icon_padding)
+    appIcon.setBounds(
+        bitmap.width - appIcon.intrinsicWidth - padding,
+        bitmap.height - appIcon.intrinsicHeight - padding,
+        bitmap.width - padding,
+        bitmap.height - padding
+    )
+    appIcon.draw(canvas)
+
+    val appName = resources.getString(R.string.app_name_for_share)
+    val paint = Paint().apply {
+        color = Color.BLACK
+        textSize = resources.getDimensionPixelSize(R.dimen.app_name_size).toFloat()
+    }
+    val textBounds = Rect().also {
+        paint.getTextBounds(appName, 0, appName.length, it)
+    }
+    canvas.drawText(
+        appName,
+        (bitmap.width - appIcon.intrinsicWidth - padding * 2 - textBounds.width()).toFloat(),
+        (bitmap.height - textBounds.height()).toFloat(), paint
+    )
 }

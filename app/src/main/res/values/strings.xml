@@ -49,4 +49,5 @@
     <string name="recent_month"><![CDATA[최근 한달]]></string>
     <string name="recent_week"><![CDATA[최근 7일]]></string>
     <string name="recent_day"><![CDATA[최근 하루]]></string>
+    <string name="app_name_for_share"><![CDATA[by 기린앱]]></string>
 </resources>
