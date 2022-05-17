@@ -208,23 +208,10 @@ abstract class WordCloudItemFragment : Fragment() {
     }
 
     protected fun shareWordCloud() {
-        shareFile =
-            decorateForShare(binding.wordCloud.drawToBitmap(), Color.WHITE)?.save(requireContext())
-        shareFile?.getUri(requireContext())?.let {
-            val intent =
-                Intent.createChooser(it.getShareIntent(), resources.getText(R.string.share))
-            requireContext().grantUriPermission(intent, it)
-            startActivityForResult(intent, REQ_SHARE_IMAGE)
-        }
-    }
-
-    private fun decorateForShare(bitmap: Bitmap, @ColorInt bgColor: Int): Bitmap? {
-        return Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config).also {
-            with(Canvas(it)) {
-                drawColor(bgColor)
-                drawBitmap(bitmap, 0f, 0f, null)
-                requireContext().drawAppSignature(this, bitmap)
-            }
+        shareFile = requireContext().decorateForShare(binding.wordCloud.drawToBitmap(), Color.WHITE)
+            ?.save(requireContext())
+        shareFile?.getShareIntent(requireContext())?.let {
+            startActivityForResult(it, REQ_SHARE_IMAGE)
         }
     }
 

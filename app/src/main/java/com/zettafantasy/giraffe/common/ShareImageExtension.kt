@@ -7,6 +7,7 @@ import android.content.pm.ResolveInfo
 import android.graphics.*
 import android.net.Uri
 import android.util.Log
+import androidx.annotation.ColorInt
 import androidx.core.content.FileProvider
 import com.zettafantasy.giraffe.R
 import java.io.File
@@ -93,4 +94,20 @@ fun Context.drawAppSignature(canvas: Canvas, bitmap: Bitmap) {
         (bitmap.width - appIcon.intrinsicWidth - padding * 2 - textBounds.width()).toFloat(),
         (bitmap.height - textBounds.height()).toFloat(), paint
     )
+}
+
+fun Context.decorateForShare(bitmap: Bitmap, @ColorInt bgColor: Int): Bitmap? {
+    return Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config).also {
+        with(Canvas(it)) {
+            drawColor(bgColor)
+            drawBitmap(bitmap, 0f, 0f, null)
+            drawAppSignature(this, bitmap)
+        }
+    }
+}
+
+fun File.getShareIntent(context: Context): Intent? = getUri(context)?.let {
+    val intent = Intent.createChooser(it.getShareIntent(), context.getText(R.string.share))
+    context.grantUriPermission(intent, it)
+    intent
 }

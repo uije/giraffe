@@ -1,27 +1,36 @@
 package com.zettafantasy.giraffe.feature.record
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.drawToBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
+import com.zettafantasy.giraffe.common.decorateForShare
+import com.zettafantasy.giraffe.common.getShareIntent
+import com.zettafantasy.giraffe.common.save
 import com.zettafantasy.giraffe.data.EmotionInventory
 import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.data.NeedInventory
 import com.zettafantasy.giraffe.data.Record
 import com.zettafantasy.giraffe.databinding.SingleRecordFragmentBinding
+import com.zettafantasy.giraffe.feature.wordcloud.WordCloudItemFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.apache.commons.lang3.StringUtils
+import java.io.File
 
 class RecordFragment : Fragment() {
+    private var shareFile: File? = null
     private val emotionInventory: EmotionInventory by lazy { EmotionInventory.getInstance(resources) }
     private val needInventory: NeedInventory by lazy { NeedInventory.getInstance(resources) }
     private lateinit var binding: SingleRecordFragmentBinding
@@ -75,6 +84,15 @@ class RecordFragment : Fragment() {
                     .show()
                 super.onOptionsItemSelected(item)
             }
+            R.id.menu_share -> {
+                shareFile =
+                    requireContext().decorateForShare(binding.root.drawToBitmap(), Color.WHITE)
+                        ?.save(requireContext())
+                shareFile?.getShareIntent(requireContext())?.let {
+                    startActivityForResult(it, WordCloudItemFragment.REQ_SHARE_IMAGE)
+                }
+                super.onOptionsItemSelected(item)
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -87,6 +105,16 @@ class RecordFragment : Fragment() {
             if (this@RecordFragment.isVisible) {
                 onSuccess()
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(javaClass.simpleName, "onActivityResult($requestCode $resultCode $data)")
+
+        if (requestCode == WordCloudItemFragment.REQ_SHARE_IMAGE && shareFile != null) {
+            shareFile?.delete()
+            Log.d(javaClass.simpleName, "File deleted $shareFile")
         }
     }
 }
