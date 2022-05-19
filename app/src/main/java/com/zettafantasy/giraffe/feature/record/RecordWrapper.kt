@@ -10,7 +10,8 @@ import java.util.*
 data class RecordWrapper(
     val record: Record,
     val emotionInventory: EmotionInventory,
-    val needInventory: NeedInventory
+    val needInventory: NeedInventory,
+    var isHighLight: Boolean = false
 ) {
     val emotions: List<Emotion?> = emotionInventory.getListByIds(record.emotionIds)
     val needs: List<Need?> = needInventory.getListByIds(record.needIds)

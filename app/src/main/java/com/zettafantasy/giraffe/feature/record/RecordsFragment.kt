@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.*
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.MainFragmentDirections
+import com.zettafantasy.giraffe.MainViewModel
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
 import com.zettafantasy.giraffe.databinding.RecordsFragmentBinding
@@ -23,10 +25,12 @@ import kotlinx.coroutines.launch
 
 class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
     private lateinit var adapter: RecordAdapter
+    private val model: MainViewModel by activityViewModels()
     private val viewModel: RecordViewModel by viewModels {
         RecordViewModelFactory(
             (requireActivity().application as GiraffeApplication).repository,
-            resources
+            resources,
+            model.highLightItemId
         )
     }
 
@@ -49,7 +53,7 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
     }
 
     private fun initRecordRv(binding: RecordsFragmentBinding) {
-        adapter = RecordAdapter(viewModel) { record ->
+        adapter = RecordAdapter(viewModel, resources.getColor(R.color.accent, null)) { record ->
             //상세화면
             Navigation.findNavController(binding.root)
                 .navigate(MainFragmentDirections.actionViewRecord(record.record))

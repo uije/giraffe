@@ -29,7 +29,5 @@ class GiraffeRepository(private val recordDao: RecordDao) {
     // off the main thread.
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insert(record: Record) {
-        recordDao.insert(record)
-    }
+    suspend fun insert(record: Record) = recordDao.insert(record)
 }

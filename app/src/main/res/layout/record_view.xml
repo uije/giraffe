@@ -18,7 +18,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/emotion_margin"
+        android:paddingEnd="@dimen/emotion_margin">
 
         <!-- 가이드라인 20% -->
         <androidx.constraintlayout.widget.Guideline

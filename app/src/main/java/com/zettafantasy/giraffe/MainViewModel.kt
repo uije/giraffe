@@ -1,12 +1,12 @@
 package com.zettafantasy.giraffe
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.SingleLiveEvent
 
 class MainViewModel : ViewModel() {
+    var highLightItemId: Long? = null
     var destinationScreen: DestinationScreen? = null
 
     private val _shareClickEvent = SingleLiveEvent<Any>()

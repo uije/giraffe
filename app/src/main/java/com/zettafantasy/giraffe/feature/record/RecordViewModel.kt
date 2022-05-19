@@ -12,7 +12,8 @@ import kotlinx.coroutines.flow.map
 class RecordViewModel(
     private val repository: GiraffeRepository,
     emotionInventory: EmotionInventory,
-    needInventory: NeedInventory
+    needInventory: NeedInventory,
+    highLightItemId: Long?
 ) : ViewModel() {
 
     val allRecords: Flow<PagingData<RecordWrapper>> = Pager(
@@ -27,7 +28,8 @@ class RecordViewModel(
                 RecordWrapper(
                     record,
                     emotionInventory,
-                    needInventory
+                    needInventory,
+                    highLightItemId == record.id
                 )
             }
         }.cachedIn(viewModelScope)
@@ -35,7 +37,8 @@ class RecordViewModel(
 
 class RecordViewModelFactory(
     private val repository: GiraffeRepository,
-    private val resources: Resources
+    private val resources: Resources,
+    private val highLightItemId: Long?
 ) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -44,7 +47,8 @@ class RecordViewModelFactory(
             return RecordViewModel(
                 repository,
                 EmotionInventory.getInstance(resources),
-                NeedInventory.getInstance(resources)
+                NeedInventory.getInstance(resources),
+                highLightItemId
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")

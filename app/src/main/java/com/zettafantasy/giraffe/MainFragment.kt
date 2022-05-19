@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.rizafu.coachmark.CoachMark
@@ -21,10 +22,12 @@ import com.zettafantasy.giraffe.common.navigateRecord
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
 import com.zettafantasy.giraffe.feature.record.RecordsFragment
 import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
+import kotlin.properties.Delegates
 
 class MainFragment : Fragment() {
     lateinit var binding: MainFragmentBinding
-    var currentScreen: Int = Preferences.defaultScreen
+    private val args by navArgs<MainFragmentArgs>()
+    var currentScreen by Delegates.notNull<Int>()
     private val navController by lazy {
         Navigation.findNavController(binding.root)
     }
@@ -42,10 +45,14 @@ class MainFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
+        currentScreen = if (hasHighLightItem()) SCREEN_RECORD else Preferences.defaultScreen
+        model.highLightItemId = args.highLightItemId
         initViewPager()
         initFab()
         return binding.root
     }
+
+    private fun hasHighLightItem() = args.highLightItemId > 0L
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

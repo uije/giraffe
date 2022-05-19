@@ -11,6 +11,11 @@
         android:label=""
         tools:layout="@layout/main_fragment">
 
+        <argument
+            android:name="highLightItemId"
+            android:defaultValue="0L"
+            app:argType="long" />
+
         <!-- 기록하기 -->
         <action
             android:id="@+id/action_go_intro_desc"

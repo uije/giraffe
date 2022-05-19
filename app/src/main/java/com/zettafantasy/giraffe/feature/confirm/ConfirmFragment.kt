@@ -42,7 +42,7 @@ class ConfirmFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.confirm_fragment, container, false)
 
         binding.btnSave.setOnClickListener {
-            save { navigateNextScreen(binding.root) }
+            save { id -> navigateNextScreen(binding.root, id) }
         }
 
         emotionInventory = EmotionInventory.getInstance(resources)
@@ -66,21 +66,22 @@ class ConfirmFragment : Fragment() {
         return binding.root
     }
 
-    private fun save(onSuccess: () -> Unit) {
-        GlobalScope.launch(Dispatchers.Main) {
-            withContext(Dispatchers.IO) {
-                repository.insert(args.record)
-            }
+    private fun save(onSuccess: (recordId: Long) -> Unit) {
+        GlobalScope.launch(Dispatchers.IO) {
+            val recordId = repository.insert(args.record)
+
             if (this@ConfirmFragment.isVisible) {
-                onSuccess()
+                withContext(Dispatchers.Main) {
+                    onSuccess(recordId)
+                }
             }
         }
     }
 
-    private fun navigateNextScreen(view: View) {
+    private fun navigateNextScreen(view: View, highLightItemId: Long) {
         if (Preferences.shownCelebrateScreen) {
             Navigation.findNavController(view)
-                .navigate(ConfirmFragmentDirections.actionConfirmToRecord())
+                .navigate(ConfirmFragmentDirections.actionConfirmToRecord(highLightItemId))
         } else {
             Navigation.findNavController(view)
                 .navigate(ConfirmFragmentDirections.actionConfirmToCelebrate())
