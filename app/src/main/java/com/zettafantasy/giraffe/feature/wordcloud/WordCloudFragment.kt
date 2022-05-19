@@ -208,7 +208,7 @@ abstract class WordCloudItemFragment : Fragment() {
     }
 
     protected fun shareWordCloud() {
-        shareFile = requireContext().decorateForShare(binding.wordCloud.drawToBitmap(), Color.WHITE)
+        shareFile = requireContext().decorateForShare(binding.root.drawToBitmap(), Color.WHITE)
             ?.save(requireContext())
         shareFile?.getShareIntent(requireContext())?.let {
             startActivityForResult(it, REQ_SHARE_IMAGE)
