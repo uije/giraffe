@@ -200,6 +200,7 @@ abstract class WordCloudItemFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
         binding.wordCloud.setBackgroundColor(Color.TRANSPARENT)
+        binding.wordCloud.setOnLoadListener { viewModel.isLoading.value = false }
 
         init()
 

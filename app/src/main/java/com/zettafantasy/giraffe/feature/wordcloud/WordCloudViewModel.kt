@@ -23,12 +23,10 @@ class WordCloudViewModel(
     val needs: LiveData<List<WordCloud>>
         get() = _needs
 
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
+    val isLoading = MutableLiveData(false)
 
     fun load(viewLifecycleOwner: LifecycleOwner) {
-        _isLoading.value = true
+        isLoading.value = true
         Transformations.map(
             repository.findRecordsSince(Preferences.wordCloudPeriod.getTime()).asLiveData()
         ) { data ->
@@ -44,8 +42,6 @@ class WordCloudViewModel(
                 records.map { it.needs }.flatten().groupingBy { it }.eachCount().toList()
                     .sortedByDescending { it.second }
                     .map { WordCloud(it.first?.getName(), it.second) }
-
-            _isLoading.value = false
         }
     }
 }

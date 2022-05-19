@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,7 @@ public class WordCloudView extends WebView {
     private int max;
     private int min;
     Subject<Boolean> onMeasuredSubject = BehaviorSubject.create();
+    private LoadListener loadListener;
 
     /**
      * Instantiates a new Word cloud view.
@@ -50,6 +52,13 @@ public class WordCloudView extends WebView {
         this.displayDensity = context.getResources().getDisplayMetrics().density;
         setVerticalScrollBarEnabled(false);
         setHorizontalScrollBarEnabled(false);
+        setWebViewClient(new WebViewClient() {
+            public void onPageFinished(WebView view, String url) {
+                if (loadListener != null) {
+                    loadListener.onLoadFinished();
+                }
+            }
+        });
     }
 
     /**
@@ -193,5 +202,13 @@ public class WordCloudView extends WebView {
         }
         this.max = max;
         this.min = min;
+    }
+
+    public void setOnLoadListener(WordCloudView.LoadListener loadListener) {
+        this.loadListener = loadListener;
+    }
+
+    public interface LoadListener {
+        void onLoadFinished();
     }
 }
