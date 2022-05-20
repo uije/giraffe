@@ -7,7 +7,6 @@ import android.content.pm.ResolveInfo
 import android.graphics.*
 import android.net.Uri
 import android.util.Log
-import androidx.annotation.ColorInt
 import androidx.core.content.FileProvider
 import com.zettafantasy.giraffe.R
 import java.io.File
@@ -96,10 +95,9 @@ fun Context.drawAppSignature(canvas: Canvas, bitmap: Bitmap) {
     )
 }
 
-fun Context.decorateForShare(bitmap: Bitmap, @ColorInt bgColor: Int): Bitmap? {
+fun Context.decorateForShare(bitmap: Bitmap): Bitmap? {
     return Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config).also {
         with(Canvas(it)) {
-            drawColor(bgColor)
             drawBitmap(bitmap, 0f, 0f, null)
             drawAppSignature(this, bitmap)
         }
