@@ -14,4 +14,8 @@
         app:key="notification"
         app:title="알림테스트" />
 
+    <Preference
+        app:key="license"
+        app:title="Open Source License" />
+
 </PreferenceScreen>
