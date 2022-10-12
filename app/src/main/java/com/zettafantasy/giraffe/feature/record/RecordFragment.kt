@@ -86,7 +86,7 @@ class RecordFragment : Fragment() {
             }
             R.id.menu_share -> {
                 shareFile =
-                    requireContext().decorateForShare(binding.root.drawToBitmap(), Color.WHITE)
+                    requireContext().decorateForShare(binding.root.drawToBitmap())
                         ?.save(requireContext())
                 shareFile?.getShareIntent(requireContext())?.let {
                     startActivityForResult(it, WordCloudItemFragment.REQ_SHARE_IMAGE)
