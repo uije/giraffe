@@ -18,6 +18,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         initClearPreference()
         initNotificationTest()
         initLicense()
+        initExport()
     }
 
     private fun initNotificationTest() {
@@ -50,5 +51,23 @@ class SettingFragment : PreferenceFragmentCompat() {
                 true
             }
         }
+    }
+
+    private fun initExport() {
+        findPreference<Preference?>("export")?.let {
+            it.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "text/cvs"
+                    putExtra(Intent.EXTRA_TITLE, "giraffe.cvs")
+                }
+                startActivityForResult(intent, CREATE_FILE)
+                true
+            }
+        }
+    }
+
+    companion object {
+        const val CREATE_FILE = 1
     }
 }

@@ -15,6 +15,10 @@
         app:title="알림테스트" />
 
     <Preference
+        app:key="export"
+        app:title="내보내기" />
+
+    <Preference
         app:key="license"
         app:title="Open Source License" />
 
