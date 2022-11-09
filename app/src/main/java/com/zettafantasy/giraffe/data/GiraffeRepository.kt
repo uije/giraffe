@@ -8,7 +8,9 @@ class GiraffeRepository(private val recordDao: RecordDao) {
 
     // Room executes all queries on a separate thread.
     // Observed Flow will notify the observer when the data has changed.
-    fun getRecords(): PagingSource<Int, Record> = recordDao.getRecords()
+    fun getPagingRecords(): PagingSource<Int, Record> = recordDao.getPagingRecords()
+
+    fun getRecords(): List<Record> = recordDao.getRecords()
 
     fun findRecord(id: Long): Flow<Record> {
         return recordDao.findRecord(id)

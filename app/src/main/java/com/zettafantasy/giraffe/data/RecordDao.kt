@@ -7,7 +7,10 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface RecordDao {
     @Query("SELECT * FROM record ORDER BY date DESC")
-    fun getRecords(): PagingSource<Int, Record>
+    fun getPagingRecords(): PagingSource<Int, Record>
+
+    @Query("SELECT * FROM record ORDER BY date DESC")
+    fun getRecords(): List<Record>
 
     @Query("SELECT * FROM record WHERE id == :id")
     fun findRecord(id: Long): Flow<Record>

@@ -22,7 +22,7 @@ class RecordViewModel(
             enablePlaceholders = true,
             maxSize = 200
         )
-    ) { repository.getRecords() }.flow
+    ) { repository.getPagingRecords() }.flow
         .map { pagingData ->
             pagingData.map { record ->
                 RecordWrapper(
