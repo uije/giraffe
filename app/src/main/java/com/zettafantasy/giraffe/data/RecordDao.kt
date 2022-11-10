@@ -21,6 +21,9 @@ interface RecordDao {
     @Query("SELECT COUNT(id) FROM record")
     fun getRowCount(): Flow<Int>
 
+    @Query("SELECT (SELECT COUNT(*) FROM record) == 0")
+    fun isEmpty(): Boolean
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(record: Record) : Long
 
