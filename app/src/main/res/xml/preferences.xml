@@ -16,7 +16,13 @@
 
     <Preference
         app:key="export"
+        app:summary="기록들을 CSV 파일로 내보냅니다."
         app:title="내보내기" />
+
+    <Preference
+        app:key="import"
+        app:summary="CSV 파일 기록들을 저장합니다."
+        app:title="가져오기" />
 
     <Preference
         app:key="license"
