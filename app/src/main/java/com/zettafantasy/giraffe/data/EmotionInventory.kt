@@ -21,7 +21,14 @@ class EmotionInventory private constructor(resources: Resources) {
     }
 
     private val list = mutableListOf<Emotion>()
-    private val map = mutableMapOf<Int, Emotion>()
+    private val idMap = mutableMapOf<Int, Emotion>()
+    private val nameMap: Map<String, Emotion> by lazy {
+        mutableMapOf<String, Emotion>().apply {
+            list.forEach { item ->
+                this[item.getName()] = item
+            }
+        }.toMap()
+    }
 
     init {
         load(resources.getStringArray(R.array.emotion_satisfied), EmotionType.SATISFIED)
@@ -32,14 +39,16 @@ class EmotionInventory private constructor(resources: Resources) {
         for (item in stringArray) {
             val emotion = Emotion(list.size, item, type)
             list.add(emotion)
-            map[emotion.getId()] = emotion
+            idMap[emotion.getId()] = emotion
         }
     }
 
     fun getListByType(type: EmotionType) =
         if (type == EmotionType.UNCLEAR) list.toList() else list.filter { it.type == type }.toList()
 
-    fun getListByIds(ids: List<Int>) = ids.mapNotNull { map[it] }.toList()
+    fun getListByIds(ids: List<Int>) = ids.mapNotNull { idMap[it] }.toList()
 
-    fun getEmotionById(id: Int?) = map[id]
+    fun getEmotionById(id: Int?) = idMap[id]
+
+    fun getEmotionByName(name: String) = nameMap[name]
 }

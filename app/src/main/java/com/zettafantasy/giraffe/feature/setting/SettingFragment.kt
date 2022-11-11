@@ -3,6 +3,7 @@ package com.zettafantasy.giraffe.feature.setting
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.preference.Preference
@@ -35,6 +36,7 @@ class SettingFragment : PreferenceFragmentCompat() {
         initNotificationTest()
         initLicense()
         initExport()
+        initImport()
     }
 
     private fun initNotificationTest() {
@@ -91,15 +93,30 @@ class SettingFragment : PreferenceFragmentCompat() {
         Toast.makeText(context, resId, Toast.LENGTH_SHORT).show()
     }
 
+    private fun initImport() {
+        findPreference<Preference?>("import")?.let {
+            it.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                startActivityForResult(portManager.importIntent, PICK_CSV_FILE)
+                true
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CREATE_FILE && resultCode == Activity.RESULT_OK) {
             data?.data?.also { uri ->
                 portManager.exportCSV(uri)
+            }
+        } else if (requestCode == PICK_CSV_FILE && resultCode == Activity.RESULT_OK) {
+            data?.data?.also { uri ->
+                portManager.importCSV(uri)
+                Log.d(javaClass.simpleName, "import file $uri")
             }
         }
     }
 
     companion object {
         const val CREATE_FILE = 1
+        const val PICK_CSV_FILE = 2
     }
 }
