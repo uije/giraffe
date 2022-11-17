@@ -6,7 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'com.google.android.gms.oss-licenses-plugin'
 }
-fl
+
 // Keystore Security
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
