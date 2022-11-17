@@ -7,8 +7,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.zettafantasy.giraffe.BuildConfig
 import com.zettafantasy.giraffe.GiraffeApplication
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.Preferences
@@ -32,11 +34,29 @@ class SettingFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
 
-        initClearPreference()
-        initNotificationTest()
-        initLicense()
+        if (BuildConfig.DEBUG) {
+            initClearPreference()
+            initNotificationTest()
+        } else {
+            hideDebugMenus()
+        }
+
         initExport()
         initImport()
+        initLicense()
+        initAppInfo()
+    }
+
+    private fun initAppInfo() {
+        findPreference<Preference>("app_info")?.let {
+            it.title = getString(R.string.app_version, BuildConfig.VERSION_NAME)
+        }
+    }
+
+    private fun hideDebugMenus() {
+        findPreference<PreferenceCategory>("debug")?.let {
+            it.isVisible = false
+        }
     }
 
     private fun initNotificationTest() {

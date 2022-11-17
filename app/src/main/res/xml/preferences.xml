@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:key="giraffe_setting">
 
-    <!--    <SwitchPreferenceCompat-->
-    <!--        app:key="notifications"-->
-    <!--        app:title="Enable message notifications" />-->
+    <PreferenceCategory
+        app:isPreferenceVisible="true"
+        app:key="debug"
+        app:title="디버그">
+        <Preference
+            app:key="clear_preference"
+            app:summary="코치마크, 가이드화면이 노출되도록 preference 값을 지웁니다."
+            app:title="Preference 삭제" />
 
-    <Preference
-        app:key="clear_preference"
-        app:summary="코치마크, 가이드화면이 노출되도록 preference 값을 지웁니다."
-        app:title="Preference 삭제" />
+        <Preference
+            app:key="notification"
+            app:title="알림테스트" />
+    </PreferenceCategory>
 
-    <Preference
-        app:key="notification"
-        app:title="알림테스트" />
+    <PreferenceCategory>
+        <Preference
+            app:key="export"
+            app:summary="기록들을 CSV 파일로 내보냅니다."
+            app:title="내보내기" />
 
-    <Preference
-        app:key="export"
-        app:summary="기록들을 CSV 파일로 내보냅니다."
-        app:title="내보내기" />
+        <Preference
+            app:key="import"
+            app:summary="CSV 파일 기록들을 저장합니다."
+            app:title="가져오기" />
 
-    <Preference
-        app:key="import"
-        app:summary="CSV 파일 기록들을 저장합니다."
-        app:title="가져오기" />
+        <Preference
+            app:key="license"
+            app:summary="사용된 오픈소스 라이선스를 확인합니다."
+            app:title="오픈소스 라이선스" />
+    </PreferenceCategory>
 
-    <Preference
-        app:key="license"
-        app:title="Open Source License" />
+    <PreferenceCategory app:key="info">
+        <Preference
+            app:enabled="false"
+            app:key="app_info"
+            app:title="@string/app_version" />
+    </PreferenceCategory>
+
 
 </PreferenceScreen>
