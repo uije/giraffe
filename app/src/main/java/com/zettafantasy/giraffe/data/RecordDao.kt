@@ -27,6 +27,9 @@ interface RecordDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(record: Record) : Long
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(vararg record: Record): List<Long>
+
     @Query("DELETE FROM record")
     suspend fun deleteAll()
 

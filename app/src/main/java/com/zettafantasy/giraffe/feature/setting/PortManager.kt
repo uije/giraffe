@@ -3,7 +3,6 @@ package com.zettafantasy.giraffe.feature.setting
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import com.opencsv.CSVReader
 import com.opencsv.CSVWriter
@@ -92,30 +91,38 @@ class PortManager(val repository: GiraffeRepository, val context: Context) {
 
     fun importCSV(uri: Uri) {
         CoroutineScope(Dispatchers.IO).launch {
-            val result = readCSV(uri)
+            val importedCount = readCSV(uri)
             withContext(Dispatchers.Main) {
-                //showResultToast(result)
+                showToast(importedCount)
             }
         }
     }
 
-    private fun readCSV(uri: Uri): Int {
+    private fun showToast(count: Int) {
+        Toast.makeText(
+            context,
+            context.getString(R.string.desc_record_imported, count),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private suspend fun readCSV(uri: Uri): Int {
         try {
             context.contentResolver.openFileDescriptor(uri, "r").use { fd ->
                 FileReader(fd?.fileDescriptor).use { fileReader ->
-                    CSVReader(fileReader).use { csvReader ->
-                        csvReader.forEach {
+                    return CSVReader(fileReader).use { csvReader ->
+                        csvReader.readAll().mapNotNull {
                             try {
-                                val record: Record = convert(it)
-                                Log.d(javaClass.simpleName, "uije $record")
+                                convert(it)
                             } catch (e: Exception) {
-                                //nothing
+                                null
                             }
-                        }
+                        }.toList().let {
+                            repository.insertAll(*it.toTypedArray())
+                        }.filter { it != -1L }.count()
                     }
                 }
             }
-            return 0
         } catch (e: Exception) {
             if (BuildConfig.DEBUG) {
                 e.printStackTrace()

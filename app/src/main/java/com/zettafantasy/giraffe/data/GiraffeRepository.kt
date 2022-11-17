@@ -32,4 +32,7 @@ class GiraffeRepository(private val recordDao: RecordDao) {
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     suspend fun insert(record: Record) = recordDao.insert(record)
+
+    @WorkerThread
+    suspend fun insertAll(vararg record: Record): List<Long> = recordDao.insertAll(*record)
 }
