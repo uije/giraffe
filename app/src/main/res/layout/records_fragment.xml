@@ -18,28 +18,48 @@
         android:layout_height="match_parent"
         tools:context=".feature.record.RecordsFragment">
 
-        <FrameLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/emptyView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <View
+                android:id="@+id/empty_icon"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_empty_box"
+                android:backgroundTint="@color/gray50_500"
+                app:layout_constraintBottom_toTopOf="@id/empty_txt"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintWidth_percent="0.25" />
 
             <TextView
+                android:id="@+id/empty_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:text="@string/desc_empty_record"
                 android:textAllCaps="false"
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:textSize="20dp" />
-        </FrameLayout>
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/empty_icon" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:visibility="gone">
 
             <!-- 테이블 헤더 -->
             <LinearLayout

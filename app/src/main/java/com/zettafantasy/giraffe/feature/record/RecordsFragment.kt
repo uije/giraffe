@@ -18,6 +18,7 @@ import com.zettafantasy.giraffe.MainFragmentDirections
 import com.zettafantasy.giraffe.MainViewModel
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.BaseBindingFragment
+import com.zettafantasy.giraffe.common.navigateRecord
 import com.zettafantasy.giraffe.databinding.RecordsFragmentBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -33,6 +34,9 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
             model.highLightItemId
         )
     }
+    private val navController by lazy {
+        Navigation.findNavController(binding.root)
+    }
 
     override fun init(inflater: LayoutInflater, container: ViewGroup?): RecordsFragmentBinding {
         var binding: RecordsFragmentBinding =
@@ -41,6 +45,10 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
         binding.viewModel = viewModel
 
         initRecordRv(binding)
+
+        binding.emptyView.setOnClickListener {
+            navController.navigateRecord()
+        }
 
         lifecycleScope.launch {
             viewModel.allRecords.collectLatest {
@@ -55,16 +63,15 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
     private fun initRecordRv(binding: RecordsFragmentBinding) {
         adapter = RecordAdapter(viewModel, resources.getColor(R.color.accent, null)) { record ->
             //상세화면
-            Navigation.findNavController(binding.root)
-                .navigate(MainFragmentDirections.actionViewRecord(record.record))
+            navController.navigate(MainFragmentDirections.actionViewRecord(record.record))
         }
 
         adapter.addLoadStateListener { loadState ->
             if (isDataEmpty(loadState)) {
-                binding.recordRv?.isVisible = false
+                binding.content?.isVisible = false
                 binding.emptyView?.isVisible = true
             } else {
-                binding.recordRv?.isVisible = true
+                binding.content?.isVisible = true
                 binding.emptyView?.isVisible = false
             }
         }

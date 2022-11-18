@@ -35,7 +35,7 @@
     <string name="share"><![CDATA[공유하기]]></string>
     <string name="fail"><![CDATA[실패]]></string>
     <string name="tooltip_start_btn"><![CDATA[내 감정과 욕구를 찾아보세요.]]></string>
-    <string name="desc_empty_record"><![CDATA[저장된 기록이 없네요...]]></string>
+    <string name="desc_empty_record"><![CDATA[저장된 기록이 없네요.\n첫 기록을 남겨보세요!]]></string>
     <string name="desc_no_record_to_export"><![CDATA[내보낼 기록이 없습니다.]]></string>
     <string name="desc_record_imported"><![CDATA[%1$d의 기록이 저장되었습니다.]]></string>
     <string name="notification_channel_remind_alarm_name">꾸준히 사용 알림</string>
