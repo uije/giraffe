@@ -22,6 +22,8 @@ class GiraffeRepository(private val recordDao: RecordDao) {
 
     fun isRecordEmpty() = recordDao.isEmpty()
 
+    fun getRowCount() = recordDao.getRowCount()
+
     suspend fun deleteRecord(record: Record) {
         return recordDao.delete(record)
     }

@@ -3,11 +3,14 @@ package com.zettafantasy.giraffe
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.*
 import androidx.core.view.doOnAttach
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -19,9 +22,13 @@ import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.navigate
 import com.zettafantasy.giraffe.common.navigateRecord
+import com.zettafantasy.giraffe.data.GiraffeRepository
 import com.zettafantasy.giraffe.databinding.MainFragmentBinding
 import com.zettafantasy.giraffe.feature.record.RecordsFragment
 import com.zettafantasy.giraffe.feature.wordcloud.WordCloudFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import kotlin.properties.Delegates
 
 class MainFragment : Fragment() {
@@ -36,6 +43,9 @@ class MainFragment : Fragment() {
     }
     private var destinationNavigated = false
     private val model: MainViewModel by activityViewModels()
+    private val repository: GiraffeRepository by lazy {
+        (requireActivity().application as GiraffeApplication).repository
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +59,19 @@ class MainFragment : Fragment() {
         model.highLightItemId = args.highLightItemId
         initViewPager()
         initFab()
+        initEmptyView()
+
         return binding.root
+    }
+
+    private fun initEmptyView() {
+        lifecycleScope.launch {
+            repository.getRowCount().map { it == 0 }.collect { isEmpty ->
+                Log.d(javaClass.simpleName, "Rows isEmpty : $isEmpty")
+                binding.bottomNavigation.isVisible = !isEmpty
+                binding.viewPager.isUserInputEnabled = !isEmpty
+            }
+        }
     }
 
     private fun hasHighLightItem() = args.highLightItemId > 0L
