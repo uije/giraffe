@@ -5,6 +5,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.*
+import android.view.animation.AnimationUtils
 import androidx.core.view.doOnAttach
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -70,7 +71,16 @@ class MainFragment : Fragment() {
                 Log.d(javaClass.simpleName, "Rows isEmpty : $isEmpty")
                 binding.bottomNavigation.isVisible = !isEmpty
                 binding.viewPager.isUserInputEnabled = !isEmpty
+                bindFabAnimation(isEmpty)
             }
+        }
+    }
+
+    private fun bindFabAnimation(isEmpty: Boolean) {
+        if (isEmpty && binding.fab.animation?.hasStarted() != true) {
+            binding.fab.animation = AnimationUtils.loadAnimation(context, R.anim.heart_beat)
+        } else if (!isEmpty && binding.fab.animation?.hasStarted() == true) {
+            binding.fab.animation?.cancel()
         }
     }
 
