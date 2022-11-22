@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.StringRes
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
@@ -22,6 +24,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SettingFragment : PreferenceFragmentCompat() {
+
+    private val navController: NavController? by lazy {
+        view?.let { Navigation.findNavController(it) }
+    }
 
     private val repository: GiraffeRepository by lazy {
         (activity?.application as GiraffeApplication).repository
@@ -45,6 +51,16 @@ class SettingFragment : PreferenceFragmentCompat() {
         initImport()
         initLicense()
         initAppInfo()
+        initThanks()
+    }
+
+    private fun initThanks() {
+        findPreference<Preference?>("thanks")?.let {
+            it.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+                navController?.navigate(SettingFragmentDirections.actionGoThanks())
+                true
+            }
+        }
     }
 
     private fun initAppInfo() {

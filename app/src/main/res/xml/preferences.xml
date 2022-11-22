@@ -32,6 +32,10 @@
             app:key="license"
             app:summary="사용된 오픈소스 라이선스를 확인합니다."
             app:title="오픈소스 라이선스" />
+
+        <Preference
+            app:key="thanks"
+            app:title="감사의 글" />
     </PreferenceCategory>
 
     <PreferenceCategory app:key="info">

@@ -54,7 +54,21 @@
     <fragment
         android:id="@+id/setting"
         android:name="com.zettafantasy.giraffe.feature.setting.SettingFragment"
-        android:label="설정" />
+        android:label="설정">
+        <action
+            android:id="@+id/action_go_thanks"
+            app:destination="@id/thanks"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_close_exit"
+            app:launchSingleTop="true"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_close_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/thanks"
+        android:name="com.zettafantasy.giraffe.feature.setting.ThanksFragment"
+        android:label="감사의 말" />
 
     <fragment
         android:id="@+id/record"

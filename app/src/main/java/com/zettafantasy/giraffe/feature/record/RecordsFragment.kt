@@ -46,10 +46,6 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
 
         initRecordRv(binding)
 
-        binding.emptyView.setOnClickListener {
-            navController.navigateRecord()
-        }
-
         lifecycleScope.launch {
             viewModel.allRecords.collectLatest {
                 Log.d(javaClass.simpleName, "records updated")
