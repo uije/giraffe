@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:visibility="gone">
+            android:visibility="gone">
 
             <!-- 테이블 헤더 -->
             <LinearLayout

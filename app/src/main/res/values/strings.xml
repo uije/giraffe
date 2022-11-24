@@ -25,7 +25,7 @@
     <string name="stimulus_desc2"><![CDATA[그때 상황을 충분히 되짚어 봅니다.]]></string>
     <string name="stimulus_desc3"><![CDATA[그 사건을 단어 혹은 짧은 문장으로 써주세요.]]></string>
     <string name="complete"><![CDATA[완료]]></string>
-    <string name="tooltip_find_item"><![CDATA[화면을 넘기며 관련된 감정들을 선택해 주세요]]></string>
+    <string name="tooltip_find_item"><![CDATA[화면을 넘기며\n와닿는 감정들을\n선택해 주세요.]]></string>
     <string name="reduce_emotion_intro_desc1"><![CDATA[다양한 감정을 고르셨네요.]]></string>
     <string name="reduce_emotion_intro_desc2"><![CDATA[그중에 좀더 와닿는 감정을<br>최대 <font color="#%1$s">%2$s개</font>까지 골라주세요.]]></string>
     <string name="alert_over_max_item_count"><![CDATA[최대 %1$d까지 선택할 수 있습니다]]></string>
