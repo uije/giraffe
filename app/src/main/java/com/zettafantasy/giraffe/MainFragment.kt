@@ -139,6 +139,15 @@ class MainFragment : Fragment() {
         binding.fab.setOnClickListener {
             navController.navigateRecord()
         }
+
+        if (!Preferences.shownCoachMarkStartBtn) {
+            val coachMark = showCoachMark(binding.fab)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                coachMark?.dismiss()
+                Preferences.shownCoachMarkStartBtn = true
+            }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
+        }
     }
 
     private fun showCoachMark(view: View) =
@@ -152,6 +161,7 @@ class MainFragment : Fragment() {
             .setTooltipAlignment(CoachMark.TARGET_TOP_RIGHT)
             .setTooltipPointer(CoachMark.POINTER_RIGHT)
             .setTooltipBackgroundColor(R.color.accent)
+            .setCircleMark()
             .setDismissible()
             .show()
 

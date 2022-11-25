@@ -63,13 +63,8 @@ class RecordsFragment : BaseBindingFragment<RecordsFragmentBinding>() {
         }
 
         adapter.addLoadStateListener { loadState ->
-            if (isDataEmpty(loadState)) {
-                binding.content?.isVisible = false
-                binding.emptyView?.isVisible = true
-            } else {
-                binding.content?.isVisible = true
-                binding.emptyView?.isVisible = false
-            }
+            binding.emptyView?.isVisible = isDataEmpty(loadState)
+            binding.content?.isVisible = adapter.itemCount > 0
         }
 
         binding.recordRv.adapter = adapter
