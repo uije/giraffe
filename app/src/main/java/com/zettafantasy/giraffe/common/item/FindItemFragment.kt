@@ -15,11 +15,11 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.rizafu.coachmark.CoachMark
 import com.thekhaeng.recyclerviewmargin.LayoutMarginDecoration
-import com.zettafantasy.giraffe.GiraffeConstant
 import com.zettafantasy.giraffe.R
 import com.zettafantasy.giraffe.common.AppExecutors
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.SnapPagerScrollListener
+import com.zettafantasy.giraffe.common.ext.hideDelayed
 import com.zettafantasy.giraffe.databinding.FindItemFragmentBinding
 import com.zettafantasy.giraffe.databinding.TooltipFindItemBinding
 import kotlin.math.max
@@ -33,6 +33,9 @@ abstract class FindItemFragment : Fragment() {
     protected lateinit var viewModel: FindItemViewModel
     private var doneMenu: MenuItem? = null
     private var coachMark: CoachMark? = null
+    private val handler by lazy {
+        Handler(Looper.getMainLooper())
+    }
 
     abstract fun provideItems(): List<Item>
 
@@ -55,7 +58,7 @@ abstract class FindItemFragment : Fragment() {
         setData(provideItems())
 
         if (viewModel.showCoachMark) {
-            showCoachMark(viewModel.coachMarkText, container)
+            showSwipeCoachMark(viewModel.coachMarkText, container)
         }
 
         return binding.root
@@ -114,7 +117,63 @@ abstract class FindItemFragment : Fragment() {
                 override fun onSnapped(position: Int) {
                     Log.d(javaClass.simpleName, String.format("onSnapped(%s)", position))
                     binding.progressbar.progress = position + spanCount - 1
+                    bindCoachMark(position)
                 }
+
+                private fun bindCoachMark(position: Int) {
+                    //상태바 코치마크
+                    if (!Preferences.shownCoachMarkProgressBar && position > 0) {
+                        handler.postDelayed({
+                            showProgressBarCoachMark().hideDelayed {
+                                Preferences.shownCoachMarkProgressBar = true
+                            }
+                        }, 500)
+                    }
+
+                    //완료버튼 코치마크
+                    if (isEndOfProgress() && !Preferences.shownCoachMarkComplete) {
+                        doneMenu?.let { item ->
+                            activity?.findViewById<View>(item.itemId)?.let {
+                                handler.postDelayed({
+                                    showCompleteCoachMark(it).hideDelayed {
+                                        Preferences.shownCoachMarkComplete = true
+                                    }
+                                }, 500)
+                            }
+                        }
+                    }
+                }
+
+                private fun isEndOfProgress() =
+                    binding.progressbar.max == binding.progressbar.progress
+
+                private fun showProgressBarCoachMark(): CoachMark =
+                    CoachMark.Builder(requireActivity())
+                        .setTarget(binding.progressbar)
+                        .addTooltipChildText(
+                            requireActivity(),
+                            getString(R.string.tooltip_progress_bar),
+                            android.R.color.black
+                        )
+                        .setTooltipAlignment(CoachMark.TARGET_TOP)
+                        .setTooltipPointer(CoachMark.POINTER_MIDDLE)
+                        .setTooltipBackgroundColor(R.color.accent)
+                        .setDismissible()
+                        .show()
+
+                private fun showCompleteCoachMark(view: View): CoachMark =
+                    CoachMark.Builder(requireActivity())
+                        .setTarget(view)
+                        .addTooltipChildText(
+                            requireActivity(),
+                            getString(R.string.tooltip_complete),
+                            android.R.color.black
+                        )
+                        .setTooltipAlignment(CoachMark.TARGET_BOTTOM_LEFT)
+                        .setTooltipPointer(CoachMark.POINTER_RIGHT)
+                        .setTooltipBackgroundColor(R.color.accent)
+                        .setDismissible()
+                        .show()
             }
         ))
     }
@@ -153,7 +212,7 @@ abstract class FindItemFragment : Fragment() {
         coachMark?.dismiss()
     }
 
-    private fun showCoachMark(desc: String, container: ViewGroup?) {
+    private fun showSwipeCoachMark(desc: String, container: ViewGroup?) {
         val tooltip = DataBindingUtil.inflate<TooltipFindItemBinding>(
             LayoutInflater.from(context),
             R.layout.tooltip_find_item,
@@ -174,10 +233,9 @@ abstract class FindItemFragment : Fragment() {
             .setTooltipPointer(CoachMark.POINTER_GONE)
             .show()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            coachMark?.dismiss()
-            Preferences.shownCoachMarkFindEmotion = true
-        }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
+        coachMark?.hideDelayed {
+            Preferences.shownCoachMarkSwipeCard = true
+        }
     }
 
     private fun stretchWidthMatchParent(

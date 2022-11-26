@@ -21,6 +21,7 @@ import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_INSIGHT
 import com.zettafantasy.giraffe.GiraffeConstant.SCREEN_RECORD
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
+import com.zettafantasy.giraffe.common.ext.hideDelayed
 import com.zettafantasy.giraffe.common.navigate
 import com.zettafantasy.giraffe.common.navigateRecord
 import com.zettafantasy.giraffe.data.GiraffeRepository
@@ -141,12 +142,9 @@ class MainFragment : Fragment() {
         }
 
         if (!Preferences.shownCoachMarkStartBtn) {
-            val coachMark = showCoachMark(binding.fab)
-
-            Handler(Looper.getMainLooper()).postDelayed({
-                coachMark?.dismiss()
+            showCoachMark(binding.fab).hideDelayed {
                 Preferences.shownCoachMarkStartBtn = true
-            }, GiraffeConstant.HIDE_COACH_MARK_MILLIS)
+            }
         }
     }
 

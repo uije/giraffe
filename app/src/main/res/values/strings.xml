@@ -35,6 +35,8 @@
     <string name="share"><![CDATA[공유하기]]></string>
     <string name="fail"><![CDATA[실패]]></string>
     <string name="tooltip_start_btn"><![CDATA[버튼을 눌러 기록을 시작할 수 있어요.]]></string>
+    <string name="tooltip_progress_bar"><![CDATA[진행 상태는 여기에 표시되요!]]></string>
+    <string name="tooltip_complete"><![CDATA[완료 버튼을 눌러 다음 단계로 넘어가세요.]]></string>
     <string name="desc_empty_record"><![CDATA[저장된 기록이 없네요.\n내 마음을 알고싶을 때 사용해 보세요!]]></string>
     <string name="desc_promotion"><![CDATA[내 마음을 알고싶을 때\n사용해 보세요!]]></string>
     <string name="desc_no_record_to_export"><![CDATA[내보낼 기록이 없습니다.]]></string>

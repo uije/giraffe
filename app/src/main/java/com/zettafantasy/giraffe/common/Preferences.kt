@@ -7,9 +7,11 @@ import com.zettafantasy.giraffe.feature.remind.RemindNotificationType
 import com.zettafantasy.giraffe.feature.wordcloud.WordCloudPeriod
 
 object Preferences {
-    private const val KEY_SHOWN_COACH_MARK_FIND_EMOTION = "shownCoachMarkFindEmotion"
+    private const val KEY_SHOWN_COACH_MARK_SWIPE_CARD = "shownCoachMarkSwipeCard"
     private const val KEY_SHOWN_RECORD_INTRO = "shownRecordIntro"
     private const val KEY_SHOWN_START_BTN = "shownStartBtn"
+    private const val KEY_SHOWN_COACH_MARK_PROGRESSBAR = "shownCoachMarkProgressBar"
+    private const val KEY_SHOWN_COACH_MARK_COMPLETE = "shownCoachMarkComplete"
     private const val KEY_LAST_USED_TIME = "lastUsedTime"
     private const val KEY_WORD_CLOUD_PERIOD = "wordCloudPeriod"
     private const val KEY_DEFAULT_SCREEN = "defaultScreen"
@@ -28,10 +30,22 @@ object Preferences {
             preferences.edit().putBoolean(KEY_SHOWN_START_BTN, value).commit()
         }
 
-    var shownCoachMarkFindEmotion: Boolean
-        get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, false)
+    var shownCoachMarkSwipeCard: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_SWIPE_CARD, false)
         set(value) {
-            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_FIND_EMOTION, value).commit()
+            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_SWIPE_CARD, value).commit()
+        }
+
+    var shownCoachMarkProgressBar: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_PROGRESSBAR, false)
+        set(value) {
+            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_PROGRESSBAR, value).commit()
+        }
+
+    var shownCoachMarkComplete: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_COACH_MARK_COMPLETE, false)
+        set(value) {
+            preferences.edit().putBoolean(KEY_SHOWN_COACH_MARK_COMPLETE, value).commit()
         }
 
     var shownRecordIntro: Boolean

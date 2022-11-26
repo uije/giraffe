@@ -31,7 +31,7 @@ class FindEmotionFragment : FindItemFragment() {
 
     override fun provideViewModel(): FindItemViewModel {
         return ViewModelProvider(this).get(FindItemViewModel::class.java).apply {
-            showCoachMark = !Preferences.shownCoachMarkFindEmotion
+            showCoachMark = !Preferences.shownCoachMarkSwipeCard
             coachMarkText = getString(R.string.tooltip_find_item)
         }
     }
