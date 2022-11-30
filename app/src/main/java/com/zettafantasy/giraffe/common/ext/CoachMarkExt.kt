@@ -7,7 +7,7 @@ import com.zettafantasy.giraffe.GiraffeConstant
 
 fun CoachMark.hideDelayed(
     delayMillis: Long = GiraffeConstant.HIDE_COACH_MARK_MILLIS,
-    callback: (() -> Unit)?
+    callback: (() -> Unit)? = null
 ) {
     Handler(Looper.getMainLooper()).postDelayed({
         dismiss()
