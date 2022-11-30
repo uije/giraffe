@@ -160,6 +160,7 @@ class MainFragment : Fragment() {
             .setTooltipPointer(CoachMark.POINTER_RIGHT)
             .setTooltipBackgroundColor(R.color.accent)
             .setCircleMark()
+            .setBackgroundAlpha(0.0f)
             .setDismissible()
             .show()
 

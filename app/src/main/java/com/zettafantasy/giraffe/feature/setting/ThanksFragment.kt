@@ -16,12 +16,12 @@ class ThanksFragment : Fragment() {
     private lateinit var binding: ThanksFragmentBinding
 
     private val thanks = "<ul>\n" +
-            "<li>내 삶에 구원자 <font color=\"#color\">예수님</font></li>\n" +
-            "<li>비폭력대화를 알려주신 <font color=\"#color\">마셜 로젠버그</font> 박사님</li>\n" +
-            "<li>명상하는 법을 알려준 <font color=\"#color\">진영</font>님</li>\n" +
-            "<li>개발하는데 자극이 되어준 <font color=\"#color\">장준</font>님</li>\n" +
-            "<li>삶에 활력이 되어준 <font color=\"#color\">임프로그</font> 멤버들</li>\n" +
-            "<li>꾸준한 책읽기를 도와준 <font color=\"#color\">내아인</font> 사람들</li>\n" +
+            "<li>내 삶에 구원자 <font color=\"#color\"><b>예수님</b></font></li>\n" +
+            "<li>비폭력대화를 알려주신 <font color=\"#color\"><b>마셜 로젠버그</b></font> 박사님</li>\n" +
+            "<li>명상하는 법을 알려준 <font color=\"#color\"><b>진영</b></font>님</li>\n" +
+            "<li>개발하는데 자극이 되어준 <font color=\"#color\"><b>장준</b></font>님</li>\n" +
+            "<li>삶에 활력이 되어준 <font color=\"#color\"><b>임프로그</b></font> 멤버들</li>\n" +
+            "<li>꾸준한 책읽기를 도와준 <font color=\"#color\"><b>내아인</b></font> 사람들</li>\n" +
             "</ul>"
 
     override fun onCreateView(

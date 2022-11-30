@@ -127,7 +127,7 @@ abstract class FindItemFragment : Fragment() {
                             showProgressBarCoachMark().hideDelayed {
                                 Preferences.shownCoachMarkProgressBar = true
                             }
-                        }, 500)
+                        }, 100)
                     }
 
                     //완료버튼 코치마크
@@ -138,7 +138,7 @@ abstract class FindItemFragment : Fragment() {
                                     showCompleteCoachMark(it).hideDelayed {
                                         Preferences.shownCoachMarkComplete = true
                                     }
-                                }, 500)
+                                }, 100)
                             }
                         }
                     }
@@ -158,7 +158,6 @@ abstract class FindItemFragment : Fragment() {
                         .setTooltipAlignment(CoachMark.TARGET_TOP)
                         .setTooltipPointer(CoachMark.POINTER_MIDDLE)
                         .setTooltipBackgroundColor(R.color.accent)
-                        .setDismissible()
                         .show()
 
                 private fun showCompleteCoachMark(view: View): CoachMark =
@@ -172,7 +171,6 @@ abstract class FindItemFragment : Fragment() {
                         .setTooltipAlignment(CoachMark.TARGET_BOTTOM_LEFT)
                         .setTooltipPointer(CoachMark.POINTER_RIGHT)
                         .setTooltipBackgroundColor(R.color.accent)
-                        .setDismissible()
                         .show()
             }
         ))
@@ -229,7 +227,6 @@ abstract class FindItemFragment : Fragment() {
             .setTooltipAlignment(CoachMark.ROOT_CENTER)
             .setTooltipBackgroundColor(android.R.color.transparent)
             .setBackgroundAlpha(0.6f)
-            .setDismissible()
             .setTooltipPointer(CoachMark.POINTER_GONE)
             .show()
 
