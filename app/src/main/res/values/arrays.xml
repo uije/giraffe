@@ -1,201 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="emotion_satisfied">
-        <item>감동받은</item>
-        <item>뭉클한</item>
-        <item>감격스런</item>
-        <item>벅찬</item>
-        <item>환희에 찬</item>
-        <item>황홀한</item>
-        <item>충만한</item>
-        <item>고마운</item>
-        <item>감사한</item>
-        <item>즐거운</item>
-        <item>유쾌한</item>
-        <item>통쾌한</item>
-        <item>흔쾌한</item>
-        <item>기쁜</item>
-        <item>행복한</item>
-        <item>반가운</item>
-        <item>따뜻한</item>
-        <item>감미로운</item>
-        <item>포근한</item>
-        <item>푸근한</item>
-        <item>사랑하는</item>
-        <item>정을 느끼는</item>
-        <item>친근한</item>
-        <item>훈훈한</item>
-        <item>정겨운</item>
-        <item>뿌듯한</item>
-        <item>산뜻한</item>
-        <item>만족스런</item>
-        <item>상쾌한</item>
-        <item>흡족한</item>
-        <item>개운한</item>
-        <item>후련한</item>
-        <item>든든한</item>
-        <item>흐뭇한</item>
-        <item>홀가분한</item>
-        <item>편안한</item>
-        <item>느긋한</item>
-        <item>담담한</item>
-        <item>친밀한</item>
-        <item>친근한</item>
-        <item>긴장이 풀리는</item>
-        <item>안심이 되는</item>
-        <item>차분한</item>
-        <item>가벼운</item>
-        <item>평화로운</item>
-        <item>누그러지는</item>
-        <item>고요한</item>
-        <item>여유로운</item>
-        <item>진정되는</item>
-        <item>잠잠해진</item>
-        <item>평온한</item>
-        <item>흥미로운</item>
-        <item>매혹된</item>
-        <item>재미있는</item>
-        <item>끌리는</item>
-        <item>활기찬</item>
-        <item>짜릿한</item>
-        <item>신나는</item>
-        <item>용기 나는</item>
-        <item>기력이 넘치는</item>
-        <item>기운이 나는</item>
-        <item>당당한</item>
-        <item>살아있는</item>
-        <item>생기가 도는</item>
-        <item>원기가 왕성한</item>
-        <item>자신감 있는</item>
-        <item>힘이 솟는</item>
-        <item>흥분된</item>
-        <item>두근거리는</item>
-        <item>기대에 부푼</item>
-        <item>들뜬</item>
-        <item>희망에 찬</item>
+        <item>감동받다</item>
+        <item>뭉클하다</item>
+        <item>감격스럽다</item>
+        <item>벅차오른다</item>
+        <item>환희에 차다</item>
+        <item>황홀하다</item>
+        <item>충만하다</item>
+        <item>고맙다</item>
+        <item>감사하다</item>
+        <item>즐겁다</item>
+        <item>유쾌하다</item>
+        <item>통쾌하다</item>
+        <item>흔쾌하다</item>
+        <item>기쁘다</item>
+        <item>행복하다</item>
+        <item>반갑다</item>
+        <item>따뜻하다</item>
+        <item>감미롭다</item>
+        <item>포근하다</item>
+        <item>푸근하다</item>
+        <item>사랑스럽다</item>
+        <item>정을 느낀다</item>
+        <item>친근하다</item>
+        <item>훈훈하다</item>
+        <item>정겹다</item>
+        <item>뿌듯하다</item>
+        <item>산뜻하다</item>
+        <item>만족스럽다</item>
+        <item>상쾌하다</item>
+        <item>흡족하다</item>
+        <item>개운하다</item>
+        <item>후련하다</item>
+        <item>든든하다</item>
+        <item>흐뭇하다</item>
+        <item>홀가분하다</item>
+        <item>편안하다</item>
+        <item>느긋하다</item>
+        <item>담담하다</item>
+        <item>친밀하다</item>
+        <item>친근하다</item>
+        <item>긴장이 풀린다</item>
+        <item>안심이 된다</item>
+        <item>차분하다</item>
+        <item>가볍다</item>
+        <item>평화롭다</item>
+        <item>누그러지다</item>
+        <item>고요하다</item>
+        <item>여유롭다</item>
+        <item>진정되다</item>
+        <item>잠잠해진다</item>
+        <item>평온하다</item>
+        <item>흥미롭다</item>
+        <item>매혹되다</item>
+        <item>재미있다</item>
+        <item>끌린다</item>
+        <item>활기차다</item>
+        <item>짜릿하다</item>
+        <item>신난다</item>
+        <item>용기가 난다</item>
+        <item>기력이 넘친다</item>
+        <item>기운이 난다</item>
+        <item>당당하다</item>
+        <item>살아있는 느낌이다</item>
+        <item>생기가 돈다</item>
+        <item>원기가 왕성하다</item>
+        <item>자신감이 넘친다</item>
+        <item>힘이 솟는다</item>
+        <item>흥분된다</item>
+        <item>두근거린다</item>
+        <item>기대에 부푼다</item>
+        <item>들뜨다</item>
+        <item>희망차다</item>
     </string-array>
 
     <string-array name="emotion_unsatisfied">
-        <item>걱정되는</item>
-        <item>까마득한</item>
-        <item>암담한</item>
-        <item>염려되는</item>
-        <item>근심하는</item>
-        <item>신경 쓰이는</item>
-        <item>뒤숭숭한</item>
-        <item>무서운</item>
-        <item>섬뜩한</item>
-        <item>오싹한</item>
-        <item>주눅든</item>
-        <item>겁나는</item>
-        <item>두려운</item>
-        <item>간담이 서늘해지는</item>
-        <item>진땀 나는</item>
-        <item>불안한</item>
-        <item>조바심 나는</item>
-        <item>긴장한</item>
-        <item>떨리는</item>
-        <item>안절부절못한</item>
-        <item>조마조마한</item>
-        <item>초조한</item>
-        <item>불편한</item>
-        <item>거북한</item>
-        <item>겸연쩍은</item>
-        <item>곤혹스러운</item>
-        <item>떨떠름한</item>
-        <item>언짢은</item>
-        <item>괴로운</item>
-        <item>난처한</item>
-        <item>멋쩍은</item>
-        <item>쑥스러운</item>
-        <item>답답한</item>
-        <item>갑갑한</item>
-        <item>서먹한</item>
-        <item>숨막히는</item>
-        <item>어색한</item>
-        <item>찝찝한</item>
-        <item>슬픈</item>
-        <item>가슴이 찢어지는</item>
-        <item>구슬픈</item>
-        <item>그리운</item>
-        <item>눈물겨운</item>
-        <item>목이 메는</item>
-        <item>서글픈</item>
-        <item>서러운</item>
-        <item>쓰라린</item>
-        <item>애끓는</item>
-        <item>울적한</item>
-        <item>참담한</item>
-        <item>처참한</item>
-        <item>안타까운</item>
-        <item>한스러운</item>
-        <item>마음이 아픈</item>
-        <item>비참한</item>
-        <item>처연한</item>
-        <item>서운한</item>
-        <item>김빠진</item>
-        <item>애석한</item>
-        <item>냉담한</item>
-        <item>섭섭한</item>
-        <item>야속한</item>
-        <item>낙담한</item>
-        <item>외로운</item>
-        <item>고독한</item>
-        <item>공허한</item>
-        <item>적적한</item>
-        <item>허전한</item>
-        <item>허탈한</item>
-        <item>막막한</item>
-        <item>쓸쓸한</item>
-        <item>허한</item>
-        <item>우울한</item>
-        <item>무력한</item>
-        <item>무기력한</item>
-        <item>침울한</item>
-        <item>꿀꿀한</item>
-        <item>피곤한</item>
-        <item>고단한</item>
-        <item>노곤한</item>
-        <item>따분한</item>
-        <item>맥 빠진</item>
-        <item>맥 풀린</item>
-        <item>지긋지긋한</item>
-        <item>귀찮은</item>
-        <item>무감각한</item>
-        <item>지겨운</item>
-        <item>지루한</item>
-        <item>지친</item>
-        <item>절망스러운</item>
-        <item>좌절한</item>
-        <item>힘든</item>
-        <item>무료한</item>
-        <item>성가신</item>
-        <item>심심한</item>
-        <item>혐오스런</item>
-        <item>밥맛 떨어지는</item>
-        <item>질린</item>
-        <item>정떨어지는</item>
-        <item>혼란스러운</item>
-        <item>멍한</item>
-        <item>창피한</item>
-        <item>놀란</item>
-        <item>민망한</item>
-        <item>당혹스런</item>
-        <item>무안한</item>
-        <item>부끄러운</item>
-        <item>화가 나는</item>
-        <item>끓어오르는</item>
-        <item>속상한</item>
-        <item>약 오르는</item>
-        <item>분한</item>
-        <item>울화가 치미는</item>
-        <item>핏대서는</item>
-        <item>격노한</item>
-        <item>분개한</item>
-        <item>억울한</item>
-        <item>치밀어 오르는</item>
-        <item>짜증 나는</item>
-        <item>미안한</item>
+        <item>걱정된다</item>
+        <item>까마득하다</item>
+        <item>암담하다</item>
+        <item>염려된다</item>
+        <item>근심하다</item>
+        <item>신경 쓰인다</item>
+        <item>뒤숭숭하다</item>
+        <item>무섭다</item>
+        <item>섬뜩하다</item>
+        <item>오싹하다</item>
+        <item>주눅들다</item>
+        <item>겁나다</item>
+        <item>두렵다</item>
+        <item>간담이 서늘하다</item>
+        <item>진땀난다</item>
+        <item>불안하다</item>
+        <item>조바심난다</item>
+        <item>긴장된다</item>
+        <item>떨리다</item>
+        <item>안절부절못하다</item>
+        <item>조마조마하다</item>
+        <item>초조하다</item>
+        <item>불편하다</item>
+        <item>거북하다</item>
+        <item>겸연쩍다</item>
+        <item>곤혹스럽다</item>
+        <item>떨떠름하다</item>
+        <item>언짢다</item>
+        <item>괴롭다</item>
+        <item>난처하다</item>
+        <item>멋쩍다</item>
+        <item>쑥스럽다</item>
+        <item>답답하다</item>
+        <item>갑갑하다</item>
+        <item>서먹하다</item>
+        <item>숨막히다</item>
+        <item>어색하다</item>
+        <item>찝찝하다</item>
+        <item>슬프다</item>
+        <item>가슴이 찢어진다</item>
+        <item>구슬프다</item>
+        <item>그립다</item>
+        <item>눈물겹다</item>
+        <item>목이 멘다</item>
+        <item>서글프다</item>
+        <item>서럽다</item>
+        <item>쓰라리다</item>
+        <item>애끓는다</item>
+        <item>울적하다</item>
+        <item>참담하다</item>
+        <item>처참하다</item>
+        <item>안타깝다</item>
+        <item>한스럽다</item>
+        <item>마음이 아프다</item>
+        <item>비참하다</item>
+        <item>처연하다</item>
+        <item>서운하다</item>
+        <item>김빠진다</item>
+        <item>애석하다</item>
+        <item>냉담하다</item>
+        <item>섭섭하다</item>
+        <item>야속하다</item>
+        <item>낙담스럽다</item>
+        <item>외롭다</item>
+        <item>고독하다</item>
+        <item>공허하다</item>
+        <item>적적하다</item>
+        <item>허전하다</item>
+        <item>허탈하다</item>
+        <item>막막하다</item>
+        <item>쓸쓸하다</item>
+        <item>허하다</item>
+        <item>우울하다</item>
+        <item>무력하다</item>
+        <item>무기력하다</item>
+        <item>침울하다</item>
+        <item>꿀꿀하다</item>
+        <item>피곤하다</item>
+        <item>고단하다</item>
+        <item>노곤하다</item>
+        <item>따분하다</item>
+        <item>맥빠진다</item>
+        <item>맥 풀린다</item>
+        <item>지긋지긋하다</item>
+        <item>귀찮다</item>
+        <item>무감각하다</item>
+        <item>지겹다</item>
+        <item>지루하다</item>
+        <item>지친다</item>
+        <item>절망스럽다</item>
+        <item>좌절하다</item>
+        <item>힘들다</item>
+        <item>무료하다</item>
+        <item>성가시다</item>
+        <item>심심하다</item>
+        <item>혐오스럽다</item>
+        <item>밥맛 떨어진다</item>
+        <item>질린다</item>
+        <item>정떨어진다</item>
+        <item>혼란스럽다</item>
+        <item>멍하다</item>
+        <item>창피하다</item>
+        <item>놀라다</item>
+        <item>민망하다</item>
+        <item>당혹스럽다</item>
+        <item>무안하다</item>
+        <item>부끄럽다</item>
+        <item>화가 난다</item>
+        <item>끓어오른다</item>
+        <item>속상하다</item>
+        <item>약오른다</item>
+        <item>분하다</item>
+        <item>울화가 치민다</item>
+        <item>핏대선다</item>
+        <item>격노하다</item>
+        <item>분개하다</item>
+        <item>억울하다</item>
+        <item>치밀어 오른다</item>
+        <item>짜증난다</item>
+        <item>미안하다</item>
     </string-array>
 
     <string-array name="need_0_survival">
@@ -313,7 +313,7 @@
         <item>놀이</item>
         <item>자각</item>
         <item>도전</item>
-        <item>꺠달음</item>
+        <item>깨달음</item>
         <item>명료함</item>
         <item>배움</item>
         <item>자극</item>
