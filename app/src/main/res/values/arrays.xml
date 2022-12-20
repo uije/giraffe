@@ -21,7 +21,7 @@
         <item>감미롭다</item>
         <item>포근하다</item>
         <item>푸근하다</item>
-        <item>사랑스럽다</item>
+        <item>사랑에 빠진다</item>
         <item>정을 느낀다</item>
         <item>친근하다</item>
         <item>훈훈하다</item>
@@ -46,14 +46,14 @@
         <item>차분하다</item>
         <item>가볍다</item>
         <item>평화롭다</item>
-        <item>누그러지다</item>
+        <item>누그러진다</item>
         <item>고요하다</item>
         <item>여유롭다</item>
-        <item>진정되다</item>
+        <item>진정된다</item>
         <item>잠잠해진다</item>
         <item>평온하다</item>
         <item>흥미롭다</item>
-        <item>매혹되다</item>
+        <item>매혹된다</item>
         <item>재미있다</item>
         <item>끌린다</item>
         <item>활기차다</item>
@@ -71,7 +71,7 @@
         <item>흥분된다</item>
         <item>두근거린다</item>
         <item>기대에 부푼다</item>
-        <item>들뜨다</item>
+        <item>들뜬다</item>
         <item>희망차다</item>
     </string-array>
 
@@ -86,15 +86,15 @@
         <item>무섭다</item>
         <item>섬뜩하다</item>
         <item>오싹하다</item>
-        <item>주눅들다</item>
-        <item>겁나다</item>
+        <item>주눅든다</item>
+        <item>겁난다</item>
         <item>두렵다</item>
         <item>간담이 서늘하다</item>
         <item>진땀난다</item>
         <item>불안하다</item>
         <item>조바심난다</item>
         <item>긴장된다</item>
-        <item>떨리다</item>
+        <item>떨린다</item>
         <item>안절부절못하다</item>
         <item>조마조마하다</item>
         <item>초조하다</item>
@@ -111,7 +111,7 @@
         <item>답답하다</item>
         <item>갑갑하다</item>
         <item>서먹하다</item>
-        <item>숨막히다</item>
+        <item>숨막힌다</item>
         <item>어색하다</item>
         <item>찝찝하다</item>
         <item>슬프다</item>

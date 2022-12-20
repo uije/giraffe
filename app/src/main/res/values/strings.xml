@@ -2,7 +2,7 @@
     <string name="app_name">기린</string>
     <string name="app_name_dev">[dev]기린</string>
     <string name="fab_content_desc">추가버튼</string>
-    <string name="emotion_state_desc"><![CDATA[<font color="#%1$s">%2$s</font> 상태이시군요.]]></string>
+    <string name="emotion_state_desc"><![CDATA[<font color="#%1$s">%2$s</font>를 선택하셨어요.]]></string>
     <string name="need_type_social">사회적 욕구 - 소속감, 협력, 사랑</string>
     <string name="need_type_survival">생존의 욕구 - 신체, 정서, 안전</string>
     <string name="need_type_fun">재미의 욕구 - 놀이, 배움</string>
