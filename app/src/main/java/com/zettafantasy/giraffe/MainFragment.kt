@@ -140,29 +140,7 @@ class MainFragment : Fragment() {
         binding.fab.setOnClickListener {
             navController.navigateRecord()
         }
-
-        if (!Preferences.shownCoachMarkStartBtn) {
-            showCoachMark(binding.fab).hideDelayed {
-                Preferences.shownCoachMarkStartBtn = true
-            }
-        }
     }
-
-    private fun showCoachMark(view: View) =
-        CoachMark.Builder(requireActivity())
-            .setTarget(view)
-            .addTooltipChildText(
-                requireActivity(),
-                getString(R.string.tooltip_start_btn),
-                android.R.color.black
-            )
-            .setTooltipAlignment(CoachMark.TARGET_TOP_RIGHT)
-            .setTooltipPointer(CoachMark.POINTER_RIGHT)
-            .setTooltipBackgroundColor(R.color.accent)
-            .setCircleMark()
-            .setBackgroundAlpha(0.0f)
-            .setDismissible()
-            .show()
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
