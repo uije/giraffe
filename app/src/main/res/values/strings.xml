@@ -57,4 +57,7 @@
     <string name="recent_day"><![CDATA[최근 하루]]></string>
     <string name="app_name_for_share"><![CDATA[by 기린앱]]></string>
     <string name="app_version"><![CDATA[앱 버전: %1$s]]></string>
+    <string name="skip"><![CDATA[건너뛰기]]></string>
+    <string name="start"><![CDATA[시작하기]]></string>
+    <string name="next"><![CDATA[다음]]></string>
 </resources>

@@ -17,6 +17,7 @@ object Preferences {
     private const val KEY_DEFAULT_SCREEN = "defaultScreen"
     private const val KEY_SHOWN_CELEBRATE_SCREEN = "shownCelebrateScreen"
     private const val KEY_LAST_REMIND_TYPE = "lastRemindType"
+    private const val KEY_SHOWN_ONBOARD_SCREEN = "shownOnboardScreen"
 
     private lateinit var preferences: SharedPreferences
 
@@ -79,6 +80,12 @@ object Preferences {
         get() = preferences.getBoolean(KEY_SHOWN_CELEBRATE_SCREEN, false)
         set(value) {
             preferences.edit().putBoolean(KEY_SHOWN_CELEBRATE_SCREEN, value).commit()
+        }
+
+    var shownOnboardScreen: Boolean
+        get() = preferences.getBoolean(KEY_SHOWN_ONBOARD_SCREEN, false)
+        set(value) {
+            preferences.edit().putBoolean(KEY_SHOWN_ONBOARD_SCREEN, value).commit()
         }
 
     var lastRemindType: RemindNotificationType

@@ -12,7 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.zettafantasy.giraffe.common.DestinationScreen
 import com.zettafantasy.giraffe.common.Preferences
 import com.zettafantasy.giraffe.common.navigate
-import com.zettafantasy.giraffe.feature.wordcloud.NeedCloudFragment
+import com.zettafantasy.giraffe.feature.onboard.OnboardActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
         navController = findNavController(R.id.my_nav_host_fragment)
         navController.setGraph(R.navigation.navigation, getStartDestinationArgs())
         setupActionBarWithNavController(navController, AppBarConfiguration(navController.graph))
+
+        if (!Preferences.shownOnboardScreen) {
+            startActivity(Intent(this, OnboardActivity::class.java))
+        }
     }
 
     private fun getStartDestinationArgs(): Bundle? {
