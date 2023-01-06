@@ -17,4 +17,14 @@
         <item name="android:textColorSecondary">?colorOnBackground</item>
         <item name="android:textColorTertiary">?colorOnBackground</item>
     </style>
+
+    <style name="Theme.Giraffe.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryVariant">@color/orange50_900</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/lime50_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
 </resources>

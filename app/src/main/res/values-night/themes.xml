@@ -16,4 +16,10 @@
         <item name="android:textColorSecondary">?colorOnBackground</item>
         <item name="android:textColorTertiary">?colorOnBackground</item>
     </style>
+
+    <style name="Theme.Giraffe.NoActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+    </style>
 </resources>
