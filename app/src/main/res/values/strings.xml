@@ -12,9 +12,9 @@
     <string name="emotion">감정</string>
     <string name="need">욕구</string>
     <string name="stimulus"><![CDATA[자극]]></string>
-    <string name="emotion_type_satisfied">좋다</string>
-    <string name="emotion_type_unsatisfied">나쁘다</string>
-    <string name="emotion_type_unclear">모르겠다</string>
+    <string name="satisfied">만족</string>
+    <string name="dissatisfied">불만족</string>
+    <string name="unclear">모르겠다</string>
     <string name="format_date">%1$ty.%1$tm.%1$td</string>
     <string name="format_time">%1$Tk:%1$TM</string>
     <string name="format_datetime">%1$tY.%1$tm.%1$td %1$Tk:%1$TM</string>

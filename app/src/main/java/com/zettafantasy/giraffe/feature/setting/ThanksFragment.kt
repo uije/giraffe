@@ -22,13 +22,14 @@ class ThanksFragment : Fragment() {
             "<li>개발하는데 자극이 되어준 <font color=\"#color\"><b>장준</b></font>님</li>\n" +
             "<li>삶에 활력이 되어준 <font color=\"#color\"><b>임프로그</b></font> 멤버들</li>\n" +
             "<li>꾸준한 책읽기를 도와준 <font color=\"#color\"><b>내아인</b></font> 사람들</li>\n" +
+            "<li>앱을 세상에 알려준 <font color=\"#color\"><b>써니(허성), 이윤정</b></font>님</li>\n" +
             "</ul>"
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         binding = DataBindingUtil.inflate(inflater, R.layout.thanks_fragment, container, false)
 
